@@ -1,0 +1,2492 @@
+{
+    "ccm:objects": {
+        "4559459216": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Completed"
+                },
+                {
+                    "ccm:key": "Operator",
+                    "ccm:value": "Operator10"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Stamping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4745"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4745"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4371019536": {
+            "ccm:object_type": "WidgetC",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B212"
+                },
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P3051"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Stamping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4291"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4291"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4291"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Drilling",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4291"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4291"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773357648": {
+            "ccm:object_type": "WidgetC",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P4563"
+                },
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P9147"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Drilling",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1220"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773359056": {
+            "ccm:object_type": "WidgetC",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B351"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3906"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3906"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3906"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3906"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Forging",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3906"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773360080": {
+            "ccm:object_type": "WidgetC",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B976"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Painting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4028"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Stamping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4028"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773360656": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P7206"
+                },
+                {
+                    "ccm:key": "Operator",
+                    "ccm:value": "Operator2"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1960"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1960"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1960"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Painting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1960"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773361680": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Failed"
+                },
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B979"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Start Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Casting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Stamping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Painting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3005"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773363536": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Failed"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Welding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Casting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2710"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773365136": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B340"
+                },
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "In Progress"
+                },
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B461"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Welding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Cutting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace9268"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773367056": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Failed"
+                },
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Failed"
+                },
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B880"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7785"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Painting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7785"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Cutting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7785"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7785"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773368336": {
+            "ccm:object_type": "WidgetC",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Operator",
+                    "ccm:value": "Operator8"
+                },
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B683"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Start Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Casting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Cutting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Painting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Forging",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace7106"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773371472": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B677"
+                },
+                {
+                    "ccm:key": "Status",
+                    "ccm:value": "Completed"
+                },
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P1026"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Forging",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Casting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace1089"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773374096": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B903"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Drilling",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Molding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Forging",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3197"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773376208": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B309"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3202"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3202"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace3202"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773377168": {
+            "ccm:object_type": "WidgetA",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B572"
+                },
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P6402"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace5392"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Drilling",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace5392"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace5392"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace5392"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773378640": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "BatchID",
+                    "ccm:value": "B770"
+                },
+                {
+                    "ccm:key": "ProductID",
+                    "ccm:value": "P4147"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Start Quality Check",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Polishing",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Assembly",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Shipping",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Casting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Complete Machining",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace4853"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4773397968": {
+            "ccm:object_type": "WidgetB",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "Operator",
+                    "ccm:value": "Operator10"
+                },
+                {
+                    "ccm:key": "Operator",
+                    "ccm:value": "Operator5"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "Complete Welding",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Inspection",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "Start Cutting",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "case_id": {
+                            "ccm:key": "case_id",
+                            "ccm:value": "Cace2532"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        }
+    },
+    "ccm:events": {
+        "4411106320": {
+            "ccm:event_type": "Complete Stamping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4745"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4559469200": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4745"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4371019600": {
+            "ccm:event_type": "Complete Stamping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4291"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4371019728": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4291"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4563025488": {
+            "ccm:event_type": "Start Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4291"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773357072": {
+            "ccm:event_type": "Start Drilling",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4291"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773357136": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4291"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773357776": {
+            "ccm:event_type": "Complete Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773357968": {
+            "ccm:event_type": "Start Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4563025424": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773358224": {
+            "ccm:event_type": "Start Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773358416": {
+            "ccm:event_type": "Start Drilling",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773358672": {
+            "ccm:event_type": "Start Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1220"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773359184": {
+            "ccm:event_type": "Complete Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3906"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773359248": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3906"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773359376": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3906"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773359504": {
+            "ccm:event_type": "Complete Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3906"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773359632": {
+            "ccm:event_type": "Complete Forging",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3906"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773360272": {
+            "ccm:event_type": "Complete Painting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4028"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773360336": {
+            "ccm:event_type": "Complete Stamping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4028"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773360784": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1960"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773360976": {
+            "ccm:event_type": "Start Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1960"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773361040": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1960"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773361296": {
+            "ccm:event_type": "Start Painting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1960"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773361872": {
+            "ccm:event_type": "Start Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362064": {
+            "ccm:event_type": "Start Casting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362256": {
+            "ccm:event_type": "Start Stamping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362320": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362576": {
+            "ccm:event_type": "Start Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362768": {
+            "ccm:event_type": "Complete Painting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773362832": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773363088": {
+            "ccm:event_type": "Start Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773363152": {
+            "ccm:event_type": "Start Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3005"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773363664": {
+            "ccm:event_type": "Complete Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773363856": {
+            "ccm:event_type": "Complete Welding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773364048": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773364240": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773364432": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773364688": {
+            "ccm:event_type": "Complete Casting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773364816": {
+            "ccm:event_type": "Complete Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2710"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773360208": {
+            "ccm:event_type": "Complete Welding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773365328": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773365456": {
+            "ccm:event_type": "Complete Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773365776": {
+            "ccm:event_type": "Start Cutting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773365904": {
+            "ccm:event_type": "Complete Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773366224": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773366288": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773366416": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773366544": {
+            "ccm:event_type": "Start Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace9268"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773367184": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7785"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773367248": {
+            "ccm:event_type": "Complete Painting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7785"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773367568": {
+            "ccm:event_type": "Start Cutting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7785"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773367824": {
+            "ccm:event_type": "Complete Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7785"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773368528": {
+            "ccm:event_type": "Start Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773368848": {
+            "ccm:event_type": "Start Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773369104": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773369296": {
+            "ccm:event_type": "Complete Casting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773369616": {
+            "ccm:event_type": "Start Cutting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773370000": {
+            "ccm:event_type": "Start Painting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773370256": {
+            "ccm:event_type": "Complete Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773370512": {
+            "ccm:event_type": "Complete Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773370768": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773370896": {
+            "ccm:event_type": "Complete Forging",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace7106"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773371600": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773371856": {
+            "ccm:event_type": "Start Forging",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773372176": {
+            "ccm:event_type": "Start Casting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773372432": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773372688": {
+            "ccm:event_type": "Start Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773373072": {
+            "ccm:event_type": "Start Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773373328": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773373520": {
+            "ccm:event_type": "Complete Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace1089"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773374224": {
+            "ccm:event_type": "Complete Drilling",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773374480": {
+            "ccm:event_type": "Complete Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773374800": {
+            "ccm:event_type": "Start Molding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773375056": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773375248": {
+            "ccm:event_type": "Complete Forging",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773375632": {
+            "ccm:event_type": "Start Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773375888": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3197"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773376336": {
+            "ccm:event_type": "Complete Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3202"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773376592": {
+            "ccm:event_type": "Complete Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3202"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773376848": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace3202"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773377296": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace5392"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773377552": {
+            "ccm:event_type": "Start Drilling",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace5392"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773377872": {
+            "ccm:event_type": "Start Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace5392"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773378128": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace5392"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773378768": {
+            "ccm:event_type": "Start Quality Check",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773379088": {
+            "ccm:event_type": "Start Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773379408": {
+            "ccm:event_type": "Start Polishing",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773379728": {
+            "ccm:event_type": "Start Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773379984": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773396688": {
+            "ccm:event_type": "Complete Assembly",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773397008": {
+            "ccm:event_type": "Start Shipping",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773397264": {
+            "ccm:event_type": "Complete Casting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773397520": {
+            "ccm:event_type": "Complete Machining",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace4853"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773398096": {
+            "ccm:event_type": "Complete Welding",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773398352": {
+            "ccm:event_type": "Start Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773398608": {
+            "ccm:event_type": "Start Inspection",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773398864": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773399120": {
+            "ccm:event_type": "Start Cutting",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4773399440": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "case_id": {
+                    "ccm:key": "case_id",
+                    "ccm:value": "Cace2532"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        }
+    },
+    "ccm:data_sources": {},
+    "ccm:activities": {},
+    "ccm:observations": {},
+    "ccm:iot_devices": {},
+    "ccm:is_records": {}
+}

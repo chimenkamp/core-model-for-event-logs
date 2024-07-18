@@ -1,0 +1,83 @@
+{
+  // Global settings for events
+  "ocel:global-event": {
+    "ocel:activity": "__INVALID__"  // Placeholder activity type
+  },
+  // Global settings for objects
+  "ocel:global-object": {
+    "ocel:type": "__INVALID__"  // Placeholder object type
+  },
+  // Meta-information about the log
+  "ocel:global-log": {
+    "ocel:object-types": [
+      "Application",   // Types of objects in the log
+      "Workflow",
+      "Offer"
+    ],
+    "ocel:attribute-names": [
+      "Accepted",   // List of attribute names used in events and objects
+      "Action",
+      "ApplicationType",
+      "CreditScore",
+      "EventID",
+      "EventIDraw",
+      "EventOrigin",
+      "FirstWithdrawalAmount",
+      "LoanGoal",
+      "MonthlyCost",
+      "NumberOfTerms",
+      "OfferID",
+      "OfferedAmount",
+      "RequestedAmount",
+      "Selected",
+      "case",
+      "idx",
+      "lifecycle",
+      "resource"
+    ],
+    "ocel:version": "1.0",  // Version of the OCEL standard being used
+    "ocel:ordering": "timestamp"  // Ordering criterion for log entries
+  },
+  // Event data
+  "ocel:events": {
+    "420373": {  // Example event with ID "420373"
+      "ocel:timestamp": "2016-01-19T16:04:44Z",  // Timestamp of the event
+      "ocel:activity": "W_Complete application",  // Activity associated with the event
+      "ocel:vmap": {  // Map of various attributes and their values for the event
+        "Accepted": "Unknown",
+        "Action": "Created",
+        "ApplicationType": "New credit",
+        "CreditScore": "Unknown",
+        "EventID": "Workitem_334299225",
+        "EventIDraw": "Workitem_334299225",
+        "EventOrigin": "Workflow",
+        "FirstWithdrawalAmount": "Unknown",
+        "LoanGoal": "Home improvement",
+        "MonthlyCost": "Unknown",
+        "NumberOfTerms": "Unknown",
+        "OfferID": "Unknown",
+        "OfferedAmount": "Unknown",
+        "RequestedAmount": 15000.0,
+        "Selected": "Unknown",
+        "case": "Application_30479942",
+        "idx": 52588.0,
+        "lifecycle": "SCHEDULE",
+        "resource": "User_13"
+      },
+      "ocel:omap": [
+        "1244818"  // List of IDs of objects related to this event
+      ]
+    }
+  },
+  // Object data
+  "ocel:objects": {
+    "1244818": {  // Example object with ID "1244818"
+      "ocel:type": "Application",  // Type of the object
+      "ocel:ovmap": {  // Map of various attributes and their values for the object
+        "ApplicationType": "New credit",
+        "LoanGoal": "Home improvement",
+        "RequestedAmount": 15000.0
+      }
+    }
+  }
+}

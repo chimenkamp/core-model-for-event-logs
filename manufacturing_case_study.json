@@ -1,0 +1,101 @@
+{
+    "ccm:events": [
+        {
+            "event_id": "event1",
+            "event_type": "process_event",
+            "attributes": {
+                "label": "take sample"
+            },
+            "timestamp": "2024-07-17T11:02:13.259986",
+            "object_id": "batch1",
+            "data_source_id": null
+        },
+        {
+            "event_id": "event2",
+            "event_type": "iot_event",
+            "attributes": {
+                "label": "detect peak"
+            },
+            "timestamp": "2024-07-17T11:02:13.259992",
+            "object_id": null,
+            "data_source_id": null
+        },
+        {
+            "event_id": "event3",
+            "event_type": "iot_event",
+            "attributes": {
+                "label": "value change",
+                "product_flow": 206
+            },
+            "timestamp": "2024-07-17T11:02:13.259993",
+            "object_id": "tank1",
+            "data_source_id": "source1"
+        }
+    ],
+    "ccm:objects": [
+        {
+            "object_id": "batch1",
+            "object_type": "batch",
+            "attributes": {
+                "recipe": "recipe1"
+            },
+            "events": [
+                "event1"
+            ]
+        },
+        {
+            "object_id": "tank1",
+            "object_type": "tank",
+            "attributes": {
+                "flow_status": "normal",
+                "product_flow": 206
+            },
+            "events": [
+                "event3"
+            ]
+        },
+        {
+            "object_id": "sensor1",
+            "object_type": "sensor",
+            "attributes": {
+                "precision": "high",
+                "unit": "l/h"
+            },
+            "events": []
+        }
+    ],
+    "ccm:data_sources": [
+        {
+            "source_id": "source1",
+            "source_type": "sensor",
+            "events": [
+                "event3"
+            ]
+        }
+    ],
+    "ccm:information_systems": [
+        {
+            "system_id": "is1",
+            "data_sources": [
+                "source1"
+            ]
+        }
+    ],
+    "ccm:iot_devices": [
+        {
+            "device_id": "device1",
+            "observations": [
+                {
+                    "observation_id": "obs1",
+                    "observed_property": "flow_status",
+                    "value": "normal"
+                },
+                {
+                    "observation_id": "obs2",
+                    "observed_property": "drift",
+                    "value": 0.1
+                }
+            ]
+        }
+    ]
+}

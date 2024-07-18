@@ -1,0 +1,166 @@
+{
+    "ccm:events": [
+        {
+            "event_id": "event1",
+            "event_type": "process event",
+            "attributes": {
+                "label": "sample taken"
+            },
+            "timestamp": "2024-07-18T12:53:41.293219",
+            "object_id": [
+                "batch1"
+            ],
+            "data_source_id": "SAP ERP"
+        },
+        {
+            "event_id": "event2",
+            "event_type": "process event",
+            "attributes": {
+                "label": "apply sample"
+            },
+            "timestamp": "2024-07-18T12:53:41.293224",
+            "object_id": [
+                "batch1"
+            ],
+            "data_source_id": "SAP ERP"
+        },
+        {
+            "event_id": "event3",
+            "event_type": "iot event",
+            "attributes": {
+                "label": "detect peak"
+            },
+            "timestamp": "2024-07-18T12:53:41.293225",
+            "object_id": [
+                "tank1"
+            ],
+            "data_source_id": "device1"
+        },
+        {
+            "event_id": "event4",
+            "event_type": "iot event",
+            "attributes": {
+                "label": "value change",
+                "product_flow": 206,
+                "observation_drift": 0.1
+            },
+            "timestamp": "2024-07-18T12:53:41.293227",
+            "object_id": [
+                "tank1"
+            ],
+            "data_source_id": "sensor1"
+        }
+    ],
+    "ccm:objects": [
+        {
+            "object_id": "batch1",
+            "object_type": "batch",
+            "attributes": {
+                "recipe": "13a4a45"
+            },
+            "events": [
+                "event1",
+                "event2"
+            ]
+        },
+        {
+            "object_id": "tank1",
+            "object_type": "tank",
+            "attributes": {
+                "flow_status": "drift",
+                "product_flow": 206
+            },
+            "events": [
+                "event4",
+                "event3"
+            ]
+        },
+        {
+            "object_id": "sensor1",
+            "object_type": "sensor",
+            "attributes": {
+                "precision": "0.1",
+                "unit": "l/h"
+            },
+            "events": []
+        }
+    ],
+    "ccm:data_sources": [
+        {
+            "source_id": "device1",
+            "source_type": "iot device",
+            "events": [
+                "event4",
+                "event3"
+            ]
+        },
+        {
+            "source_id": "SAP ERP",
+            "source_type": "information system",
+            "events": [
+                "event1",
+                "event2"
+            ]
+        },
+        {
+            "source_id": "sensor1",
+            "source_type": "iot device",
+            "events": [
+                "event4"
+            ]
+        },
+        {
+            "source_id": "device1",
+            "source_type": "iot device",
+            "events": [
+                "event4",
+                "event3"
+            ]
+        }
+    ],
+    "ccm:information_systems": [
+        {
+            "system_id": "SAP ERP",
+            "data_sources": [
+                "SAP ERP"
+            ],
+            "events": []
+        }
+    ],
+    "ccm:iot_devices": [
+        {
+            "device_id": "device1",
+            "observations": [
+                {
+                    "observation_id": "obs1",
+                    "observed_property": "flow_status",
+                    "value": "normal"
+                },
+                {
+                    "observation_id": "obs2",
+                    "observed_property": "drift",
+                    "value": 0.1
+                }
+            ]
+        },
+        {
+            "device_id": "sensor1",
+            "observations": []
+        },
+        {
+            "device_id": "device1",
+            "observations": [
+                {
+                    "observation_id": "obs1",
+                    "observed_property": "flow_status",
+                    "value": "normal"
+                },
+                {
+                    "observation_id": "obs2",
+                    "observed_property": "drift",
+                    "value": 0.1
+                }
+            ]
+        }
+    ]
+}

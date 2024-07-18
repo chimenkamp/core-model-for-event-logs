@@ -1,0 +1,352 @@
+{
+    "ccm:objects": {
+        "4654520272": {
+            "ccm:object_type": "assembly line",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "status",
+                    "ccm:value": "operational"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "description": {
+                            "ccm:key": "description",
+                            "ccm:value": "Startup sequence initiated"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "description": {
+                            "ccm:key": "description",
+                            "ccm:value": "Startup sequence initiated"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "task": {
+                            "ccm:key": "task",
+                            "ccm:value": "welding"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:10:00Z"
+                        }
+                    },
+                    "ccm:derived_from": "temperature reading",
+                    "ccm:is_record": 4654281040
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4654557776": {
+            "ccm:object_type": "robot arm",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "precision",
+                    "ccm:value": "high"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "task": {
+                            "ccm:key": "task",
+                            "ccm:value": "welding"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:10:00Z"
+                        }
+                    },
+                    "ccm:derived_from": "temperature reading",
+                    "ccm:is_record": 4654281040
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4654659152": {
+            "ccm:object_type": "conveyor belt",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "speed",
+                    "ccm:value": "1.0 m/s"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "conveyor speed change",
+                    "ccm:attributes": {
+                        "new_speed": {
+                            "ccm:key": "new_speed",
+                            "ccm:value": "1.2 m/s"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:15:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "conveyor speed change",
+                    "ccm:attributes": {
+                        "new_speed": {
+                            "ccm:key": "new_speed",
+                            "ccm:value": "1.2 m/s"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:15:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": []
+        },
+        "4658163600": {
+            "ccm:object_type": "sensor",
+            "ccm:attributes": [
+                {
+                    "ccm:key": "type",
+                    "ccm:value": "temperature"
+                },
+                {
+                    "ccm:key": "unit",
+                    "ccm:value": "Celsius"
+                }
+            ],
+            "ccm:events": [
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "36.5"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:00:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "37.0"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:05:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:related_objects": [],
+            "ccm:data_sources": [
+                4658165712
+            ]
+        }
+    },
+    "ccm:events": {
+        "4658154256": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "description": {
+                    "ccm:key": "description",
+                    "ccm:value": "Startup sequence initiated"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4654744976": {
+            "ccm:event_type": "temperature reading",
+            "ccm:attributes": {
+                "value": {
+                    "ccm:key": "value",
+                    "ccm:value": "36.5"
+                },
+                "timestamp": {
+                    "ccm:key": "timestamp",
+                    "ccm:value": "2024-06-27T12:00:00Z"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4654652624": {
+            "ccm:event_type": "temperature reading",
+            "ccm:attributes": {
+                "value": {
+                    "ccm:key": "value",
+                    "ccm:value": "37.0"
+                },
+                "timestamp": {
+                    "ccm:key": "timestamp",
+                    "ccm:value": "2024-06-27T12:05:00Z"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        },
+        "4658154512": {
+            "ccm:event_type": "process event",
+            "ccm:attributes": {
+                "task": {
+                    "ccm:key": "task",
+                    "ccm:value": "welding"
+                },
+                "timestamp": {
+                    "ccm:key": "timestamp",
+                    "ccm:value": "2024-06-27T12:10:00Z"
+                }
+            },
+            "ccm:derived_from": "temperature reading",
+            "ccm:is_record": 4654281040
+        },
+        "4658163216": {
+            "ccm:event_type": "conveyor speed change",
+            "ccm:attributes": {
+                "new_speed": {
+                    "ccm:key": "new_speed",
+                    "ccm:value": "1.2 m/s"
+                },
+                "timestamp": {
+                    "ccm:key": "timestamp",
+                    "ccm:value": "2024-06-27T12:15:00Z"
+                }
+            },
+            "ccm:derived_from": null,
+            "ccm:is_record": null
+        }
+    },
+    "ccm:data_sources": {
+        "4658165712": {
+            "ccm:events": [
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "36.5"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:00:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "37.0"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:05:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ],
+            "ccm:object": 4658163600
+        }
+    },
+    "ccm:activities": {},
+    "ccm:observations": {
+        "4655477456": {
+            "ccm:iot_device": 4654515920,
+            "ccm:iot_events": [
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "36.5"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:00:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                },
+                {
+                    "ccm:event_type": "temperature reading",
+                    "ccm:attributes": {
+                        "value": {
+                            "ccm:key": "value",
+                            "ccm:value": "37.0"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:05:00Z"
+                        }
+                    },
+                    "ccm:derived_from": null,
+                    "ccm:is_record": null
+                }
+            ]
+        }
+    },
+    "ccm:iot_devices": {
+        "4654515920": {
+            "ccm:events": [],
+            "ccm:observations": [
+                4655477456
+            ]
+        }
+    },
+    "ccm:is_records": {
+        "4654281040": {
+            "ccm:events": [
+                {
+                    "ccm:event_type": "process event",
+                    "ccm:attributes": {
+                        "task": {
+                            "ccm:key": "task",
+                            "ccm:value": "welding"
+                        },
+                        "timestamp": {
+                            "ccm:key": "timestamp",
+                            "ccm:value": "2024-06-27T12:10:00Z"
+                        }
+                    },
+                    "ccm:derived_from": "temperature reading",
+                    "ccm:is_record": 4654281040
+                }
+            ],
+            "ccm:object": null
+        }
+    }
+}
