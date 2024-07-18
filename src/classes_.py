@@ -422,4 +422,6 @@ class CCM:
                     dot.edge(*edge)
                     edges.add(edge)
 
-        dot.render(output_file, view=True)
+        # dot.render(output_file, view=True)
+        dot.format = 'png'
+        dot.save(output_file)

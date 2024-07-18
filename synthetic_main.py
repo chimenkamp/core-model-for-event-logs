@@ -132,5 +132,4 @@ ocel_log = pm4py.read_ocel(
 
 ccm = load_ocel_to_ccm_from_dataframe(ocel_log)
 ext = ccm.get_extended_table()
-ccm.visualize("ccm.png")
 print(ext)
