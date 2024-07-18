@@ -162,5 +162,6 @@ object_tank.add_related_object(object_batch)
 ccm.visualize("case_study_example.png")
 table: pd.DataFrame = ccm.get_extended_table()
 ccm.save_to_json("case_study_example.json")
+ccm.visualize("case_study_example.png") # Visualize the data
 ```
 

@@ -316,7 +316,7 @@ class CCM:
 
     def visualize(self, output_file: str) -> None:
         dot = Digraph(comment='CCM Diagram')
-        edges = set()  # To keep track of added edges
+        edges = set()
 
         # Add objects
         for obj in self.objects:
@@ -424,4 +424,5 @@ class CCM:
 
         # dot.render(output_file, view=True)
         dot.format = 'png'
-        dot.save(output_file)
+        # dot.save(output_file)
+        dot.render(output_file, view=True)

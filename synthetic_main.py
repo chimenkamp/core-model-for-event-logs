@@ -125,8 +125,6 @@ def generate_random_value() -> Union[str, int, float]:
         return round(random.uniform(1.0, 100.0), 2)
 
 
-# Example usage (assuming pm4py and the OCEL file are properly defined)
-
 ocel_log = pm4py.read_ocel(
     '/Users/christianimenkamp/Documents/Data-Repository/Community/turmv4_batch4_ocel/log.jsonocel')
 

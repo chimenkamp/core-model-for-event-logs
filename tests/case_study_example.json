@@ -6,7 +6,7 @@
             "attributes": {
                 "label": "sample taken"
             },
-            "timestamp": "2024-07-18T13:26:21.714883",
+            "timestamp": "2024-07-18T13:43:48.527818",
             "object_id": [
                 "batch1"
             ],
@@ -18,7 +18,7 @@
             "attributes": {
                 "label": "apply sample"
             },
-            "timestamp": "2024-07-18T13:26:21.714889",
+            "timestamp": "2024-07-18T13:43:48.527825",
             "object_id": [
                 "batch1"
             ],
@@ -30,7 +30,7 @@
             "attributes": {
                 "label": "detect peak"
             },
-            "timestamp": "2024-07-18T13:26:21.714891",
+            "timestamp": "2024-07-18T13:43:48.527828",
             "object_id": [
                 "tank1"
             ],
@@ -44,7 +44,7 @@
                 "product_flow": 206,
                 "observation_drift": 0.1
             },
-            "timestamp": "2024-07-18T13:26:21.714892",
+            "timestamp": "2024-07-18T13:43:48.527830",
             "object_id": [
                 "tank1"
             ],
