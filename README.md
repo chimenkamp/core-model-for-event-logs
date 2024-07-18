@@ -55,6 +55,7 @@ The Common-Core Model (CCM) is a framework for managing and representing data re
   - **SOSA.IoTDevice**
     - Inherits from `DataSource`.
     - Contains `SOSA.Observation`.
+  - **TODO**: Add `SOSA.Sensor` and `SOSA.Actuator`...
 
 - **Object**
   - Contains attributes (`Attribute`).
