@@ -5,7 +5,9 @@ import datetime
 
 import pandas as pd
 
-from src.utils import _match_conditions, _parse_query
+from src.utils.table_utils import create_extended_table
+from src.utils.utils import query_classes
+from src.utils.visualize import create_graph
 
 
 class CCMClass(ABC):
@@ -262,44 +264,7 @@ class CCM(CCMClass):
         return self.event_log
 
     def get_extended_table(self) -> pd.DataFrame:
-        rows = []
-
-        for event in self.event_log:
-            related_objects = [obj for obj in self.objects if obj in event.related_objects]
-
-            for related_object in related_objects:
-                row: dict[str, Any] = {
-                    'ccm:event_id': event.event_id,
-                    'ccm:event_type': event.event_type,
-                    'ccm:timestamp': event.timestamp,
-                    'ccm:object_id': related_object.object_id,
-                    'ccm:object_type': related_object.object_type,
-                    'ccm:data_source_id': event.data_source.source_id if event.data_source else None,
-                    'ccm:data_source_type': event.data_source.source_type if event.data_source else None
-                }
-
-                for attr in event.attributes:
-                    row[f'event:{attr.key}'] = attr.value
-
-                for attr in related_object.attributes:
-                    row[f'object:{attr.key}'] = attr.value
-
-                if event.data_source:
-                    for ds in self.data_sources:
-                        if ds.source_id == event.data_source.source_id:
-                            for attr in ds.events:
-                                if attr.event_id == event.event_id:
-                                    for e_attr in attr.attributes:
-                                        row[f'data_source_event:{e_attr.key}'] = e_attr.value
-
-                if isinstance(event, ProcessEvent):
-                    for activity in event.activities:
-                        row[f'activity:{activity.activity_id}_type'] = activity.activity_type
-
-                rows.append(row)
-
-        df = pd.DataFrame(rows)
-        return df
+        return create_extended_table(self.objects, self.event_log, self.data_sources)
 
     def save_to_json(self, file_path: str) -> None:
         data = self.serialize()
@@ -324,130 +289,17 @@ class CCM(CCMClass):
     def visualize(self, output_file: str) -> None:
         """
         This method generates a visualization of the CCM dataset using Graphviz.
-        :param output_file:
-        :return:
+        :param output_file: The path where the output file will be saved.
+        :return: None
         """
-
         try:
             from graphviz import Digraph
         except ImportError:
             raise ImportError("Please install Graphviz using 'pip install graphviz'")
 
-        dot = Digraph(comment='CCM Diagram')
-        edges = set()
-
-        for obj in self.objects:
-            dot.node(obj.object_id, label=f"Object\n{obj.object_type}\n{obj.object_id}", shape='box', style='filled',
-                     color='lightyellow')
-
-            for attr in obj.attributes:
-                attr_id = f"{obj.object_id}_{attr.key}"
-                dot.node(attr_id, label=f"Attribute\n{attr.key}: {attr.value}", shape='ellipse', style='filled',
-                         color='lightgrey')
-                edge = (obj.object_id, attr_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-            for related_obj in obj.related_objects:
-                edge = (obj.object_id, related_obj.object_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-        for event in self.event_log:
-            event_label = "Process Event" if event.event_type == "process event" else "IoT Event"
-            dot.node(event.event_id, label=f"{event_label}\n{event.event_id}", shape='box', style='filled',
-                     color='lightblue')
-
-            for attr in event.attributes:
-                attr_id = f"{event.event_id}_{attr.key}"
-                dot.node(attr_id, label=f"Event Attribute\n{attr.key}: {attr.value}", shape='ellipse', style='filled',
-                         color='lightgreen')
-                edge = (event.event_id, attr_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-            for obj in event.related_objects:
-                edge = (obj.object_id, event.event_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-            if isinstance(event, ProcessEvent):
-                for activity in event.activities:
-                    dot.node(activity.activity_id, label=f"Activity\n{activity.activity_type}\n{activity.activity_id}",
-                             shape='diamond', style='filled', color='lightcoral')
-                    edge = (event.event_id, activity.activity_id)
-                    if edge not in edges:
-                        dot.edge(*edge)
-                        edges.add(edge)
-
-        for ds in self.data_sources:
-            dot.node(ds.source_id, label=f"Data Source\n{ds.source_type}\n{ds.source_id}", shape='box', style='filled',
-                     color='lightpink')
-
-            for event in ds.events:
-                edge = (ds.source_id, event.event_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-        for device in self.iot_devices:
-            dot.node(device.source_id, label=f"IoT Device\n{device.source_id}", shape='box', style='filled',
-                     color='lightcyan')
-
-            for obs in device.observations:
-                obs_id = obs.observation_id
-                dot.node(obs_id, label=f"Observation\n{obs.observed_property}: {obs.value}", shape='ellipse',
-                         style='filled', color='lightgoldenrod')
-                edge = (device.source_id, obs_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-            for event in device.events:
-                edge = (device.source_id, event.event_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
-        for is_system in self.information_systems:
-            dot.node(is_system.source_id, label=f"Information System\n{is_system.source_id}", shape='box',
-                     style='filled', color='black', fontcolor='white')
-
-            for event in self.event_log:
-                if event.data_source and isinstance(event.data_source,
-                                                    IS) and event.data_source.source_id == is_system.source_id:
-                    edge = (is_system.source_id, event.event_id)
-                    if edge not in edges:
-                        dot.edge(*edge)
-                        edges.add(edge)
-
-        for obj in self.objects:
-            for ds in obj.data_sources:
-                edge = (obj.object_id, ds.source_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
-
+        dot = create_graph(self.objects, self.event_log, self.data_sources, self.iot_devices, self.information_systems)
         dot.format = 'png'
         dot.render(output_file, view=True)
-
-    def filter_events(self, conditions: dict) -> List[Event]:
-        """
-        Filters events based on the provided conditions.
-        :param conditions: A dictionary with keys as attributes and values as desired values.
-        :return: A list of events that match the conditions.
-        """
-        filtered_events = []
-
-        for event in self.event_log:
-            if _match_conditions(event, conditions):
-                filtered_events.append(event)
-
-        return filtered_events
 
     def query(self, query_str: str) -> pd.DataFrame:
         """
@@ -455,6 +307,15 @@ class CCM(CCMClass):
         :param query_str: The query string, e.g., "event_type == 'iot event' and event:temperature > 25".
         :return: A DataFrame of the filtered events.
         """
-        conditions = _parse_query(query_str)
-        filtered_events = self.filter_events(conditions)
-        return pd.DataFrame([event.serialize() for event in filtered_events])
+
+        classes = {
+            'Object': self.objects,
+            'Event': self.event_log,
+            'InformationSystem': self.information_systems,
+            'SOSA.IoTDevice': self.iot_devices,
+            'SOSA.Observation': [
+                observation for iot_device in self.iot_devices for observation in iot_device.observations
+            ],
+            'Activity': self.activities
+        }
+        return query_classes(query_str, classes)

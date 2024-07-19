@@ -89,7 +89,12 @@ def case_study_example():
 
 if __name__ == "__main__":
     ccm = case_study_example()
-    ccm.visualize("case_study_example.png")
+
+    query = "SELECT object_id, object_type FROM Object WHERE self.object_type == 'tank'"
+
+    result_df1 = ccm.query(query)
+    print(result_df1)
+
     table: pd.DataFrame = ccm.get_extended_table()
-    ccm.save_to_json("case_study_example.json")
-    print(table)
+    # ccm.save_to_json("case_study_example.json")
+    # ccm.visualize("case_study_example.png")
