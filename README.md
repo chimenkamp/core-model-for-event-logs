@@ -70,7 +70,7 @@ The Common-Core Model (CCM) is a framework for managing and representing data re
 
 ## Usage Example
 
-![Example Image](tests/IMAGE.png)
+![Example Image](tests/case study simple/IMAGE.png)
 
 ```python
 # Initialize CCM instance

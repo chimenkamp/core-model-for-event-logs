@@ -1,4 +1,5 @@
 import json
+import typing
 from abc import ABC, abstractmethod
 from typing import List, Union, Optional, Literal, Any
 import datetime
@@ -8,7 +9,7 @@ import pandas as pd
 from src.utils.table_utils import create_extended_table
 from src.utils.query_utils import query_classes
 from src.utils.types import CCMEntry
-from src.utils.visualize import create_graph
+from src.utils.visualize_utils import create_graph
 
 
 class Attribute(CCMEntry):
@@ -43,6 +44,7 @@ class Event(CCMEntry):
         self.timestamp: datetime.datetime = datetime.datetime.now()
         self.data_source: Optional['DataSource'] = data_source
         self.related_objects: List['Object'] = []
+        self.related_events: List['Event'] = []
 
     def __repr__(self) -> str:
         return (f"Event(id={self.event_id}, type={self.event_type}, attributes={self.attributes}, "
@@ -61,6 +63,9 @@ class Event(CCMEntry):
             "data_source": self.data_source.serialize() if self.data_source else None,
             "related_objects": [obj.object_id for obj in self.related_objects]
         }
+
+    def add_related_event(self, related_event: 'Event') -> None:
+        self.related_events.append(related_event)
 
 
 class IoTEvent(Event):
