@@ -1,6 +1,8 @@
 from typing import Set, List, Tuple
 
-def create_graph(objects: List, event_log: List, data_sources: List, iot_devices: List, information_systems: List) -> 'Digraph':
+
+def create_graph(objects: List, event_log: List, data_sources: List, iot_devices: List,
+                 information_systems: List) -> 'Digraph':
     """
     This method creates a Graphviz Digraph object representing the CCM dataset.
     :return: A Graphviz Digraph object.
@@ -18,6 +20,7 @@ def create_graph(objects: List, event_log: List, data_sources: List, iot_devices
     add_event_relations(dot, edges, event_log)
 
     return dot
+
 
 def add_objects(dot: 'Digraph', edges: Set[Tuple[str, str]], objects: List) -> None:
     for obj in objects:
@@ -38,6 +41,7 @@ def add_objects(dot: 'Digraph', edges: Set[Tuple[str, str]], objects: List) -> N
             if edge not in edges:
                 dot.edge(*edge)
                 edges.add(edge)
+
 
 def add_event_log(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: List) -> None:
     for event in event_log:
@@ -69,6 +73,7 @@ def add_event_log(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: List) 
                     dot.edge(*edge)
                     edges.add(edge)
 
+
 def add_data_sources(dot: 'Digraph', edges: Set[Tuple[str, str]], data_sources: List) -> None:
     for ds in data_sources:
         dot.node(ds.source_id, label=f"Data Source\n{ds.source_type}\n{ds.source_id}", shape='box', style='filled',
@@ -79,6 +84,7 @@ def add_data_sources(dot: 'Digraph', edges: Set[Tuple[str, str]], data_sources: 
             if edge not in edges:
                 dot.edge(*edge)
                 edges.add(edge)
+
 
 def add_iot_devices(dot: 'Digraph', edges: Set[Tuple[str, str]], iot_devices: List) -> None:
     for device in iot_devices:
@@ -100,7 +106,9 @@ def add_iot_devices(dot: 'Digraph', edges: Set[Tuple[str, str]], iot_devices: Li
                 dot.edge(*edge)
                 edges.add(edge)
 
-def add_information_systems(dot: 'Digraph', edges: Set[Tuple[str, str]], information_systems: List, event_log: List, objects: List) -> None:
+
+def add_information_systems(dot: 'Digraph', edges: Set[Tuple[str, str]], information_systems: List, event_log: List,
+                            objects: List) -> None:
     for is_system in information_systems:
         dot.node(is_system.source_id, label=f"Information System\n{is_system.source_id}", shape='box', style='filled',
                  color='black', fontcolor='white')
@@ -119,6 +127,7 @@ def add_information_systems(dot: 'Digraph', edges: Set[Tuple[str, str]], informa
                 dot.edge(*edge)
                 edges.add(edge)
 
+
 def add_event_relations(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: List) -> None:
     for event in event_log:
         for related_event in event.related_events:
@@ -126,4 +135,3 @@ def add_event_relations(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: 
             if edge not in edges:
                 dot.edge(*edge)
                 edges.add(edge)
-
