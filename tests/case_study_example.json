@@ -1,88 +1,185 @@
 {
-    "ccm:events": [
+    "ccm:event_log": [
         {
             "event_id": "event1",
             "event_type": "process event",
-            "attributes": {
-                "label": "sample taken"
+            "attributes": [
+                {
+                    "key": "label",
+                    "value": "sample taken"
+                }
+            ],
+            "timestamp": "2024-07-19T07:00:22.698198",
+            "data_source": {
+                "source_id": "SAP ERP",
+                "source_type": "information system",
+                "events": [
+                    "event1",
+                    "event2"
+                ]
             },
-            "timestamp": "2024-07-18T13:43:48.527818",
-            "object_id": [
+            "related_objects": [
                 "batch1"
             ],
-            "data_source_id": "SAP ERP"
+            "activities": [
+                {
+                    "activity_id": "activity1",
+                    "activity_type": "take sample"
+                }
+            ]
         },
         {
             "event_id": "event2",
             "event_type": "process event",
-            "attributes": {
-                "label": "apply sample"
+            "attributes": [
+                {
+                    "key": "label",
+                    "value": "apply sample"
+                }
+            ],
+            "timestamp": "2024-07-19T07:00:22.698203",
+            "data_source": {
+                "source_id": "SAP ERP",
+                "source_type": "information system",
+                "events": [
+                    "event1",
+                    "event2"
+                ]
             },
-            "timestamp": "2024-07-18T13:43:48.527825",
-            "object_id": [
+            "related_objects": [
                 "batch1"
             ],
-            "data_source_id": "SAP ERP"
+            "activities": [
+                {
+                    "activity_id": "activity2",
+                    "activity_type": "apply sample"
+                }
+            ]
         },
         {
             "event_id": "event3",
             "event_type": "iot event",
-            "attributes": {
-                "label": "detect peak"
-            },
-            "timestamp": "2024-07-18T13:43:48.527828",
-            "object_id": [
-                "tank1"
+            "attributes": [
+                {
+                    "key": "label",
+                    "value": "detect peak"
+                }
             ],
-            "data_source_id": "device1"
+            "timestamp": "2024-07-19T07:00:22.698204",
+            "data_source": {
+                "source_id": "device1",
+                "source_type": "iot device",
+                "events": [
+                    "event4",
+                    "event3"
+                ],
+                "observations": [
+                    {
+                        "observation_id": "obs1",
+                        "observed_property": "flow_status",
+                        "value": "normal"
+                    },
+                    {
+                        "observation_id": "obs2",
+                        "observed_property": "drift",
+                        "value": 0.1
+                    }
+                ]
+            },
+            "related_objects": [
+                "tank1"
+            ]
         },
         {
             "event_id": "event4",
             "event_type": "iot event",
-            "attributes": {
-                "label": "value change",
-                "product_flow": 206,
-                "observation_drift": 0.1
-            },
-            "timestamp": "2024-07-18T13:43:48.527830",
-            "object_id": [
-                "tank1"
+            "attributes": [
+                {
+                    "key": "label",
+                    "value": "value change"
+                },
+                {
+                    "key": "product_flow",
+                    "value": 206
+                },
+                {
+                    "key": "observation_drift",
+                    "value": 0.1
+                }
             ],
-            "data_source_id": "sensor1"
+            "timestamp": "2024-07-19T07:00:22.698206",
+            "data_source": {
+                "source_id": "sensor1",
+                "source_type": "iot device",
+                "events": [
+                    "event4"
+                ],
+                "observations": []
+            },
+            "related_objects": [
+                "tank1"
+            ]
         }
     ],
     "ccm:objects": [
         {
             "object_id": "batch1",
             "object_type": "batch",
-            "attributes": {
-                "recipe": "13a4a45"
-            },
+            "attributes": [
+                {
+                    "key": "recipe",
+                    "value": "13a4a45"
+                }
+            ],
+            "related_objects": [],
             "events": [
                 "event1",
                 "event2"
-            ]
+            ],
+            "data_sources": []
         },
         {
             "object_id": "tank1",
             "object_type": "tank",
-            "attributes": {
-                "flow_status": "drift",
-                "product_flow": 206
-            },
+            "attributes": [
+                {
+                    "key": "flow_status",
+                    "value": "drift"
+                },
+                {
+                    "key": "product_flow",
+                    "value": 206
+                }
+            ],
+            "related_objects": [
+                "batch1"
+            ],
             "events": [
                 "event4",
                 "event3"
+            ],
+            "data_sources": [
+                "sensor1"
             ]
         },
         {
             "object_id": "sensor1",
             "object_type": "sensor",
-            "attributes": {
-                "precision": "0.1",
-                "unit": "l/h"
-            },
-            "events": []
+            "attributes": [
+                {
+                    "key": "precision",
+                    "value": "0.1"
+                },
+                {
+                    "key": "unit",
+                    "value": "l/h"
+                }
+            ],
+            "related_objects": [],
+            "events": [],
+            "data_sources": [
+                "sensor1"
+            ]
         }
     ],
     "ccm:data_sources": [
@@ -92,6 +189,18 @@
             "events": [
                 "event4",
                 "event3"
+            ],
+            "observations": [
+                {
+                    "observation_id": "obs1",
+                    "observed_property": "flow_status",
+                    "value": "normal"
+                },
+                {
+                    "observation_id": "obs2",
+                    "observed_property": "drift",
+                    "value": 0.1
+                }
             ]
         },
         {
@@ -107,7 +216,8 @@
             "source_type": "iot device",
             "events": [
                 "event4"
-            ]
+            ],
+            "observations": []
         },
         {
             "source_id": "device1",
@@ -115,21 +225,39 @@
             "events": [
                 "event4",
                 "event3"
+            ],
+            "observations": [
+                {
+                    "observation_id": "obs1",
+                    "observed_property": "flow_status",
+                    "value": "normal"
+                },
+                {
+                    "observation_id": "obs2",
+                    "observed_property": "drift",
+                    "value": 0.1
+                }
             ]
         }
     ],
     "ccm:information_systems": [
         {
-            "system_id": "SAP ERP",
-            "data_sources": [
-                "SAP ERP"
-            ],
-            "events": []
+            "source_id": "SAP ERP",
+            "source_type": "information system",
+            "events": [
+                "event1",
+                "event2"
+            ]
         }
     ],
     "ccm:iot_devices": [
         {
-            "device_id": "device1",
+            "source_id": "device1",
+            "source_type": "iot device",
+            "events": [
+                "event4",
+                "event3"
+            ],
             "observations": [
                 {
                     "observation_id": "obs1",
@@ -144,11 +272,20 @@
             ]
         },
         {
-            "device_id": "sensor1",
+            "source_id": "sensor1",
+            "source_type": "iot device",
+            "events": [
+                "event4"
+            ],
             "observations": []
         },
         {
-            "device_id": "device1",
+            "source_id": "device1",
+            "source_type": "iot device",
+            "events": [
+                "event4",
+                "event3"
+            ],
             "observations": [
                 {
                     "observation_id": "obs1",
@@ -162,5 +299,6 @@
                 }
             ]
         }
-    ]
+    ],
+    "ccm:activities": []
 }
