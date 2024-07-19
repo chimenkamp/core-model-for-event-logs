@@ -1,12 +1,14 @@
-from abc import ABC, abstractmethod
-from typing import List, Optional, Union, Literal, Any
-import datetime
 import json
+from abc import ABC, abstractmethod
+from typing import List, Union, Optional, Literal, Any
+import datetime
+
 import pandas as pd
-from graphviz import Digraph
+
+from src.utils import _match_conditions, _parse_query
 
 
-class Serializable(ABC):
+class CCMClass(ABC):
     """
     Abstract base class to enforce serialization implementation.
     """
@@ -16,7 +18,7 @@ class Serializable(ABC):
         pass
 
 
-class Attribute(Serializable):
+class Attribute(CCMClass):
     """
     Class to represent an attribute of an object or event.
     """
@@ -35,7 +37,7 @@ class Attribute(Serializable):
         }
 
 
-class Event(Serializable):
+class Event(CCMClass):
     """
     Class to represent an event.
     """
@@ -77,7 +79,7 @@ class IoTEvent(Event):
         super().__init__(event_id, "iot event", attributes, data_source)
 
 
-class Activity(Serializable):
+class Activity(CCMClass):
     """
     Class to represent an activity.
     """
@@ -111,7 +113,7 @@ class ProcessEvent(Event):
         return data
 
 
-class DataSource(Serializable):
+class DataSource(CCMClass):
     """
     Class to represent a data source.
     """
@@ -150,7 +152,7 @@ class SOSA:
     Class to represent the SOSA ontology / Namespace.
     """
 
-    class Observation(Serializable):
+    class Observation(CCMClass):
         """
         Class to represent an observation.
         """
@@ -188,7 +190,7 @@ class SOSA:
             return data
 
 
-class Object(Serializable):
+class Object(CCMClass):
     """
     Class to represent an object.
     """
@@ -226,7 +228,7 @@ class Object(Serializable):
         }
 
 
-class CCM(Serializable):
+class CCM(CCMClass):
     """
     Class to represent a Common-Core Model (CCM) dataset.
     """
@@ -320,6 +322,17 @@ class CCM(Serializable):
         }
 
     def visualize(self, output_file: str) -> None:
+        """
+        This method generates a visualization of the CCM dataset using Graphviz.
+        :param output_file:
+        :return:
+        """
+
+        try:
+            from graphviz import Digraph
+        except ImportError:
+            raise ImportError("Please install Graphviz using 'pip install graphviz'")
+
         dot = Digraph(comment='CCM Diagram')
         edges = set()
 
@@ -421,3 +434,27 @@ class CCM(Serializable):
 
         dot.format = 'png'
         dot.render(output_file, view=True)
+
+    def filter_events(self, conditions: dict) -> List[Event]:
+        """
+        Filters events based on the provided conditions.
+        :param conditions: A dictionary with keys as attributes and values as desired values.
+        :return: A list of events that match the conditions.
+        """
+        filtered_events = []
+
+        for event in self.event_log:
+            if _match_conditions(event, conditions):
+                filtered_events.append(event)
+
+        return filtered_events
+
+    def query(self, query_str: str) -> pd.DataFrame:
+        """
+        Filters events based on a query string and returns the result as a DataFrame.
+        :param query_str: The query string, e.g., "event_type == 'iot event' and event:temperature > 25".
+        :return: A DataFrame of the filtered events.
+        """
+        conditions = _parse_query(query_str)
+        filtered_events = self.filter_events(conditions)
+        return pd.DataFrame([event.serialize() for event in filtered_events])
