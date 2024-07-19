@@ -1,0 +1,272 @@
+// CCM Diagram
+digraph {
+	shipment1 [label="Object
+shipment
+shipment1" color=lightyellow shape=box style=filled]
+	shipment1_status [label="Attribute
+status: in transit" color=lightgrey shape=ellipse style=filled]
+	shipment1 -> shipment1_status
+	shipment1_environmental_conditions [label="Attribute
+environmental_conditions: stable" color=lightgrey shape=ellipse style=filled]
+	shipment1 -> shipment1_environmental_conditions
+	shipment1_location [label="Attribute
+location: Supplier Warehouse" color=lightgrey shape=ellipse style=filled]
+	shipment1 -> shipment1_location
+	rfid1 [label="Object
+rfid
+rfid1" color=lightyellow shape=box style=filled]
+	rfid1_precision [label="Attribute
+precision: 0.1" color=lightgrey shape=ellipse style=filled]
+	rfid1 -> rfid1_precision
+	rfid1_unit [label="Attribute
+unit: cm" color=lightgrey shape=ellipse style=filled]
+	rfid1 -> rfid1_unit
+	rfid1_location [label="Attribute
+location: Supplier Warehouse" color=lightgrey shape=ellipse style=filled]
+	rfid1 -> rfid1_location
+	rfid1 -> shipment1
+	event1 [label="IoT Event
+event1" color=lightblue shape=box style=filled]
+	event1_label [label="Event Attribute
+label: shipment departure" color=lightgreen shape=ellipse style=filled]
+	event1 -> event1_label
+	event1_location [label="Event Attribute
+location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
+	event1 -> event1_location
+	shipment1 -> event1
+	rfid1 -> event1
+	event2 [label="IoT Event
+event2" color=lightblue shape=box style=filled]
+	event2_label [label="Event Attribute
+label: shipment arrival" color=lightgreen shape=ellipse style=filled]
+	event2 -> event2_label
+	event2_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event2 -> event2_location
+	shipment1 -> event2
+	rfid1 -> event2
+	event3 [label="Process Event
+event3" color=lightblue shape=box style=filled]
+	event3_label [label="Event Attribute
+label: assembly start" color=lightgreen shape=ellipse style=filled]
+	event3 -> event3_label
+	event3_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event3 -> event3_location
+	activity1 [label="Activity
+start assembly
+activity1" color=lightcoral shape=diamond style=filled]
+	event3 -> activity1
+	event4 [label="Process Event
+event4" color=lightblue shape=box style=filled]
+	event4_label [label="Event Attribute
+label: assembly complete" color=lightgreen shape=ellipse style=filled]
+	event4 -> event4_label
+	event4_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event4 -> event4_location
+	activity2 [label="Activity
+complete assembly
+activity2" color=lightcoral shape=diamond style=filled]
+	event4 -> activity2
+	event5 [label="IoT Event
+event5" color=lightblue shape=box style=filled]
+	event5_label [label="Event Attribute
+label: temperature check" color=lightgreen shape=ellipse style=filled]
+	event5 -> event5_label
+	event5_location [label="Event Attribute
+location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
+	event5 -> event5_location
+	event5_temperature [label="Event Attribute
+temperature: 22C" color=lightgreen shape=ellipse style=filled]
+	event5 -> event5_temperature
+	shipment1 -> event5
+	event6 [label="IoT Event
+event6" color=lightblue shape=box style=filled]
+	event6_label [label="Event Attribute
+label: humidity check" color=lightgreen shape=ellipse style=filled]
+	event6 -> event6_label
+	event6_location [label="Event Attribute
+location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
+	event6 -> event6_location
+	event6_humidity [label="Event Attribute
+humidity: 50%" color=lightgreen shape=ellipse style=filled]
+	event6 -> event6_humidity
+	shipment1 -> event6
+	event7 [label="IoT Event
+event7" color=lightblue shape=box style=filled]
+	event7_label [label="Event Attribute
+label: vibration check" color=lightgreen shape=ellipse style=filled]
+	event7 -> event7_label
+	event7_location [label="Event Attribute
+location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
+	event7 -> event7_location
+	event7_vibration [label="Event Attribute
+vibration: normal" color=lightgreen shape=ellipse style=filled]
+	event7 -> event7_vibration
+	shipment1 -> event7
+	event8 [label="IoT Event
+event8" color=lightblue shape=box style=filled]
+	event8_label [label="Event Attribute
+label: light check" color=lightgreen shape=ellipse style=filled]
+	event8 -> event8_label
+	event8_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event8 -> event8_location
+	event8_light [label="Event Attribute
+light: bright" color=lightgreen shape=ellipse style=filled]
+	event8 -> event8_light
+	rfid1 -> event8
+	event9 [label="IoT Event
+event9" color=lightblue shape=box style=filled]
+	event9_label [label="Event Attribute
+label: pressure check" color=lightgreen shape=ellipse style=filled]
+	event9 -> event9_label
+	event9_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event9 -> event9_location
+	event9_pressure [label="Event Attribute
+pressure: 1 atm" color=lightgreen shape=ellipse style=filled]
+	event9 -> event9_pressure
+	rfid1 -> event9
+	event10 [label="Process Event
+event10" color=lightblue shape=box style=filled]
+	event10_label [label="Event Attribute
+label: quality check" color=lightgreen shape=ellipse style=filled]
+	event10 -> event10_label
+	event10_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event10 -> event10_location
+	event11 [label="Process Event
+event11" color=lightblue shape=box style=filled]
+	event11_label [label="Event Attribute
+label: packaging start" color=lightgreen shape=ellipse style=filled]
+	event11 -> event11_label
+	event11_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event11 -> event11_location
+	event12 [label="Process Event
+event12" color=lightblue shape=box style=filled]
+	event12_label [label="Event Attribute
+label: packaging complete" color=lightgreen shape=ellipse style=filled]
+	event12 -> event12_label
+	event12_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event12 -> event12_location
+	event13 [label="Process Event
+event13" color=lightblue shape=box style=filled]
+	event13_label [label="Event Attribute
+label: dispatch ready" color=lightgreen shape=ellipse style=filled]
+	event13 -> event13_label
+	event13_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event13 -> event13_location
+	event14 [label="Process Event
+event14" color=lightblue shape=box style=filled]
+	event14_label [label="Event Attribute
+label: dispatch complete" color=lightgreen shape=ellipse style=filled]
+	event14 -> event14_label
+	event14_location [label="Event Attribute
+location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
+	event14 -> event14_location
+	device2 [label="Data Source
+iot device
+device2" color=lightpink shape=box style=filled]
+	device2 -> event5
+	device3 [label="Data Source
+iot device
+device3" color=lightpink shape=box style=filled]
+	device3 -> event6
+	device4 [label="Data Source
+iot device
+device4" color=lightpink shape=box style=filled]
+	device4 -> event7
+	device5 [label="Data Source
+iot device
+device5" color=lightpink shape=box style=filled]
+	device5 -> event8
+	device6 [label="Data Source
+iot device
+device6" color=lightpink shape=box style=filled]
+	device6 -> event9
+	"SAP ERP" [label="Data Source
+information system
+SAP ERP" color=lightpink shape=box style=filled]
+	"SAP ERP" -> event3
+	"SAP ERP" -> event4
+	"SAP ERP" -> event10
+	"SAP ERP" -> event11
+	"SAP ERP" -> event12
+	"SAP ERP" -> event13
+	"SAP ERP" -> event14
+	sensor1 [label="Data Source
+iot device
+sensor1" color=lightpink shape=box style=filled]
+	sensor1 -> event1
+	device2 [label="Data Source
+iot device
+device2" color=lightpink shape=box style=filled]
+	device3 [label="Data Source
+iot device
+device3" color=lightpink shape=box style=filled]
+	device4 [label="Data Source
+iot device
+device4" color=lightpink shape=box style=filled]
+	device5 [label="Data Source
+iot device
+device5" color=lightpink shape=box style=filled]
+	device6 [label="Data Source
+iot device
+device6" color=lightpink shape=box style=filled]
+	device2 [label="IoT Device
+device2" color=lightcyan shape=box style=filled]
+	obs3 [label="Observation
+temperature: 22C" color=lightgoldenrod shape=ellipse style=filled]
+	device2 -> obs3
+	device3 [label="IoT Device
+device3" color=lightcyan shape=box style=filled]
+	obs4 [label="Observation
+humidity: 50%" color=lightgoldenrod shape=ellipse style=filled]
+	device3 -> obs4
+	device4 [label="IoT Device
+device4" color=lightcyan shape=box style=filled]
+	obs5 [label="Observation
+vibration: normal" color=lightgoldenrod shape=ellipse style=filled]
+	device4 -> obs5
+	device5 [label="IoT Device
+device5" color=lightcyan shape=box style=filled]
+	obs6 [label="Observation
+light: bright" color=lightgoldenrod shape=ellipse style=filled]
+	device5 -> obs6
+	device6 [label="IoT Device
+device6" color=lightcyan shape=box style=filled]
+	obs7 [label="Observation
+pressure: 1 atm" color=lightgoldenrod shape=ellipse style=filled]
+	device6 -> obs7
+	sensor1 [label="IoT Device
+sensor1" color=lightcyan shape=box style=filled]
+	device2 [label="IoT Device
+device2" color=lightcyan shape=box style=filled]
+	obs3 [label="Observation
+temperature: 22C" color=lightgoldenrod shape=ellipse style=filled]
+	device3 [label="IoT Device
+device3" color=lightcyan shape=box style=filled]
+	obs4 [label="Observation
+humidity: 50%" color=lightgoldenrod shape=ellipse style=filled]
+	device4 [label="IoT Device
+device4" color=lightcyan shape=box style=filled]
+	obs5 [label="Observation
+vibration: normal" color=lightgoldenrod shape=ellipse style=filled]
+	device5 [label="IoT Device
+device5" color=lightcyan shape=box style=filled]
+	obs6 [label="Observation
+light: bright" color=lightgoldenrod shape=ellipse style=filled]
+	device6 [label="IoT Device
+device6" color=lightcyan shape=box style=filled]
+	obs7 [label="Observation
+pressure: 1 atm" color=lightgoldenrod shape=ellipse style=filled]
+	"SAP ERP" [label="Information System
+SAP ERP" color=black fontcolor=white shape=box style=filled]
+	shipment1 -> sensor1
+	rfid1 -> sensor1
+}

@@ -1,3 +1,5 @@
+import pandas as pd
+
 from src.classes_ import CCM, Object, Attribute, IoTEvent, ProcessEvent, Activity, SOSA, IS
 
 def create_ccm_env() -> CCM:
@@ -43,8 +45,8 @@ def create_ccm_env() -> CCM:
     event_assembly_complete.add_activity(Activity(activity_id="activity2", activity_type="complete assembly"))
 
     # Link IoT Events to Process Events
-    event_assembly_start.add_related_event(event_shipment_arrival)
-    event_assembly_complete.add_related_event(event_shipment_arrival)
+    # event_assembly_start.add_related_event(event_shipment_arrival)
+    # event_assembly_complete.add_related_event(event_shipment_arrival)
 
     # Assign events to objects
     object_shipment.add_event(event_shipment_departure)
@@ -97,10 +99,12 @@ def create_ccm_env() -> CCM:
 
     object_sensor_rfid.add_related_object(object_shipment)
 
-    ccm.visualize("case_study_example.png")
     return ccm
 
 
 if __name__ == "__main__":
     ccm: CCM = create_ccm_env()
-    ccm.visualize("case_study_example.png")
+
+    table: pd.DataFrame = ccm.get_extended_table()
+    ccm.visualize("use_case_init_short.png")
+    print(table)

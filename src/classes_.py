@@ -260,6 +260,7 @@ class CCM(CCMEntry):
         return self.event_log
 
     def get_extended_table(self) -> pd.DataFrame:
+
         return create_extended_table(self.objects, self.event_log, self.data_sources)
 
     def save_to_json(self, file_path: str) -> None:
@@ -297,10 +298,17 @@ class CCM(CCMEntry):
         dot.format = 'png'
         dot.render(output_file, view=True)
 
-    def query(self, query_str: str) -> pd.DataFrame:
+    def query(self, query_str: str, return_as_dataframe: bool = True) -> pd.DataFrame:
         """
         Filters events based on a query string and returns the result as a DataFrame.
-        :param query_str: The query string, e.g., "event_type == 'iot event' and event:temperature > 25".
+
+        Query Examples:
+        - "SELECT * FROM Event WHERE self.event_type == 'process event'"
+        - "SELECT * FROM Object WHERE self.object_type == 'tank'"
+        - "SELECT observation_id FROM SOSA.Observation WHERE self.value > 0.5"
+
+        :param query_str: The query string to filter the events.
+        :param return_as_dataframe: Whether to return the result as a DataFrame or a list of objects.
         :return: A DataFrame of the filtered events.
         """
 
@@ -314,4 +322,4 @@ class CCM(CCMEntry):
             ],
             'Activity': self.activities
         }
-        return query_classes(query_str, classes, True)
+        return query_classes(query_str, classes, return_as_dataframe)

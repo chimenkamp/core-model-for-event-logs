@@ -1,6 +1,41 @@
-from typing import List, Dict, Any
-
+from typing import List, Dict, Any, Optional
+import src
 import pandas as pd
+
+
+def create_row_element(
+        data_sources: List['src.classes_.DataSource'],
+        event: 'src.classes_.Event',
+        related_object: Optional['src.classes_.Object'] = None
+) -> Dict[str, Any]:
+    row: Dict[str, Any] = {
+        'ccm:event_id': event.event_id,
+        'ccm:event_type': event.event_type,
+        'ccm:timestamp': event.timestamp,
+        'ccm:object_id': related_object.object_id if related_object else None,
+        'ccm:object_type': related_object.object_type if related_object else None,
+        'ccm:data_source_id': event.data_source.source_id if event.data_source else None,
+        'ccm:data_source_type': event.data_source.source_type if event.data_source else None
+    }
+
+    for attr in event.attributes:
+        row[f'event:{attr.key}'] = attr.value
+
+    for attr in (related_object.attributes if related_object else []):
+        row[f'object:{attr.key}'] = attr.value
+
+    if event.data_source:
+        for ds in data_sources:
+            if ds.source_id == event.data_source.source_id:
+                for ds_event in ds.events:
+                    if ds_event.event_id == event.event_id:
+                        for e_attr in ds_event.attributes:
+                            row[f'data_source_event:{e_attr.key}'] = e_attr.value
+
+    if event.event_type == 'process event':
+        for activity in event.activities:
+            row[f'activity:{activity.activity_id}_type'] = activity.activity_type
+    return row
 
 
 def create_extended_table(objects: List, event_log: List, data_sources: List) -> pd.DataFrame:
@@ -10,34 +45,15 @@ def create_extended_table(objects: List, event_log: List, data_sources: List) ->
         related_objects = [obj for obj in objects if obj in event.related_objects]
 
         for related_object in related_objects:
-            row: Dict[str, Any] = {
-                'ccm:event_id': event.event_id,
-                'ccm:event_type': event.event_type,
-                'ccm:timestamp': event.timestamp,
-                'ccm:object_id': related_object.object_id,
-                'ccm:object_type': related_object.object_type,
-                'ccm:data_source_id': event.data_source.source_id if event.data_source else None,
-                'ccm:data_source_type': event.data_source.source_type if event.data_source else None
-            }
+            # TODO: Only unique events are added to the table. Necessary if a event is related to multiple objects
 
-            for attr in event.attributes:
-                row[f'event:{attr.key}'] = attr.value
+            if any([d['ccm:event_id'] == event.event_id for d in rows]):
+                break
 
-            for attr in related_object.attributes:
-                row[f'object:{attr.key}'] = attr.value
-
-            if event.data_source:
-                for ds in data_sources:
-                    if ds.source_id == event.data_source.source_id:
-                        for ds_event in ds.events:
-                            if ds_event.event_id == event.event_id:
-                                for e_attr in ds_event.attributes:
-                                    row[f'data_source_event:{e_attr.key}'] = e_attr.value
-
-            if event.event_type == 'process event':
-                for activity in event.activities:
-                    row[f'activity:{activity.activity_id}_type'] = activity.activity_type
-
+            row = create_row_element(data_sources=data_sources, event=event, related_object=related_object)
+            rows.append(row)
+        else:
+            row = create_row_element(data_sources=data_sources, event=event)
             rows.append(row)
 
     df = pd.DataFrame(rows)
