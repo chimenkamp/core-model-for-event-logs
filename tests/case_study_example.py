@@ -90,7 +90,7 @@ def case_study_example():
 if __name__ == "__main__":
     ccm = case_study_example()
 
-    query = "SELECT object_id, object_type FROM Object WHERE self.object_type == 'tank'"
+    query = "SELECT * FROM Event WHERE self.event_type == 'process event'"
 
     result_df1 = ccm.query(query)
     print(result_df1)

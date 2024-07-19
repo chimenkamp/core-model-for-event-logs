@@ -6,21 +6,12 @@ import datetime
 import pandas as pd
 
 from src.utils.table_utils import create_extended_table
-from src.utils.utils import query_classes
+from src.utils.query_utils import query_classes
+from src.utils.types import CCMEntry
 from src.utils.visualize import create_graph
 
 
-class CCMClass(ABC):
-    """
-    Abstract base class to enforce serialization implementation.
-    """
-
-    @abstractmethod
-    def serialize(self) -> dict:
-        pass
-
-
-class Attribute(CCMClass):
+class Attribute(CCMEntry):
     """
     Class to represent an attribute of an object or event.
     """
@@ -39,7 +30,7 @@ class Attribute(CCMClass):
         }
 
 
-class Event(CCMClass):
+class Event(CCMEntry):
     """
     Class to represent an event.
     """
@@ -81,7 +72,7 @@ class IoTEvent(Event):
         super().__init__(event_id, "iot event", attributes, data_source)
 
 
-class Activity(CCMClass):
+class Activity(CCMEntry):
     """
     Class to represent an activity.
     """
@@ -115,7 +106,7 @@ class ProcessEvent(Event):
         return data
 
 
-class DataSource(CCMClass):
+class DataSource(CCMEntry):
     """
     Class to represent a data source.
     """
@@ -154,7 +145,7 @@ class SOSA:
     Class to represent the SOSA ontology / Namespace.
     """
 
-    class Observation(CCMClass):
+    class Observation(CCMEntry):
         """
         Class to represent an observation.
         """
@@ -192,7 +183,7 @@ class SOSA:
             return data
 
 
-class Object(CCMClass):
+class Object(CCMEntry):
     """
     Class to represent an object.
     """
@@ -230,7 +221,7 @@ class Object(CCMClass):
         }
 
 
-class CCM(CCMClass):
+class CCM(CCMEntry):
     """
     Class to represent a Common-Core Model (CCM) dataset.
     """
@@ -318,4 +309,4 @@ class CCM(CCMClass):
             ],
             'Activity': self.activities
         }
-        return query_classes(query_str, classes)
+        return query_classes(query_str, classes, True)
