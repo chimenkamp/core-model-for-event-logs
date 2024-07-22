@@ -1,7 +1,13 @@
-from typing import List, Union, Dict, Literal
-import pandas as pd
 import re
+import sys
+import traceback
+import typing
+from typing import List, Dict, Union, Optional
+import pandas as pd
 
+import src
+
+from src.utils.table_utils import create_extended_table
 from src.utils.types import CCMEntry
 
 
@@ -31,27 +37,77 @@ def parse_query(query: str) -> Dict[str, Union[str, List[str]]]:
     }
 
 
-# Function to evaluate the WHERE clause
-def evaluate_where_clause(obj: CCMEntry, where_clause: str, from_clause: str) -> bool:
+def extract_first_elements(condition_string: str) -> List[str]:
     """
-    Evaluates the WHERE clause on the given object.
+    Extract the first elements before the dot in each condition from the given string.
 
-    :param obj: The class instance to evaluate.
+    :param condition_string: The condition string to extract elements from.
+    :return: A list of the first elements before the dot in each condition.
+    """
+    pattern = r"(\w+)\."
+    matches = re.findall(pattern, condition_string)
+    return matches
+
+
+def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) -> List[dict[str, CCMEntry]]:
+    """
+    Evaluates the WHERE clause on the given objects.
+
+    :param obj_dict: A dictionary with class names as keys and class instances as values.
     :param where_clause: The WHERE clause string.
-    :return: True if the object satisfies the WHERE clause, False otherwise.
+    :return: True if the objects satisfy the WHERE clause, False otherwise.
     """
-    where_clause = where_clause.replace('=', '==')
-    where_clause = where_clause.replace(from_clause, 'self')
-    try:
-        eval_result = eval(where_clause, {}, {"self": obj})
-        return eval_result
-    except Exception as e:
-        print(f"Error evaluating where clause: {e}, {where_clause} -> {obj}")
-        return False
+    # Replace = with == and replace AND/OR with Python's logical operators
+    where_clause = (where_clause
+                    .replace('=', '==')
+                    .replace(' AND ', ' and ')
+                    .replace(' OR ', ' or '))
 
+    replace_map: dict[str, str] = {
+        "Event": "e",
+        "Object": "o",
+        "InformationSystem": "is",
+        "IoTDevice": "d",
+        "Attribute": "a",
+        "DataSource": "ds",
+        "ProcessEvent": "pe",
+        "Activity": "act",
+        "Observation": "obs",
+    }
 
-# Function to convert class instances to DataFrame
-def class_instances_to_dataframe(instances: List[CCMEntry], fields: List[str]) -> pd.DataFrame:
+    for class_name, instance in obj_dict.items():
+        where_clause = where_clause.replace(class_name, replace_map[class_name])
+
+    results: List[dict[str, CCMEntry]] = []
+
+    for event in obj_dict['Event']:
+        e = event
+        obs: List[CCMEntry] = event.related_objects
+        ds: "src.classes_.DataSource" = event.data_source
+
+        for ob in obs:
+            o = ob
+
+            context = {
+                "e": e,
+                "o": o,
+                "ds": ds
+            }
+
+            try:
+                eval_result = eval(where_clause, {}, context)
+                print(f"Evaluated where clause: {where_clause} -> {eval_result}")
+                if eval_result:
+                    results.append({"event": e, "object": o, "result": eval_result})
+            except Exception as e:
+                print("##################################################")
+                print(f"Error evaluating where clause: {e}, {where_clause} -> {obj_dict}")
+                traceback.print_exc(file=sys.stdout)
+                print("##################################################")
+                return False
+    return results
+
+def class_instances_to_dataframe(instances: List['CCMEntry'], fields: List[str]) -> pd.DataFrame:
     """
     Converts a list of class instances to a pandas DataFrame, extending the table for fields that are objects with attributes.
 
@@ -99,30 +155,43 @@ def class_instances_to_dataframe(instances: List[CCMEntry], fields: List[str]) -
     return df
 
 
-# Main query function
-def query_classes(query: str, classes: Dict[str, List[CCMEntry]], return_format: Literal["dataframe", "class_reference", "extended_table"]) -> Union[pd.DataFrame, Dict[str, List[CCMEntry]]]:
+def query_classes(
+        query: str,
+        classes: Dict[str, List['CCMEntry']],
+        return_format: str = "dataframe") -> Union[pd.DataFrame, Dict[str, List['CCMEntry']]]:
     """
     Executes a SQL-like query on the given classes.
 
     :param return_format: The format to return the result in.
+        dataframe: Return the result as a pandas DataFrame.
+        class_reference: Return the result as a dictionary of class names to lists of class instances.
+        extended_table: Return the result as an extended table with resolved references. Only works with From Event.
     :param query: The SQL-like query string.
     :param classes: A dictionary of class names to lists of class instances.
     :return: The resulting DataFrame or dictionary of lists of objects.
     """
+
     parsed_query = parse_query(query)
     select_fields: List[str] = parsed_query['select']
     from_class: str = parsed_query['from']
     where_clause: str = parsed_query['where']
 
+    if return_format == 'extended_table' and from_class != 'Event':
+        raise ValueError("Extended table format is only supported for querying from the Event class")
+
     if from_class not in classes:
         raise ValueError(f"Class {from_class} not found")
 
-    class_instances: List['CCMEntry'] = classes[from_class]
-    filtered_instances: List['CCMEntry'] = [instance for instance in class_instances if evaluate_where_clause(instance, where_clause, from_class)]
+    filtered_instances: list[dict[str, CCMEntry]] = evaluate_where_clause(classes, where_clause)
 
-    if return_format == 'dataframe':
-        return class_instances_to_dataframe(filtered_instances, select_fields)
-    elif return_format == 'class_reference':
+    if return_format == 'class_reference':
         return {from_class: filtered_instances}
     elif return_format == 'extended_table':
-        raise NotImplementedError("Extended table format not yet implemented")
+
+        return create_extended_table(
+            event_log=[instance['event'] for instance in filtered_instances if 'event' in instance],
+            objects=[instance['object'] for instance in filtered_instances if 'object' in instance],
+            data_sources=[instance['ds'] for instance in filtered_instances if 'ds' in instance]
+        )
+    else:
+        raise ValueError(f"Unsupported return format: {return_format}")

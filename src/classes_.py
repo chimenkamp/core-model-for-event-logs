@@ -313,7 +313,9 @@ class CCM(CCMEntry):
         dot.format = 'png'
         dot.render(output_file, view=True)
 
-    def query(self, query_str: str, return_as_dataframe: bool = True) -> pd.DataFrame:
+    def query(self,
+              query_str: str,
+              return_format: Literal["dataframe", "class_reference", "extended_table"] = "dataframe") -> pd.DataFrame:
         """
         Filters events based on a query string and returns the result as a DataFrame.
 
@@ -322,8 +324,8 @@ class CCM(CCMEntry):
         - "SELECT * FROM Object WHERE Object.object_type = 'tank'"
         - "SELECT observation_id FROM SOSA.Observation WHERE SOSA.Observation.value > 0.5"
 
+        :param return_format: The format to return the result in. Default is "dataframe".
         :param query_str: The query string to filter the events.
-        :param return_as_dataframe: Whether to return the result as a DataFrame or a list of objects.
         :return: A DataFrame of the filtered events.
         """
         # Assuming query_classes is a predefined function
@@ -335,4 +337,4 @@ class CCM(CCMEntry):
             'Observation': self.observation,
             'Activity': self.activities
         }
-        return query_classes(query_str, classes, "dataframe" if return_as_dataframe else "class_reference")
+        return query_classes(query_str, classes, return_format)
