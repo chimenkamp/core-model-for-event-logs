@@ -14,8 +14,8 @@ def create_row_element(
         'ccm:timestamp': event.timestamp,
         'ccm:object_id': related_object.object_id if related_object else None,
         'ccm:object_type': related_object.object_type if related_object else None,
-        'ccm:data_source_id': event.data_source.source_id if event.data_source else None,
-        'ccm:data_source_type': event.data_source.source_type if event.data_source else None
+        'ccm:data_source_id': event.data_source.data_source_id if event.data_source else None,
+        'ccm:data_source_type': event.data_source.data_source_type if event.data_source else None
     }
 
     for attr in event.attributes:
@@ -26,13 +26,12 @@ def create_row_element(
 
     if event.data_source:
         for ds in data_sources:
-            if ds.source_id == event.data_source.source_id:
-                for ds_event in ds.events:
-                    if ds_event.event_id == event.event_id:
-                        for e_attr in ds_event.attributes:
-                            row[f'data_source_event:{e_attr.key}'] = e_attr.value
+            if ds.data_source_id == event.data_source.data_source_id:
+                for attr in ds.attributes:
+                    row[f'data_source:{attr.key}'] = attr.value
 
     if event.event_type == 'process event':
+        event: 'src.classes_.ProcessEvent' = event
         for activity in event.activities:
             row[f'activity:{activity.activity_id}_type'] = activity.activity_type
     return row
