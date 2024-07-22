@@ -315,7 +315,7 @@ class CCM(CCMEntry):
 
     def query(self,
               query_str: str,
-              return_format: Literal["dataframe", "class_reference", "extended_table"] = "dataframe") -> pd.DataFrame:
+              return_format: Literal["class_reference", "extended_table"] = "extended_table") -> pd.DataFrame:
         """
         Filters events based on a query string and returns the result as a DataFrame.
 

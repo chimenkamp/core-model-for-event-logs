@@ -81,30 +81,34 @@ def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) ->
     results: List[dict[str, CCMEntry]] = []
 
     for event in obj_dict['Event']:
-        e = event
-        obs: List[CCMEntry] = event.related_objects
-        ds: "src.classes_.DataSource" = event.data_source
+        temp_event_context: "src.classes_.Event" = event
+        obs: List["src.classes_.Object"] = event.related_objects
+        temp_data_source_context: "src.classes_.DataSource" = event.data_source
 
         for ob in obs:
-            o = ob
+            temp_object_context: "src.classes_.Object" = ob
 
             context = {
-                "e": e,
-                "o": o,
-                "ds": ds
+                "e": temp_event_context,
+                "o": temp_object_context,
+                "ds": temp_data_source_context
             }
 
             try:
                 eval_result = eval(where_clause, {}, context)
-                print(f"Evaluated where clause: {where_clause} -> {eval_result}")
                 if eval_result:
-                    results.append({"event": e, "object": o, "result": eval_result})
+                    results.append(
+                        {
+                            "event": temp_event_context,
+                            "object": temp_object_context,
+                            "result": temp_data_source_context
+                        }
+                    )
             except Exception as e:
                 print("##################################################")
                 print(f"Error evaluating where clause: {e}, {where_clause} -> {obj_dict}")
                 traceback.print_exc(file=sys.stdout)
                 print("##################################################")
-                return False
     return results
 
 def class_instances_to_dataframe(instances: List['CCMEntry'], fields: List[str]) -> pd.DataFrame:
@@ -158,7 +162,9 @@ def class_instances_to_dataframe(instances: List['CCMEntry'], fields: List[str])
 def query_classes(
         query: str,
         classes: Dict[str, List['CCMEntry']],
-        return_format: str = "dataframe") -> Union[pd.DataFrame, Dict[str, List['CCMEntry']]]:
+        return_format: typing.Literal["class_reference", "extended_table"] = "extended_table") -> Union[
+    pd.DataFrame, Dict[str, List['CCMEntry']]
+]:
     """
     Executes a SQL-like query on the given classes.
 
@@ -188,10 +194,16 @@ def query_classes(
         return {from_class: filtered_instances}
     elif return_format == 'extended_table':
 
-        return create_extended_table(
+        extended_table: pd.DataFrame = create_extended_table(
             event_log=[instance['event'] for instance in filtered_instances if 'event' in instance],
             objects=[instance['object'] for instance in filtered_instances if 'object' in instance],
             data_sources=[instance['ds'] for instance in filtered_instances if 'ds' in instance]
         )
+
+        if select_fields and select_fields[0] != '*':
+            select_fields = [f"ccm:{field}" for field in select_fields]
+            extended_table = extended_table[select_fields]
+
+        return extended_table
     else:
         raise ValueError(f"Unsupported return format: {return_format}")

@@ -207,20 +207,9 @@ if __name__ == "__main__":
     print(table)
 
     # Example query 1: Select all IoT events where the label is 'temperature check' or 'humidity check'
+    # query1 = "SELECT event_id, event_type FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
     query1 = "SELECT * FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
     result1: pd.DataFrame = ccm.query(query1, "extended_table")
     print("Query 1 Result:")
     print(len(result1))
-    #
-    # # Example query 2: Select all Process events where the label is 'assembly start' and location is 'Main
-    # # Manufacturing Plant'
-    # query2 = "SELECT * FROM Event WHERE (Event.label = 'assembly start' AND Event.location = 'Main Manufacturing Plant')"
-    # result2: pd.DataFrame = ccm.query(query2, "extended_table")
-    # print("Query 2 Result:")
-    # print(len(result2))
-    #
-    # # Example query 3: Select all events where location is 'Supplier Warehouse' and label is 'shipment departure'
-    # query3 = "SELECT * FROM Event WHERE (Event.location = 'Supplier Warehouse' AND Event.label = 'shipment departure')"
-    # result3: pd.DataFrame = ccm.query(query3, "extended_table")
-    # print("Query 3 Result:")
-    # print(len(result3))
+
