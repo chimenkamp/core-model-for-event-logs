@@ -1,14 +1,14 @@
 from random import randint
 
+import pm4py
 
 from src.classes_ import CCM, Object, Attribute, IoTEvent, ProcessEvent, Activity, SOSA, IS
 
 import datetime
 import pandas as pd
 
+from src.mapping.ccm_to_ocel import CCMToOcelMapper
 
-
-# Assuming necessary classes and methods are already defined and imported
 
 def create_ccm_env() -> CCM:
     ccm = CCM()
@@ -106,7 +106,8 @@ def create_ccm_env() -> CCM:
     event_dispatch_ready.add_activity(Activity(activity_type="dispatch ready"))
 
     event_dispatch_complete = ProcessEvent(event_id="14",
-                                           timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
+                                           timestamp=datetime.datetime.now() + datetime.timedelta(
+                                               minutes=randint(1, 60)))
     event_dispatch_complete.add_attribute(Attribute(key="label", value="dispatch complete"))
     event_dispatch_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
@@ -203,13 +204,18 @@ def create_ccm_env() -> CCM:
 if __name__ == "__main__":
     ccm: CCM = create_ccm_env()
 
+    # ccm.visualize("use_case_init_long.png")
+
     table: pd.DataFrame = ccm.get_extended_table()
     print(table)
 
-    # Example query 1: Select all IoT events where the label is 'temperature check' or 'humidity check'
-    # query1 = "SELECT event_id, event_type FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
+    # Example query 1: Select all IoT events where the label is 'temperature check' or 'humidity check' query1 =
+    # "SELECT event_id, event_type FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
     query1 = "SELECT * FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
     result1: pd.DataFrame = ccm.query(query1, "extended_table")
     print("Query 1 Result:")
     print(len(result1))
 
+    ocel_mapping: CCMToOcelMapper = CCMToOcelMapper(ccm)
+
+    print(ocel_mapping.ocel)

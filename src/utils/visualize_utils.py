@@ -96,13 +96,14 @@ def add_event_log(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: List['
                 edges.add(edge)
 
         if event.event_type == "process event":
-            for activity in event.activities:
-                dot.node(activity.activity_id, label=f"Activity\n{activity.activity_type}\n{activity.activity_id}",
-                         shape='diamond', style='filled', color='lightcoral')
-                edge = (event.event_id, activity.activity_id)
-                if edge not in edges:
-                    dot.edge(*edge)
-                    edges.add(edge)
+            event: "src.classes_.ProcessEvent" = event
+
+            dot.node(event.activity.activity_id, label=f"Activity\n{event.activity.activity_type}\n{event.activity.activity_id}",
+                     shape='diamond', style='filled', color='lightcoral')
+            edge = (event.event_id, event.activity.activity_id)
+            if edge not in edges:
+                dot.edge(*edge)
+                edges.add(edge)
 
 
 def add_data_sources(dot: 'Digraph', edges: Set[Tuple[str, str]],
