@@ -32,8 +32,8 @@ def create_row_element(
 
     if event.event_type == 'process event':
         event: 'src.classes_.ProcessEvent' = event
-        for activity in event.activities:
-            row[f'activity:{activity.activity_id}_type'] = activity.activity_type
+        row[f'activity:activity_type'] = event.activity.activity_type
+
     return row
 
 

@@ -92,14 +92,14 @@ class Event(CCMEntry):
 
     def __repr__(self) -> str:
         return (f"Event(id={self.event_id}, obj={self.related_objects}, data_source={self.data_source}, "
-                f"derived_from_event={self.derived_from_event})")
+                f"derived_from_event={self.derived_from_events})")
 
     def serialize(self) -> dict:
         return {
             "event_id": self.event_id,
             "object": [obj.object_id for obj in self.related_objects] if self.related_objects else None,
             "data_source": self.data_source.data_source_id if self.data_source else None,
-            "derived_from_event": self.derived_from_event.event_id if self.derived_from_event else None
+            "derived_from_events": [event.event_id for event in self.derived_from_events] if self.derived_from_events else None
         }
 
     def add_object(self, obj: 'Object') -> None:
@@ -108,8 +108,8 @@ class Event(CCMEntry):
     def add_data_source(self, data_source: 'DataSource') -> None:
         self.data_source = data_source
 
-    def add_derived_from_event(self, derived_from_event: 'Event') -> None:
-        self.derived_from_event = derived_from_event
+    def add_derived_from_event(self, derived_from_event: typing.Self) -> None:
+        self.derived_from_events.append(derived_from_event)
 
 
 class ProcessEvent(Event):
@@ -117,18 +117,20 @@ class ProcessEvent(Event):
     Class to represent a process event.
     """
 
-    def __init__(self, event_id: Optional[str] = None) -> None:
-        super().__init__("process event", event_id)
-        self.process_event_id: str = self.event_id
-        self.activities: List[Activity] = []
+    def __init__(self, timestamp: Optional[datetime.datetime] = None,
+                 event_id: Optional[str] = None, objs: Optional[List['Object']] = None,
+                 data_source: Optional['DataSource'] = None, derived_from_events: List[typing.Self] = None) -> None:
+
+        super().__init__("process event", timestamp, event_id, objs, data_source, derived_from_events)
+        self.activity: Activity = None
 
     def serialize(self) -> dict:
         data = super().serialize()
-        data["process_event_id"] = self.process_event_id
+        data["activity"] = self.activity.serialize() if self.activity else None
         return data
 
     def add_activity(self, activity: Activity) -> None:
-        self.activities.append(activity)
+        self.activity = activity
 
 
 class IoTEvent(Event):
@@ -136,14 +138,10 @@ class IoTEvent(Event):
     Class to represent an IoT event.
     """
 
-    def __init__(self, event_id: Optional[str] = None) -> None:
-        super().__init__("iot event", event_id)
-        self.iot_event_id: str = self.event_id
-
-    def serialize(self) -> dict:
-        data = super().serialize()
-        data["iot_event_id"] = self.iot_event_id
-        return data
+    def __init__(self, timestamp: Optional[datetime.datetime] = None,
+                 event_id: Optional[str] = None, objs: Optional[List['Object']] = None,
+                 data_source: Optional['DataSource'] = None, derived_from_events: List[typing.Self] = None) -> None:
+        super().__init__("iot event", timestamp, event_id, objs, data_source, derived_from_events)
 
 
 class IS(DataSource):
@@ -320,9 +318,9 @@ class CCM(CCMEntry):
         Filters events based on a query string and returns the result as a DataFrame.
 
         Query Examples:
-        - "SELECT * FROM Event WHERE self.event_type == 'process event'"
-        - "SELECT * FROM Object WHERE self.object_type == 'tank'"
-        - "SELECT observation_id FROM SOSA.Observation WHERE self.value > 0.5"
+        - "SELECT * FROM Event WHERE Event.event_type = 'process event'"
+        - "SELECT * FROM Object WHERE Object.object_type = 'tank'"
+        - "SELECT observation_id FROM SOSA.Observation WHERE SOSA.Observation.value > 0.5"
 
         :param query_str: The query string to filter the events.
         :param return_as_dataframe: Whether to return the result as a DataFrame or a list of objects.
@@ -337,4 +335,4 @@ class CCM(CCMEntry):
             'Observation': self.observation,
             'Activity': self.activities
         }
-        return query_classes(query_str, classes, return_as_dataframe)
+        return query_classes(query_str, classes, "dataframe" if return_as_dataframe else "class_reference")

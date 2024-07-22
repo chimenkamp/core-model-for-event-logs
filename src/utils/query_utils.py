@@ -1,4 +1,4 @@
-from typing import List, Union, Dict
+from typing import List, Union, Dict, Literal
 import pandas as pd
 import re
 
@@ -32,7 +32,7 @@ def parse_query(query: str) -> Dict[str, Union[str, List[str]]]:
 
 
 # Function to evaluate the WHERE clause
-def evaluate_where_clause(obj: CCMEntry, where_clause: str) -> bool:
+def evaluate_where_clause(obj: CCMEntry, where_clause: str, from_clause: str) -> bool:
     """
     Evaluates the WHERE clause on the given object.
 
@@ -40,10 +40,13 @@ def evaluate_where_clause(obj: CCMEntry, where_clause: str) -> bool:
     :param where_clause: The WHERE clause string.
     :return: True if the object satisfies the WHERE clause, False otherwise.
     """
+    where_clause = where_clause.replace('=', '==')
+    where_clause = where_clause.replace(from_clause, 'self')
     try:
-        return eval(where_clause, {}, {"self": obj})
+        eval_result = eval(where_clause, {}, {"self": obj})
+        return eval_result
     except Exception as e:
-        print(f"Error evaluating where clause: {e}")
+        print(f"Error evaluating where clause: {e}, {where_clause} -> {obj}")
         return False
 
 
@@ -97,13 +100,13 @@ def class_instances_to_dataframe(instances: List[CCMEntry], fields: List[str]) -
 
 
 # Main query function
-def query_classes(query: str, classes: Dict[str, List[CCMEntry]], return_as_dataframe: bool = True) -> Union[pd.DataFrame, Dict[str, List[CCMEntry]]]:
+def query_classes(query: str, classes: Dict[str, List[CCMEntry]], return_format: Literal["dataframe", "class_reference", "extended_table"]) -> Union[pd.DataFrame, Dict[str, List[CCMEntry]]]:
     """
     Executes a SQL-like query on the given classes.
 
+    :param return_format: The format to return the result in.
     :param query: The SQL-like query string.
     :param classes: A dictionary of class names to lists of class instances.
-    :param return_as_dataframe: Flag to determine the return type. If True, returns a DataFrame; otherwise, returns a dictionary of lists of objects.
     :return: The resulting DataFrame or dictionary of lists of objects.
     """
     parsed_query = parse_query(query)
@@ -115,10 +118,11 @@ def query_classes(query: str, classes: Dict[str, List[CCMEntry]], return_as_data
         raise ValueError(f"Class {from_class} not found")
 
     class_instances: List['CCMEntry'] = classes[from_class]
-    filtered_instances: List['CCMEntry'] = [instance for instance in class_instances if evaluate_where_clause(instance, where_clause)]
+    filtered_instances: List['CCMEntry'] = [instance for instance in class_instances if evaluate_where_clause(instance, where_clause, from_class)]
 
-    if return_as_dataframe:
+    if return_format == 'dataframe':
         return class_instances_to_dataframe(filtered_instances, select_fields)
-    else:
-        result = {from_class: filtered_instances}
-        return result
+    elif return_format == 'class_reference':
+        return {from_class: filtered_instances}
+    elif return_format == 'extended_table':
+        raise NotImplementedError("Extended table format not yet implemented")

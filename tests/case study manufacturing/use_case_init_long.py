@@ -1,3 +1,5 @@
+from random import randint
+
 import pandas as pd
 
 from src.classes_ import CCM, Object, Attribute, IoTEvent, ProcessEvent, Activity, SOSA, IS
@@ -28,75 +30,88 @@ def create_ccm_env() -> CCM:
     object_sensor_rfid.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
 
     # Define IoT Events for raw material procurement and supply chain management
-    event_shipment_departure = IoTEvent(event_id="1")
+    event_shipment_departure = IoTEvent(event_id="1",
+                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_shipment_departure.add_attribute(Attribute(key="label", value="shipment departure"))
     event_shipment_departure.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
 
-    event_shipment_arrival = IoTEvent(event_id="2")
+    event_shipment_arrival = IoTEvent(event_id="2",
+                                      timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_shipment_arrival.add_attribute(Attribute(key="label", value="shipment arrival"))
     event_shipment_arrival.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     # Additional IoT Events
-    event_temperature_check = IoTEvent(event_id="5")
+    event_temperature_check = IoTEvent(event_id="5",
+                                       timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_temperature_check.add_attribute(Attribute(key="label", value="temperature check"))
     event_temperature_check.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
 
-    event_humidity_check = IoTEvent(event_id="6")
+    event_humidity_check = IoTEvent(event_id="6",
+                                    timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_humidity_check.add_attribute(Attribute(key="label", value="humidity check"))
     event_humidity_check.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
 
-    event_vibration_check = IoTEvent(event_id="7")
+    event_vibration_check = IoTEvent(event_id="7",
+                                     timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_vibration_check.add_attribute(Attribute(key="label", value="vibration check"))
     event_vibration_check.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
 
-    event_light_check = IoTEvent(event_id="8")
+    event_light_check = IoTEvent(event_id="8",
+                                 timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_light_check.add_attribute(Attribute(key="label", value="light check"))
     event_light_check.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_pressure_check = IoTEvent(event_id="9")
+    event_pressure_check = IoTEvent(event_id="9",
+                                    timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_pressure_check.add_attribute(Attribute(key="label", value="pressure check"))
     event_pressure_check.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     # Define Process Events derived from IoT Events for assembly line operations
-    event_assembly_start = ProcessEvent(event_id="3")
+    event_assembly_start = ProcessEvent(event_id="3",
+                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_assembly_start.add_attribute(Attribute(key="label", value="assembly start"))
     event_assembly_start.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_assembly_start.add_activity(Activity(activity_type="assembly started"))
 
-    event_assembly_complete = ProcessEvent(event_id="4")
+    event_assembly_complete = ProcessEvent(event_id="4", timestamp=datetime.datetime.now() + datetime.timedelta(
+        minutes=randint(1, 60)))
     event_assembly_complete.add_attribute(Attribute(key="label", value="assembly complete"))
     event_assembly_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_assembly_complete.add_activity(Activity(activity_type="assembly completed"))
 
     # Additional Process Events
-    event_quality_check = ProcessEvent(event_id="10")
+    event_quality_check = ProcessEvent(event_id="10",
+                                       timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_quality_check.add_attribute(Attribute(key="label", value="quality check"))
     event_quality_check.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_quality_check.add_activity(Activity(activity_type="quality check performed"))
 
-    event_packaging_start = ProcessEvent(event_id="11")
+    event_packaging_start = ProcessEvent(event_id="11",
+                                         timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_packaging_start.add_attribute(Attribute(key="label", value="packaging start"))
     event_packaging_start.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_packaging_start.add_activity(Activity(activity_type="packaging started"))
 
-
-    event_packaging_complete = ProcessEvent(event_id="12")
+    event_packaging_complete = ProcessEvent(event_id="12", timestamp=datetime.datetime.now() + datetime.timedelta(
+        minutes=randint(1, 60)))
     event_packaging_complete.add_attribute(Attribute(key="label", value="packaging complete"))
     event_packaging_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_packaging_complete.add_activity(Activity(activity_type="packaging completed"))
 
-    event_dispatch_ready = ProcessEvent(event_id="13")
+    event_dispatch_ready = ProcessEvent(event_id="13",
+                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_dispatch_ready.add_attribute(Attribute(key="label", value="dispatch ready"))
     event_dispatch_ready.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_dispatch_ready.add_activity(Activity(activity_type="dispatch ready"))
 
-    event_dispatch_complete = ProcessEvent(event_id="14")
+    event_dispatch_complete = ProcessEvent(event_id="14",
+                                           timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
     event_dispatch_complete.add_attribute(Attribute(key="label", value="dispatch complete"))
     event_dispatch_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
@@ -194,5 +209,11 @@ if __name__ == "__main__":
     ccm: CCM = create_ccm_env()
 
     table: pd.DataFrame = ccm.get_extended_table()
-    ccm.visualize("use_case_init_long.png")
     print(table)
+
+    # select all process events
+    query = "SELECT * FROM Event WHERE Event.event_type = 'iot event'"
+    process_events: pd.DataFrame = ccm.query(query)
+    print(process_events)
+
+    # ccm.visualize("use_case_init_long.png")

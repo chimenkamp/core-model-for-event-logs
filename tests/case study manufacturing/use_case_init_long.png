@@ -24,219 +24,219 @@ unit: cm" color=lightgrey shape=ellipse style=filled]
 	"2_location" [label="Attribute
 location: Supplier Warehouse" color=lightgrey shape=ellipse style=filled]
 	2 -> "2_location"
-	"22083859-40df-4fc6-a6b4-c61d321c4065" [label="IoT Event
-22083859-40df-4fc6-a6b4-c61d321c4065" color=lightblue shape=box style=filled]
-	"22083859-40df-4fc6-a6b4-c61d321c4065_label" [label="Event Attribute
+	"af76e678-ab9c-4f0e-80c0-616b47687c25" [label="IoT Event
+af76e678-ab9c-4f0e-80c0-616b47687c25" color=lightblue shape=box style=filled]
+	"af76e678-ab9c-4f0e-80c0-616b47687c25_label" [label="Event Attribute
 label: shipment departure" color=lightgreen shape=ellipse style=filled]
-	"22083859-40df-4fc6-a6b4-c61d321c4065" -> "22083859-40df-4fc6-a6b4-c61d321c4065_label"
-	"22083859-40df-4fc6-a6b4-c61d321c4065_location" [label="Event Attribute
+	"af76e678-ab9c-4f0e-80c0-616b47687c25" -> "af76e678-ab9c-4f0e-80c0-616b47687c25_label"
+	"af76e678-ab9c-4f0e-80c0-616b47687c25_location" [label="Event Attribute
 location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
-	"22083859-40df-4fc6-a6b4-c61d321c4065" -> "22083859-40df-4fc6-a6b4-c61d321c4065_location"
-	2 -> "22083859-40df-4fc6-a6b4-c61d321c4065"
-	"a748523b-0b10-4831-add7-75c2b9eb674f" [label="IoT Event
-a748523b-0b10-4831-add7-75c2b9eb674f" color=lightblue shape=box style=filled]
-	"a748523b-0b10-4831-add7-75c2b9eb674f_label" [label="Event Attribute
+	"af76e678-ab9c-4f0e-80c0-616b47687c25" -> "af76e678-ab9c-4f0e-80c0-616b47687c25_location"
+	2 -> "af76e678-ab9c-4f0e-80c0-616b47687c25"
+	"67f3116e-b3ab-4c51-ba03-f82fd644b0a1" [label="IoT Event
+67f3116e-b3ab-4c51-ba03-f82fd644b0a1" color=lightblue shape=box style=filled]
+	"67f3116e-b3ab-4c51-ba03-f82fd644b0a1_label" [label="Event Attribute
 label: shipment arrival" color=lightgreen shape=ellipse style=filled]
-	"a748523b-0b10-4831-add7-75c2b9eb674f" -> "a748523b-0b10-4831-add7-75c2b9eb674f_label"
-	"a748523b-0b10-4831-add7-75c2b9eb674f_location" [label="Event Attribute
+	"67f3116e-b3ab-4c51-ba03-f82fd644b0a1" -> "67f3116e-b3ab-4c51-ba03-f82fd644b0a1_label"
+	"67f3116e-b3ab-4c51-ba03-f82fd644b0a1_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"a748523b-0b10-4831-add7-75c2b9eb674f" -> "a748523b-0b10-4831-add7-75c2b9eb674f_location"
-	2 -> "a748523b-0b10-4831-add7-75c2b9eb674f"
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c" [label="Process Event
-db938a7f-1fbd-44a8-8c3d-9ca7763ed47c" color=lightblue shape=box style=filled]
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c_label" [label="Event Attribute
+	"67f3116e-b3ab-4c51-ba03-f82fd644b0a1" -> "67f3116e-b3ab-4c51-ba03-f82fd644b0a1_location"
+	2 -> "67f3116e-b3ab-4c51-ba03-f82fd644b0a1"
+	"833dd548-7a77-43e1-8813-b061e8e34765" [label="Process Event
+833dd548-7a77-43e1-8813-b061e8e34765" color=lightblue shape=box style=filled]
+	"833dd548-7a77-43e1-8813-b061e8e34765_label" [label="Event Attribute
 label: assembly start" color=lightgreen shape=ellipse style=filled]
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c" -> "db938a7f-1fbd-44a8-8c3d-9ca7763ed47c_label"
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c_location" [label="Event Attribute
+	"833dd548-7a77-43e1-8813-b061e8e34765" -> "833dd548-7a77-43e1-8813-b061e8e34765_label"
+	"833dd548-7a77-43e1-8813-b061e8e34765_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c" -> "db938a7f-1fbd-44a8-8c3d-9ca7763ed47c_location"
-	"e31e7e11-0169-40c3-b3ec-c31ccbbc8901" [label="Activity
+	"833dd548-7a77-43e1-8813-b061e8e34765" -> "833dd548-7a77-43e1-8813-b061e8e34765_location"
+	"b2f5b09d-c7c1-446a-b696-361d2057b88f" [label="Activity
 assembly started
-e31e7e11-0169-40c3-b3ec-c31ccbbc8901" color=lightcoral shape=diamond style=filled]
-	"db938a7f-1fbd-44a8-8c3d-9ca7763ed47c" -> "e31e7e11-0169-40c3-b3ec-c31ccbbc8901"
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c" [label="Process Event
-4f936fd6-456a-4366-81b0-5c169c48dc8c" color=lightblue shape=box style=filled]
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c_label" [label="Event Attribute
+b2f5b09d-c7c1-446a-b696-361d2057b88f" color=lightcoral shape=diamond style=filled]
+	"833dd548-7a77-43e1-8813-b061e8e34765" -> "b2f5b09d-c7c1-446a-b696-361d2057b88f"
+	"6d06a37e-6005-49af-9452-f75106365ab0" [label="Process Event
+6d06a37e-6005-49af-9452-f75106365ab0" color=lightblue shape=box style=filled]
+	"6d06a37e-6005-49af-9452-f75106365ab0_label" [label="Event Attribute
 label: assembly complete" color=lightgreen shape=ellipse style=filled]
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c" -> "4f936fd6-456a-4366-81b0-5c169c48dc8c_label"
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c_location" [label="Event Attribute
+	"6d06a37e-6005-49af-9452-f75106365ab0" -> "6d06a37e-6005-49af-9452-f75106365ab0_label"
+	"6d06a37e-6005-49af-9452-f75106365ab0_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c" -> "4f936fd6-456a-4366-81b0-5c169c48dc8c_location"
-	"9922a631-1a10-4546-a222-d3ff9378918c" [label="Activity
+	"6d06a37e-6005-49af-9452-f75106365ab0" -> "6d06a37e-6005-49af-9452-f75106365ab0_location"
+	"debdea94-a837-41d2-95cb-4673bd52b999" [label="Activity
 assembly completed
-9922a631-1a10-4546-a222-d3ff9378918c" color=lightcoral shape=diamond style=filled]
-	"4f936fd6-456a-4366-81b0-5c169c48dc8c" -> "9922a631-1a10-4546-a222-d3ff9378918c"
-	"d02368b0-705b-49e2-99ae-a3366b049608" [label="IoT Event
-d02368b0-705b-49e2-99ae-a3366b049608" color=lightblue shape=box style=filled]
-	"d02368b0-705b-49e2-99ae-a3366b049608_label" [label="Event Attribute
+debdea94-a837-41d2-95cb-4673bd52b999" color=lightcoral shape=diamond style=filled]
+	"6d06a37e-6005-49af-9452-f75106365ab0" -> "debdea94-a837-41d2-95cb-4673bd52b999"
+	"d809e200-415b-4bf3-948c-679e58987586" [label="IoT Event
+d809e200-415b-4bf3-948c-679e58987586" color=lightblue shape=box style=filled]
+	"d809e200-415b-4bf3-948c-679e58987586_label" [label="Event Attribute
 label: temperature check" color=lightgreen shape=ellipse style=filled]
-	"d02368b0-705b-49e2-99ae-a3366b049608" -> "d02368b0-705b-49e2-99ae-a3366b049608_label"
-	"d02368b0-705b-49e2-99ae-a3366b049608_location" [label="Event Attribute
+	"d809e200-415b-4bf3-948c-679e58987586" -> "d809e200-415b-4bf3-948c-679e58987586_label"
+	"d809e200-415b-4bf3-948c-679e58987586_location" [label="Event Attribute
 location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
-	"d02368b0-705b-49e2-99ae-a3366b049608" -> "d02368b0-705b-49e2-99ae-a3366b049608_location"
-	"d02368b0-705b-49e2-99ae-a3366b049608_temperature" [label="Event Attribute
+	"d809e200-415b-4bf3-948c-679e58987586" -> "d809e200-415b-4bf3-948c-679e58987586_location"
+	"d809e200-415b-4bf3-948c-679e58987586_temperature" [label="Event Attribute
 temperature: 22C" color=lightgreen shape=ellipse style=filled]
-	"d02368b0-705b-49e2-99ae-a3366b049608" -> "d02368b0-705b-49e2-99ae-a3366b049608_temperature"
-	2 -> "d02368b0-705b-49e2-99ae-a3366b049608"
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a" [label="IoT Event
-e9dea0ef-919c-4c8e-b6cb-003aea65a47a" color=lightblue shape=box style=filled]
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a_label" [label="Event Attribute
+	"d809e200-415b-4bf3-948c-679e58987586" -> "d809e200-415b-4bf3-948c-679e58987586_temperature"
+	2 -> "d809e200-415b-4bf3-948c-679e58987586"
+	"e828686c-fa44-42eb-9edb-63f1011b2a96" [label="IoT Event
+e828686c-fa44-42eb-9edb-63f1011b2a96" color=lightblue shape=box style=filled]
+	"e828686c-fa44-42eb-9edb-63f1011b2a96_label" [label="Event Attribute
 label: humidity check" color=lightgreen shape=ellipse style=filled]
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a" -> "e9dea0ef-919c-4c8e-b6cb-003aea65a47a_label"
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a_location" [label="Event Attribute
+	"e828686c-fa44-42eb-9edb-63f1011b2a96" -> "e828686c-fa44-42eb-9edb-63f1011b2a96_label"
+	"e828686c-fa44-42eb-9edb-63f1011b2a96_location" [label="Event Attribute
 location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a" -> "e9dea0ef-919c-4c8e-b6cb-003aea65a47a_location"
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a_humidity" [label="Event Attribute
+	"e828686c-fa44-42eb-9edb-63f1011b2a96" -> "e828686c-fa44-42eb-9edb-63f1011b2a96_location"
+	"e828686c-fa44-42eb-9edb-63f1011b2a96_humidity" [label="Event Attribute
 humidity: 50%" color=lightgreen shape=ellipse style=filled]
-	"e9dea0ef-919c-4c8e-b6cb-003aea65a47a" -> "e9dea0ef-919c-4c8e-b6cb-003aea65a47a_humidity"
-	1 -> "e9dea0ef-919c-4c8e-b6cb-003aea65a47a"
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2" [label="IoT Event
-7b0478c7-f577-4ea0-8fc6-c71ef867bba2" color=lightblue shape=box style=filled]
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2_label" [label="Event Attribute
+	"e828686c-fa44-42eb-9edb-63f1011b2a96" -> "e828686c-fa44-42eb-9edb-63f1011b2a96_humidity"
+	1 -> "e828686c-fa44-42eb-9edb-63f1011b2a96"
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3" [label="IoT Event
+5300655b-2ce1-4fae-aac1-f60b36f0e2f3" color=lightblue shape=box style=filled]
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3_label" [label="Event Attribute
 label: vibration check" color=lightgreen shape=ellipse style=filled]
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2" -> "7b0478c7-f577-4ea0-8fc6-c71ef867bba2_label"
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2_location" [label="Event Attribute
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3" -> "5300655b-2ce1-4fae-aac1-f60b36f0e2f3_label"
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3_location" [label="Event Attribute
 location: Supplier Warehouse" color=lightgreen shape=ellipse style=filled]
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2" -> "7b0478c7-f577-4ea0-8fc6-c71ef867bba2_location"
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2_vibration" [label="Event Attribute
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3" -> "5300655b-2ce1-4fae-aac1-f60b36f0e2f3_location"
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3_vibration" [label="Event Attribute
 vibration: normal" color=lightgreen shape=ellipse style=filled]
-	"7b0478c7-f577-4ea0-8fc6-c71ef867bba2" -> "7b0478c7-f577-4ea0-8fc6-c71ef867bba2_vibration"
-	1 -> "7b0478c7-f577-4ea0-8fc6-c71ef867bba2"
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec" [label="IoT Event
-0fb30d1b-d24a-40a7-8288-38c604e319ec" color=lightblue shape=box style=filled]
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec_label" [label="Event Attribute
+	"5300655b-2ce1-4fae-aac1-f60b36f0e2f3" -> "5300655b-2ce1-4fae-aac1-f60b36f0e2f3_vibration"
+	1 -> "5300655b-2ce1-4fae-aac1-f60b36f0e2f3"
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8" [label="IoT Event
+eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8" color=lightblue shape=box style=filled]
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_label" [label="Event Attribute
 label: light check" color=lightgreen shape=ellipse style=filled]
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec" -> "0fb30d1b-d24a-40a7-8288-38c604e319ec_label"
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec_location" [label="Event Attribute
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8" -> "eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_label"
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec" -> "0fb30d1b-d24a-40a7-8288-38c604e319ec_location"
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec_light" [label="Event Attribute
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8" -> "eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_location"
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_light" [label="Event Attribute
 light: bright" color=lightgreen shape=ellipse style=filled]
-	"0fb30d1b-d24a-40a7-8288-38c604e319ec" -> "0fb30d1b-d24a-40a7-8288-38c604e319ec_light"
-	2 -> "0fb30d1b-d24a-40a7-8288-38c604e319ec"
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2" [label="IoT Event
-63afc17f-8d29-40ba-8776-06e469c0c6e2" color=lightblue shape=box style=filled]
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2_label" [label="Event Attribute
+	"eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8" -> "eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8_light"
+	2 -> "eef3ab8f-7bb0-4af9-8a21-2e28a8e799f8"
+	"1a199794-81bb-4b3e-a620-884ea2322f91" [label="IoT Event
+1a199794-81bb-4b3e-a620-884ea2322f91" color=lightblue shape=box style=filled]
+	"1a199794-81bb-4b3e-a620-884ea2322f91_label" [label="Event Attribute
 label: pressure check" color=lightgreen shape=ellipse style=filled]
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2" -> "63afc17f-8d29-40ba-8776-06e469c0c6e2_label"
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2_location" [label="Event Attribute
+	"1a199794-81bb-4b3e-a620-884ea2322f91" -> "1a199794-81bb-4b3e-a620-884ea2322f91_label"
+	"1a199794-81bb-4b3e-a620-884ea2322f91_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2" -> "63afc17f-8d29-40ba-8776-06e469c0c6e2_location"
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2_pressure" [label="Event Attribute
+	"1a199794-81bb-4b3e-a620-884ea2322f91" -> "1a199794-81bb-4b3e-a620-884ea2322f91_location"
+	"1a199794-81bb-4b3e-a620-884ea2322f91_pressure" [label="Event Attribute
 pressure: 1 atm" color=lightgreen shape=ellipse style=filled]
-	"63afc17f-8d29-40ba-8776-06e469c0c6e2" -> "63afc17f-8d29-40ba-8776-06e469c0c6e2_pressure"
-	2 -> "63afc17f-8d29-40ba-8776-06e469c0c6e2"
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a" [label="Process Event
-83c3074a-dcab-4c7c-8772-06ddddc2a07a" color=lightblue shape=box style=filled]
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a_label" [label="Event Attribute
+	"1a199794-81bb-4b3e-a620-884ea2322f91" -> "1a199794-81bb-4b3e-a620-884ea2322f91_pressure"
+	2 -> "1a199794-81bb-4b3e-a620-884ea2322f91"
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a" [label="Process Event
+8cca7ea5-575e-4d7c-9cad-f202c6d9840a" color=lightblue shape=box style=filled]
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a_label" [label="Event Attribute
 label: quality check" color=lightgreen shape=ellipse style=filled]
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a" -> "83c3074a-dcab-4c7c-8772-06ddddc2a07a_label"
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a_location" [label="Event Attribute
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a" -> "8cca7ea5-575e-4d7c-9cad-f202c6d9840a_label"
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a" -> "83c3074a-dcab-4c7c-8772-06ddddc2a07a_location"
-	"f975e635-f259-4522-8e1a-ff03c0716efe" [label="Activity
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a" -> "8cca7ea5-575e-4d7c-9cad-f202c6d9840a_location"
+	"b5ca5e59-865e-45cf-bc04-57556c71e306" [label="Activity
 quality check performed
-f975e635-f259-4522-8e1a-ff03c0716efe" color=lightcoral shape=diamond style=filled]
-	"83c3074a-dcab-4c7c-8772-06ddddc2a07a" -> "f975e635-f259-4522-8e1a-ff03c0716efe"
-	"2a864509-2f5d-46db-8338-07994647b0ad" [label="Process Event
-2a864509-2f5d-46db-8338-07994647b0ad" color=lightblue shape=box style=filled]
-	"2a864509-2f5d-46db-8338-07994647b0ad_label" [label="Event Attribute
+b5ca5e59-865e-45cf-bc04-57556c71e306" color=lightcoral shape=diamond style=filled]
+	"8cca7ea5-575e-4d7c-9cad-f202c6d9840a" -> "b5ca5e59-865e-45cf-bc04-57556c71e306"
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7" [label="Process Event
+eb218a90-515b-45f6-a12c-a4fab55b45e7" color=lightblue shape=box style=filled]
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7_label" [label="Event Attribute
 label: packaging start" color=lightgreen shape=ellipse style=filled]
-	"2a864509-2f5d-46db-8338-07994647b0ad" -> "2a864509-2f5d-46db-8338-07994647b0ad_label"
-	"2a864509-2f5d-46db-8338-07994647b0ad_location" [label="Event Attribute
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7" -> "eb218a90-515b-45f6-a12c-a4fab55b45e7_label"
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"2a864509-2f5d-46db-8338-07994647b0ad" -> "2a864509-2f5d-46db-8338-07994647b0ad_location"
-	"cdc6b1d4-755b-4580-a267-0332e9e4b4cc" [label="Activity
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7" -> "eb218a90-515b-45f6-a12c-a4fab55b45e7_location"
+	"fa290f08-1a03-44af-b01d-0d4ae22f6d97" [label="Activity
 packaging started
-cdc6b1d4-755b-4580-a267-0332e9e4b4cc" color=lightcoral shape=diamond style=filled]
-	"2a864509-2f5d-46db-8338-07994647b0ad" -> "cdc6b1d4-755b-4580-a267-0332e9e4b4cc"
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0" [label="Process Event
-83dab5fb-35d9-4a6f-9818-3cc523c8f6c0" color=lightblue shape=box style=filled]
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0_label" [label="Event Attribute
+fa290f08-1a03-44af-b01d-0d4ae22f6d97" color=lightcoral shape=diamond style=filled]
+	"eb218a90-515b-45f6-a12c-a4fab55b45e7" -> "fa290f08-1a03-44af-b01d-0d4ae22f6d97"
+	"83d6da89-484c-46a6-975e-708329dc61c2" [label="Process Event
+83d6da89-484c-46a6-975e-708329dc61c2" color=lightblue shape=box style=filled]
+	"83d6da89-484c-46a6-975e-708329dc61c2_label" [label="Event Attribute
 label: packaging complete" color=lightgreen shape=ellipse style=filled]
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0" -> "83dab5fb-35d9-4a6f-9818-3cc523c8f6c0_label"
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0_location" [label="Event Attribute
+	"83d6da89-484c-46a6-975e-708329dc61c2" -> "83d6da89-484c-46a6-975e-708329dc61c2_label"
+	"83d6da89-484c-46a6-975e-708329dc61c2_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0" -> "83dab5fb-35d9-4a6f-9818-3cc523c8f6c0_location"
-	"a233ae7d-5c64-4b2d-8504-0f0c79a96268" [label="Activity
+	"83d6da89-484c-46a6-975e-708329dc61c2" -> "83d6da89-484c-46a6-975e-708329dc61c2_location"
+	"23587141-1143-410d-bc44-7553abaa5b08" [label="Activity
 packaging completed
-a233ae7d-5c64-4b2d-8504-0f0c79a96268" color=lightcoral shape=diamond style=filled]
-	"83dab5fb-35d9-4a6f-9818-3cc523c8f6c0" -> "a233ae7d-5c64-4b2d-8504-0f0c79a96268"
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5" [label="Process Event
-cec2faca-ad31-4c9b-b0e6-23d622e843c5" color=lightblue shape=box style=filled]
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5_label" [label="Event Attribute
+23587141-1143-410d-bc44-7553abaa5b08" color=lightcoral shape=diamond style=filled]
+	"83d6da89-484c-46a6-975e-708329dc61c2" -> "23587141-1143-410d-bc44-7553abaa5b08"
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2" [label="Process Event
+1d98ec8f-5f25-439f-a181-bd8e174756f2" color=lightblue shape=box style=filled]
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2_label" [label="Event Attribute
 label: dispatch ready" color=lightgreen shape=ellipse style=filled]
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5" -> "cec2faca-ad31-4c9b-b0e6-23d622e843c5_label"
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5_location" [label="Event Attribute
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2" -> "1d98ec8f-5f25-439f-a181-bd8e174756f2_label"
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5" -> "cec2faca-ad31-4c9b-b0e6-23d622e843c5_location"
-	"73d67f54-8c7b-42c3-a529-1e68e4d9163e" [label="Activity
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2" -> "1d98ec8f-5f25-439f-a181-bd8e174756f2_location"
+	"1548aee4-3075-4b48-8127-8f343d23e6c1" [label="Activity
 dispatch ready
-73d67f54-8c7b-42c3-a529-1e68e4d9163e" color=lightcoral shape=diamond style=filled]
-	"cec2faca-ad31-4c9b-b0e6-23d622e843c5" -> "73d67f54-8c7b-42c3-a529-1e68e4d9163e"
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8" [label="Process Event
-a790c347-1e05-42da-9e39-ba1e18c64aa8" color=lightblue shape=box style=filled]
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8_label" [label="Event Attribute
+1548aee4-3075-4b48-8127-8f343d23e6c1" color=lightcoral shape=diamond style=filled]
+	"1d98ec8f-5f25-439f-a181-bd8e174756f2" -> "1548aee4-3075-4b48-8127-8f343d23e6c1"
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2" [label="Process Event
+d0edf389-c0e8-449f-b95a-0fbd0b1095a2" color=lightblue shape=box style=filled]
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2_label" [label="Event Attribute
 label: dispatch complete" color=lightgreen shape=ellipse style=filled]
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8" -> "a790c347-1e05-42da-9e39-ba1e18c64aa8_label"
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8_location" [label="Event Attribute
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2" -> "d0edf389-c0e8-449f-b95a-0fbd0b1095a2_label"
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8" -> "a790c347-1e05-42da-9e39-ba1e18c64aa8_location"
-	"0acf05a6-1e6d-4eed-a59a-64f5a370342b" [label="Activity
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2" -> "d0edf389-c0e8-449f-b95a-0fbd0b1095a2_location"
+	"1242f83e-3f84-4a85-b06c-f07695a35b13" [label="Activity
 dispatch completed
-0acf05a6-1e6d-4eed-a59a-64f5a370342b" color=lightcoral shape=diamond style=filled]
-	"a790c347-1e05-42da-9e39-ba1e18c64aa8" -> "0acf05a6-1e6d-4eed-a59a-64f5a370342b"
-	"e04f7e78-9a9d-49e8-8e12-0c49b92ce9f3" [label="Data Source
+1242f83e-3f84-4a85-b06c-f07695a35b13" color=lightcoral shape=diamond style=filled]
+	"d0edf389-c0e8-449f-b95a-0fbd0b1095a2" -> "1242f83e-3f84-4a85-b06c-f07695a35b13"
+	"4c48f86d-47b7-46d4-a723-7b66e0104e94" [label="Data Source
 iot device
-e04f7e78-9a9d-49e8-8e12-0c49b92ce9f3" color=lightpink shape=box style=filled]
-	"2a068c8b-e92c-4942-a917-6352fc268e00" [label="Data Source
+4c48f86d-47b7-46d4-a723-7b66e0104e94" color=lightpink shape=box style=filled]
+	"589ae3c6-0bd4-4412-8f87-c7c887a07bb6" [label="Data Source
 iot device
-2a068c8b-e92c-4942-a917-6352fc268e00" color=lightpink shape=box style=filled]
-	"144f4b59-7ca5-4fc1-ad97-298bd9a04c98" [label="Data Source
+589ae3c6-0bd4-4412-8f87-c7c887a07bb6" color=lightpink shape=box style=filled]
+	"f50b1064-0c82-464d-a1d6-fc2f88e06970" [label="Data Source
 iot device
-144f4b59-7ca5-4fc1-ad97-298bd9a04c98" color=lightpink shape=box style=filled]
-	"822c6be4-fbba-44af-b0ae-27bb64e112c0" [label="Data Source
+f50b1064-0c82-464d-a1d6-fc2f88e06970" color=lightpink shape=box style=filled]
+	"d67463f1-de32-4d5f-a44a-ff39fb9b48f0" [label="Data Source
 iot device
-822c6be4-fbba-44af-b0ae-27bb64e112c0" color=lightpink shape=box style=filled]
-	"bf753611-5903-4fe9-a6a1-2b7886245fe2" [label="Data Source
+d67463f1-de32-4d5f-a44a-ff39fb9b48f0" color=lightpink shape=box style=filled]
+	"67057b7d-c6bf-4173-b6bb-9283999533b3" [label="Data Source
 iot device
-bf753611-5903-4fe9-a6a1-2b7886245fe2" color=lightpink shape=box style=filled]
+67057b7d-c6bf-4173-b6bb-9283999533b3" color=lightpink shape=box style=filled]
 	1 [label="Data Source
 information system
 1" color=lightpink shape=box style=filled]
-	"e04f7e78-9a9d-49e8-8e12-0c49b92ce9f3" [label="IoT Device
-e04f7e78-9a9d-49e8-8e12-0c49b92ce9f3" color=lightcyan shape=box style=filled]
+	"4c48f86d-47b7-46d4-a723-7b66e0104e94" [label="IoT Device
+4c48f86d-47b7-46d4-a723-7b66e0104e94" color=lightcyan shape=box style=filled]
 	3 [label="Observation
 3" color=lightblue shape=ellipse style=filled]
-	"e04f7e78-9a9d-49e8-8e12-0c49b92ce9f3" -> 3
-	"2a068c8b-e92c-4942-a917-6352fc268e00" [label="IoT Device
-2a068c8b-e92c-4942-a917-6352fc268e00" color=lightcyan shape=box style=filled]
+	"4c48f86d-47b7-46d4-a723-7b66e0104e94" -> 3
+	"589ae3c6-0bd4-4412-8f87-c7c887a07bb6" [label="IoT Device
+589ae3c6-0bd4-4412-8f87-c7c887a07bb6" color=lightcyan shape=box style=filled]
 	4 [label="Observation
 4" color=lightblue shape=ellipse style=filled]
-	"2a068c8b-e92c-4942-a917-6352fc268e00" -> 4
-	"144f4b59-7ca5-4fc1-ad97-298bd9a04c98" [label="IoT Device
-144f4b59-7ca5-4fc1-ad97-298bd9a04c98" color=lightcyan shape=box style=filled]
+	"589ae3c6-0bd4-4412-8f87-c7c887a07bb6" -> 4
+	"f50b1064-0c82-464d-a1d6-fc2f88e06970" [label="IoT Device
+f50b1064-0c82-464d-a1d6-fc2f88e06970" color=lightcyan shape=box style=filled]
 	5 [label="Observation
 5" color=lightblue shape=ellipse style=filled]
-	"144f4b59-7ca5-4fc1-ad97-298bd9a04c98" -> 5
-	"822c6be4-fbba-44af-b0ae-27bb64e112c0" [label="IoT Device
-822c6be4-fbba-44af-b0ae-27bb64e112c0" color=lightcyan shape=box style=filled]
+	"f50b1064-0c82-464d-a1d6-fc2f88e06970" -> 5
+	"d67463f1-de32-4d5f-a44a-ff39fb9b48f0" [label="IoT Device
+d67463f1-de32-4d5f-a44a-ff39fb9b48f0" color=lightcyan shape=box style=filled]
 	6 [label="Observation
 6" color=lightblue shape=ellipse style=filled]
-	"822c6be4-fbba-44af-b0ae-27bb64e112c0" -> 6
-	"bf753611-5903-4fe9-a6a1-2b7886245fe2" [label="IoT Device
-bf753611-5903-4fe9-a6a1-2b7886245fe2" color=lightcyan shape=box style=filled]
+	"d67463f1-de32-4d5f-a44a-ff39fb9b48f0" -> 6
+	"67057b7d-c6bf-4173-b6bb-9283999533b3" [label="IoT Device
+67057b7d-c6bf-4173-b6bb-9283999533b3" color=lightcyan shape=box style=filled]
 	7 [label="Observation
 7" color=lightblue shape=ellipse style=filled]
-	"bf753611-5903-4fe9-a6a1-2b7886245fe2" -> 7
+	"67057b7d-c6bf-4173-b6bb-9283999533b3" -> 7
 	1 [label="Information System
 1" color=black fontcolor=white shape=box style=filled]
-	1 -> "db938a7f-1fbd-44a8-8c3d-9ca7763ed47c"
-	1 -> "4f936fd6-456a-4366-81b0-5c169c48dc8c"
-	1 -> "d02368b0-705b-49e2-99ae-a3366b049608"
-	1 -> "83c3074a-dcab-4c7c-8772-06ddddc2a07a"
-	1 -> "2a864509-2f5d-46db-8338-07994647b0ad"
-	1 -> "83dab5fb-35d9-4a6f-9818-3cc523c8f6c0"
-	1 -> "cec2faca-ad31-4c9b-b0e6-23d622e843c5"
-	1 -> "a790c347-1e05-42da-9e39-ba1e18c64aa8"
+	1 -> "833dd548-7a77-43e1-8813-b061e8e34765"
+	1 -> "6d06a37e-6005-49af-9452-f75106365ab0"
+	1 -> "d809e200-415b-4bf3-948c-679e58987586"
+	1 -> "8cca7ea5-575e-4d7c-9cad-f202c6d9840a"
+	1 -> "eb218a90-515b-45f6-a12c-a4fab55b45e7"
+	1 -> "83d6da89-484c-46a6-975e-708329dc61c2"
+	1 -> "1d98ec8f-5f25-439f-a181-bd8e174756f2"
+	1 -> "d0edf389-c0e8-449f-b95a-0fbd0b1095a2"
 }
