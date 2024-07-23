@@ -24,13 +24,9 @@ class Attribute(CCMEntry):
         self.key: str = key
         self.value: Union[str, float, int] = value
 
-    def __repr__(self) -> str:
-        return f"Attribute(key={self.key}, value={self.value})"
-
     def serialize(self) -> dict:
         return {
-            "key": self.key,
-            "value": self.value
+            f"attribute:{self.key}": self.value
         }
 
 
@@ -83,16 +79,15 @@ class Event(CCMEntry):
                  event_id: Optional[str] = None, objs: Optional[List['Object']] = None,
                  data_source: Optional['DataSource'] = None, derived_from_events: List[typing.Self] = None) -> None:
         super().__init__()
+
         self.event_id: str = event_id if event_id else str(uuid4())
         self.event_type: Literal['process event', 'iot event'] = event_typ
-        self.related_objects: List[Object] = objs if objs else []
-        self.data_source: Optional[DataSource] = data_source
-        self.derived_from_events: List[typing.Self] = derived_from_events
-        self.timestamp: datetime.datetime = timestamp if timestamp else datetime.datetime.now()
 
-    def __repr__(self) -> str:
-        return (f"Event(id={self.event_id}, obj={self.related_objects}, data_source={self.data_source}, "
-                f"derived_from_event={self.derived_from_events})")
+        self.related_objects: List[Object] = objs if objs else []
+        self.derived_from_events: List[typing.Self] = derived_from_events if derived_from_events else []
+        self.data_source: Optional[DataSource] = data_source
+
+        self.timestamp: datetime.datetime = timestamp if timestamp else datetime.datetime.now()
 
     def serialize(self) -> dict:
         return {
@@ -117,12 +112,12 @@ class ProcessEvent(Event):
     Class to represent a process event.
     """
 
-    def __init__(self, timestamp: Optional[datetime.datetime] = None,
+    def __init__(self, activity: Activity, timestamp: Optional[datetime.datetime] = None,
                  event_id: Optional[str] = None, objs: Optional[List['Object']] = None,
-                 data_source: Optional['DataSource'] = None, derived_from_events: List[typing.Self] = None) -> None:
+                 information_system: Optional['IS'] = None, derived_from_events: List[typing.Self] = None) -> None:
 
-        super().__init__("process event", timestamp, event_id, objs, data_source, derived_from_events)
-        self.activity: Activity = None
+        super().__init__("process event", timestamp, event_id, objs, information_system, derived_from_events)
+        self.activity: Activity = activity
 
     def serialize(self) -> dict:
         data = super().serialize()
@@ -138,10 +133,24 @@ class IoTEvent(Event):
     Class to represent an IoT event.
     """
 
-    def __init__(self, timestamp: Optional[datetime.datetime] = None,
+    def __init__(self, timestamp: Optional[datetime.datetime] = None, observations: List['SOSA.Observation'] = None,
                  event_id: Optional[str] = None, objs: Optional[List['Object']] = None,
                  data_source: Optional['DataSource'] = None, derived_from_events: List[typing.Self] = None) -> None:
         super().__init__("iot event", timestamp, event_id, objs, data_source, derived_from_events)
+        self.observations: List['SOSA.Observation'] = observations if observations else []
+
+    def add_observation(self, observation: 'SOSA.Observation') -> None:
+        """
+        Add an observation to the event.
+        :param observation: The observation to add.
+        :return:
+        """
+        self.observations.append(observation)
+
+    def serialize(self) -> dict:
+        data = super().serialize()
+        data["observations"] = [obs.serialize() for obs in self.observations]
+        return data
 
 
 class IS(DataSource):
@@ -174,9 +183,6 @@ class SOSA:
             super().__init__()
             self.observation_id: str = observation_id if observation_id else str(uuid4())
             self.iot_device: Optional['SOSA.IoTDevice'] = iot_device
-
-        def __repr__(self) -> str:
-            return f"Observation(id={self.observation_id}, iot_device={self.iot_device})"
 
         def serialize(self) -> dict:
             return {
@@ -215,12 +221,10 @@ class Object(CCMEntry):
         self.related_objects: List[Object] = []
         self.data_source: Optional[DataSource] = data_source
 
-    def __repr__(self) -> str:
-        return f"Object(id={self.object_id})"
-
     def serialize(self) -> dict:
         return {
-            "object_id": self.object_id
+            "object_id": self.object_id,
+            "object_type": self.object_type,
         }
 
     def add_related_object(self, related_object: 'Object') -> None:
@@ -276,10 +280,6 @@ class CCM(CCMEntry):
         with open(file_path, 'w') as file:
             json.dump(data, file, indent=4)
 
-    def __repr__(self) -> str:
-        return (f"CCM(event_log={self.event_log}, objects={self.objects}, data_sources={self.data_sources}, "
-                f"information_systems={self.information_systems}, iot_devices={self.iot_devices})")
-
     def serialize(self) -> dict:
         return {
             "ccm:events": [event.serialize() for event in self.event_log],
@@ -301,7 +301,6 @@ class CCM(CCMEntry):
         except ImportError:
             raise ImportError("Please install Graphviz using 'pip install graphviz'")
 
-        # Assuming create_graph is a predefined function
         dot = create_graph(
             self.objects,
             self.event_log,
@@ -315,7 +314,8 @@ class CCM(CCMEntry):
 
     def query(self,
               query_str: str,
-              return_format: Literal["class_reference", "extended_table"] = "extended_table") -> pd.DataFrame:
+              return_format: Literal["class_reference", "extended_table"] = "extended_table")\
+            -> Union[pd.DataFrame, typing.Dict[str, List['CCMEntry']]]:
         """
         Filters events based on a query string and returns the result as a DataFrame.
 
@@ -324,12 +324,12 @@ class CCM(CCMEntry):
         - "SELECT * FROM Object WHERE Object.object_type = 'tank'"
         - "SELECT observation_id FROM SOSA.Observation WHERE SOSA.Observation.value > 0.5"
 
-        :param return_format: The format to return the result in. Default is "dataframe".
+        :param return_format: The format to return the result in. Default is "extended_table".
         :param query_str: The query string to filter the events.
         :return: A DataFrame of the filtered events.
         """
-        # Assuming query_classes is a predefined function
-        classes = {
+
+        class_map = {
             'Object': self.objects,
             'Event': self.event_log,
             'InformationSystem': self.information_systems,
@@ -337,4 +337,4 @@ class CCM(CCMEntry):
             'Observation': self.observation,
             'Activity': self.activities
         }
-        return query_classes(query_str, classes, return_format)
+        return query_classes(query_str, class_map, return_format)

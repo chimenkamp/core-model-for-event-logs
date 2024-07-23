@@ -4,11 +4,33 @@ import traceback
 import typing
 from typing import List, Dict, Union, Optional
 import pandas as pd
+import ast
+import operator as op
 
 import src
-
 from src.utils.table_utils import create_extended_table
 from src.utils.types import CCMEntry
+
+# Define a dictionary of safe operators for the eval function replacement
+SAFE_OPERATORS = {
+    ast.Add: op.add,
+    ast.Sub: op.sub,
+    ast.Mult: op.mul,
+    ast.Div: op.truediv,
+    ast.Mod: op.mod,
+    ast.Pow: op.pow,
+    ast.BitXor: op.xor,
+    ast.USub: op.neg,
+    ast.Eq: op.eq,
+    ast.NotEq: op.ne,
+    ast.Lt: op.lt,
+    ast.LtE: op.le,
+    ast.Gt: op.gt,
+    ast.GtE: op.ge,
+    ast.And: op.and_,
+    ast.Or: op.or_,
+    ast.In: op.contains,
+}
 
 
 def parse_query(query: str) -> Dict[str, Union[str, List[str]]]:
@@ -49,36 +71,82 @@ def extract_first_elements(condition_string: str) -> List[str]:
     return matches
 
 
-def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) -> List[dict[str, CCMEntry]]:
+def evaluate_expr(node: ast.AST, context: Dict[str, typing.Any]) -> typing.Any:
+    """
+    Evaluates an AST node in a given context.
+
+    :param node: The AST node to evaluate.
+    :param context: The context in which to evaluate the node.
+    :return: The result of the evaluation.
+    """
+
+    if isinstance(node, ast.Expression):
+        return evaluate_expr(node.body, context)
+    elif isinstance(node, ast.BoolOp):
+        left = evaluate_expr(node.values[0], context)
+        for value in node.values[1:]:
+            right = evaluate_expr(value, context)
+            if isinstance(node.op, ast.And):
+                left = left and right
+            elif isinstance(node.op, ast.Or):
+                left = left or right
+        return left
+    elif isinstance(node, ast.Compare):
+        left = evaluate_expr(node.left, context)
+        for op_, comparator in zip(node.ops, node.comparators):
+            right = evaluate_expr(comparator, context)
+            operator_func = SAFE_OPERATORS[type(op_)]
+            if not operator_func(left, right):
+                return False
+        return True
+    elif isinstance(node, ast.BinOp):
+        left = evaluate_expr(node.left, context)
+        right = evaluate_expr(node.right, context)
+        return SAFE_OPERATORS[type(node.op)](left, right)
+    elif isinstance(node, ast.UnaryOp):
+        operand = evaluate_expr(node.operand, context)
+        return SAFE_OPERATORS[type(node.op)](operand)
+    elif isinstance(node, ast.Name):
+        return context[node.id]
+    elif isinstance(node, ast.Attribute):
+        value = evaluate_expr(node.value, context)
+        return getattr(value, node.attr)
+    elif isinstance(node, ast.Constant):
+        return node.value
+    else:
+        raise TypeError(f"Unsupported AST node type: {type(node)}")
+
+
+def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) -> List[Dict[str, CCMEntry]]:
     """
     Evaluates the WHERE clause on the given objects.
 
     :param obj_dict: A dictionary with class names as keys and class instances as values.
     :param where_clause: The WHERE clause string.
-    :return: True if the objects satisfy the WHERE clause, False otherwise.
+    :return: A list of dictionaries with the filtered results.
     """
-    # Replace = with == and replace AND/OR with Python's logical operators
+    # Replace SQL-like operators with Python logical operators
     where_clause = (where_clause
                     .replace('=', '==')
                     .replace(' AND ', ' and ')
                     .replace(' OR ', ' or '))
 
-    replace_map: dict[str, str] = {
+    replace_map: Dict[str, str] = {
         "Event": "e",
         "Object": "o",
-        "InformationSystem": "is",
-        "IoTDevice": "d",
-        "Attribute": "a",
         "DataSource": "ds",
-        "ProcessEvent": "pe",
-        "Activity": "act",
-        "Observation": "obs",
+        "InformationSystem": "is",
+        "IoTDevice": "id",
+        "Observation": "ob",
+        "Activity": "a",
+        "Attribute": "attr",
+
     }
 
     for class_name, instance in obj_dict.items():
         where_clause = where_clause.replace(class_name, replace_map[class_name])
 
-    results: List[dict[str, CCMEntry]] = []
+    results: List[Dict[str, CCMEntry]] = []
 
     for event in obj_dict['Event']:
         temp_event_context: "src.classes_.Event" = event
@@ -95,13 +163,14 @@ def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) ->
             }
 
             try:
-                eval_result = eval(where_clause, {}, context)
+                expr_ast = ast.parse(where_clause, mode='eval')
+                eval_result = evaluate_expr(expr_ast, context)
                 if eval_result:
                     results.append(
                         {
                             "event": temp_event_context,
                             "object": temp_object_context,
-                            "result": temp_data_source_context
+                            "ds": temp_data_source_context
                         }
                     )
             except Exception as e:
@@ -110,53 +179,6 @@ def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) ->
                 traceback.print_exc(file=sys.stdout)
                 print("##################################################")
     return results
-
-def class_instances_to_dataframe(instances: List['CCMEntry'], fields: List[str]) -> pd.DataFrame:
-    """
-    Converts a list of class instances to a pandas DataFrame, extending the table for fields that are objects with attributes.
-
-    :param instances: The list of class instances.
-    :param fields: The list of fields to include in the DataFrame.
-    :return: The resulting DataFrame.
-    """
-    rows = []
-
-    for instance in instances:
-        serialized = instance.serialize()
-        row = {}
-
-        for field in fields:
-            if field == '*':
-                for key, value in serialized.items():
-                    if isinstance(value, list) and value and isinstance(value[0], CCMEntry):
-                        for obj in value:
-                            obj_serialized = obj.serialize()
-                            for obj_key, obj_value in obj_serialized.items():
-                                row[f'{key}:{obj_key}'] = obj_value
-                    elif isinstance(value, CCMEntry):
-                        nested_serialized = value.serialize()
-                        for nested_key, nested_value in nested_serialized.items():
-                            row[f'{field}:{nested_key}'] = nested_value
-                    else:
-                        row[key] = value
-            elif field in serialized:
-                value = serialized[field]
-                if isinstance(value, list) and value and isinstance(value[0], CCMEntry):
-                    for obj in value:
-                        obj_serialized = obj.serialize()
-                        for obj_key, obj_value in obj_serialized.items():
-                            row[f'{field}:{obj_key}'] = obj_value
-                elif isinstance(value, CCMEntry):
-                    nested_serialized = value.serialize()
-                    for nested_key, nested_value in nested_serialized.items():
-                        row[f'{field}:{nested_key}'] = nested_value
-                else:
-                    row[field] = value
-
-        rows.append(row)
-
-    df = pd.DataFrame(rows)
-    return df
 
 
 def query_classes(
@@ -169,7 +191,6 @@ def query_classes(
     Executes a SQL-like query on the given classes.
 
     :param return_format: The format to return the result in.
-        dataframe: Return the result as a pandas DataFrame.
         class_reference: Return the result as a dictionary of class names to lists of class instances.
         extended_table: Return the result as an extended table with resolved references. Only works with From Event.
     :param query: The SQL-like query string.
@@ -188,7 +209,7 @@ def query_classes(
     if from_class not in classes:
         raise ValueError(f"Class {from_class} not found")
 
-    filtered_instances: list[dict[str, CCMEntry]] = evaluate_where_clause(classes, where_clause)
+    filtered_instances: List[dict[str, CCMEntry]] = evaluate_where_clause(classes, where_clause)
 
     if return_format == 'class_reference':
         return {from_class: filtered_instances}

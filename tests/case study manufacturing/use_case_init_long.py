@@ -63,55 +63,59 @@ def create_ccm_env() -> CCM:
 
     # Define Process Events derived from IoT Events for assembly line operations
     event_assembly_start = ProcessEvent(event_id="3",
-                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
+                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)),
+                                        activity=Activity(activity_type="assembly started")
+                                        )
     event_assembly_start.add_attribute(Attribute(key="label", value="assembly start"))
     event_assembly_start.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
     event_assembly_start.add_activity(Activity(activity_type="assembly started"))
 
-    event_assembly_complete = ProcessEvent(event_id="4", timestamp=datetime.datetime.now() + datetime.timedelta(
-        minutes=randint(1, 60)))
+    event_assembly_complete = ProcessEvent(
+        event_id="4",
+        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)),
+        activity=Activity(activity_type="assembly completed")
+    )
     event_assembly_complete.add_attribute(Attribute(key="label", value="assembly complete"))
     event_assembly_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_assembly_complete.add_activity(Activity(activity_type="assembly completed"))
-
     # Additional Process Events
     event_quality_check = ProcessEvent(event_id="10",
-                                       timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
+                                       timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)),
+                                       activity=Activity(activity_type="quality check performed"))
+
     event_quality_check.add_attribute(Attribute(key="label", value="quality check"))
     event_quality_check.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_quality_check.add_activity(Activity(activity_type="quality check performed"))
-
     event_packaging_start = ProcessEvent(event_id="11",
-                                         timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
+                                         timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)),
+                                         activity=Activity(activity_type="packaging started")
+                                         )
     event_packaging_start.add_attribute(Attribute(key="label", value="packaging start"))
     event_packaging_start.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_packaging_start.add_activity(Activity(activity_type="packaging started"))
-
-    event_packaging_complete = ProcessEvent(event_id="12", timestamp=datetime.datetime.now() + datetime.timedelta(
-        minutes=randint(1, 60)))
+    event_packaging_complete = ProcessEvent(event_id="12",
+                                            timestamp=datetime.datetime.now() + datetime.timedelta(
+                                                minutes=randint(1, 60)),
+                                            activity=Activity(activity_type="packaging completed")
+                                            )
     event_packaging_complete.add_attribute(Attribute(key="label", value="packaging complete"))
     event_packaging_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_packaging_complete.add_activity(Activity(activity_type="packaging completed"))
-
     event_dispatch_ready = ProcessEvent(event_id="13",
-                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)))
+                                        timestamp=datetime.datetime.now() + datetime.timedelta(minutes=randint(1, 60)),
+                                        activity=Activity(activity_type="dispatch ready")
+                                        )
     event_dispatch_ready.add_attribute(Attribute(key="label", value="dispatch ready"))
     event_dispatch_ready.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
 
-    event_dispatch_ready.add_activity(Activity(activity_type="dispatch ready"))
-
     event_dispatch_complete = ProcessEvent(event_id="14",
                                            timestamp=datetime.datetime.now() + datetime.timedelta(
-                                               minutes=randint(1, 60)))
+                                               minutes=randint(1, 60)),
+                                           activity=Activity(activity_type="dispatch completed")
+                                           )
     event_dispatch_complete.add_attribute(Attribute(key="label", value="dispatch complete"))
     event_dispatch_complete.add_attribute(Attribute(key="location", value="Main Manufacturing Plant"))
-
-    event_dispatch_complete.add_activity(Activity(activity_type="dispatch completed"))
 
     # Add events to objects
     event_shipment_departure.add_object(object_sensor_rfid)

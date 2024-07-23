@@ -26,13 +26,14 @@ def create_row_element(
 
     if event.data_source:
         for ds in data_sources:
-            if ds.data_source_id == event.data_source.data_source_id:
+            if ds and ds.data_source_id == event.data_source.data_source_id:
                 for attr in ds.attributes:
                     row[f'data_source:{attr.key}'] = attr.value
 
     if event.event_type == 'process event':
         event: 'src.classes_.ProcessEvent' = event
-        row[f'activity:activity_type'] = event.activity.activity_type
+        if event.activity:
+            row[f'activity:activity_type'] = event.activity.activity_type
 
     return row
 
