@@ -25,12 +25,11 @@ class CCMToOcelMapper:
 
         :return: An OCEL object.
         """
-        # Initialize empty DataFrames for events, objects, and relations
+
         events_df = pd.DataFrame(columns=["ocel:eid", "ocel:activity", "ocel:timestamp", "ocel:vmap"])
         objects_df = pd.DataFrame(columns=["ocel:oid", "ocel:type", "ocel:ovmap"])
         relations_df = pd.DataFrame(columns=["ocel:eid", "ocel:oid"])
 
-        # Map objects
         for ccm_object in self.ccm.objects:
             obj_data = {
                 "ocel:oid": ccm_object.object_id,
@@ -45,7 +44,6 @@ class CCMToOcelMapper:
 
             objects_df = pd.concat([objects_df, pd.DataFrame(obj_data)])
 
-        # Map events
         for ccm_event in self.ccm.event_log:
             event_data = {
                 "ocel:eid": ccm_event.event_id,
@@ -59,7 +57,6 @@ class CCMToOcelMapper:
                 event_data["ocel:activity"] = ccm_event.activity.activity_type
             events_df = pd.concat([events_df, pd.DataFrame(event_data)])
 
-            # Create relations
             index: int = 0
             for obj in ccm_event.related_objects:
                 relation_data = {
@@ -70,7 +67,6 @@ class CCMToOcelMapper:
                 relations_df = pd.concat([relations_df, pd.DataFrame(relation_data, index=[0])])
                 index += 1
 
-        # Create the OCEL object
         ocel = OCEL(events=events_df, objects=objects_df, relations=relations_df)
 
         return ocel

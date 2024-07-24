@@ -45,11 +45,6 @@ def create_extended_table(objects: List, event_log: List, data_sources: List) ->
         related_objects = [obj for obj in objects if obj in event.related_objects]
 
         for related_object in related_objects:
-            # TODO: Only unique events are added to the table. Necessary if a event is related to multiple objects
-
-            if any([d['ccm:event_id'] == event.event_id for d in rows]):
-                break
-
             row = create_row_element(data_sources=data_sources, event=event, related_object=related_object)
             rows.append(row)
         else:
@@ -57,4 +52,6 @@ def create_extended_table(objects: List, event_log: List, data_sources: List) ->
             rows.append(row)
 
     df = pd.DataFrame(rows)
+    # remove duplicates by event_id
+    df = df.drop_duplicates(subset=['ccm:event_id'])
     return df

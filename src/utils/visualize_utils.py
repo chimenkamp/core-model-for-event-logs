@@ -1,4 +1,7 @@
 from typing import Set, List, Tuple
+
+from graphviz import Digraph
+
 import src
 
 
@@ -98,7 +101,7 @@ def add_event_log(dot: 'Digraph', edges: Set[Tuple[str, str]], event_log: List['
         if event.event_type == "process event":
             event: "src.classes_.ProcessEvent" = event
 
-            dot.node(event.activity.activity_id, label=f"Activity\n{event.activity.activity_type}\n{event.activity.activity_id}",
+            dot.node(event.activity.activity_id, label=f"Activity\n{event.activity.activity_type}",
                      shape='diamond', style='filled', color='lightcoral')
             edge = (event.event_id, event.activity.activity_id)
             if edge not in edges:
@@ -140,14 +143,21 @@ def add_iot_devices(
     """
     Adds IoT device nodes and edges to the Graphviz Digraph.
 
+    :param events: The list of events.
+    :param observations: The list of observations.
     :param dot: The Graphviz Digraph object.
     :param edges: The set of edges to prevent duplicates.
     :param iot_devices: The list of IoT devices to add.
     :return: None
     """
     for device in iot_devices:
-        dot.node(device.data_source_id, label=f"IoT Device\n{device.data_source_id}", shape='box', style='filled',
-                 color='lightcyan')
+        dot.node(
+            device.data_source_id,
+            label=f"IoT Device\n{device.data_source_type}",
+            shape='box',
+            style='filled',
+            color='lightcyan'
+        )
 
         for obs in observations:
             if obs.iot_device and obs.iot_device.data_source_id == device.data_source_id:

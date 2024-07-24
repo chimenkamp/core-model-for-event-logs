@@ -44,11 +44,8 @@ class Activity(CCMEntry):
     def serialize(self) -> dict:
         return {
             "activity_id": self.activity_id,
-            "activity_value": self.activity_type
+            "activity_type": self.activity_type
         }
-
-    def add_activity_value(self, activity_value: Optional[Union[str, float, int]]) -> None:
-        self.activity_type = activity_value
 
 
 class DataSource(CCMEntry):

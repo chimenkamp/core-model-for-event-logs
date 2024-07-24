@@ -208,7 +208,7 @@ def create_ccm_env() -> CCM:
 if __name__ == "__main__":
     ccm: CCM = create_ccm_env()
 
-    # ccm.visualize("use_case_init_long.png")
+    ccm.visualize("use_case_init_long.png")
 
     table: pd.DataFrame = ccm.get_extended_table()
     print(table)

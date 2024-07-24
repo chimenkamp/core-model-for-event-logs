@@ -165,6 +165,7 @@ def evaluate_where_clause(obj_dict: Dict[str, typing.Any], where_clause: str) ->
             try:
                 expr_ast = ast.parse(where_clause, mode='eval')
                 eval_result = evaluate_expr(expr_ast, context)
+
                 if eval_result:
                     results.append(
                         {
