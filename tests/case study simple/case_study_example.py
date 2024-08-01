@@ -43,11 +43,9 @@ def implement_case_study() -> CCM:
 
     event_peak_detected = IoTEvent()
     event_peak_detected.add_object(analytics_1)
-    event_peak_detected.add_activity(Activity(activity_type="detect peak"))
 
     event_value_change = IoTEvent()
     event_value_change.add_object(flow_sensor)
-    event_value_change.add_activity(Activity(activity_type="product flow"))
 
     # Create observations
     observation_1 = SOSA.Observation()

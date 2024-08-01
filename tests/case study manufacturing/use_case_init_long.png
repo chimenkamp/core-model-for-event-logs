@@ -48,9 +48,9 @@ label: assembly start" color=lightgreen shape=ellipse style=filled]
 	"3_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	3 -> "3_location"
-	"0284aaab-3c51-4c0f-9ebc-edaff6cf3f4c" [label="Activity
+	"58981c49-173a-4ef4-8819-21441b551da9" [label="Activity
 assembly started" color=lightcoral shape=diamond style=filled]
-	3 -> "0284aaab-3c51-4c0f-9ebc-edaff6cf3f4c"
+	3 -> "58981c49-173a-4ef4-8819-21441b551da9"
 	4 [label="Process Event
 4" color=lightblue shape=box style=filled]
 	"4_label" [label="Event Attribute
@@ -59,9 +59,9 @@ label: assembly complete" color=lightgreen shape=ellipse style=filled]
 	"4_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	4 -> "4_location"
-	"9a06798e-346e-41e0-9f77-973b2d903104" [label="Activity
+	"7284d90a-a603-4e5e-9017-bef62505abbc" [label="Activity
 assembly completed" color=lightcoral shape=diamond style=filled]
-	4 -> "9a06798e-346e-41e0-9f77-973b2d903104"
+	4 -> "7284d90a-a603-4e5e-9017-bef62505abbc"
 	5 [label="IoT Event
 5" color=lightblue shape=box style=filled]
 	"5_label" [label="Event Attribute
@@ -130,9 +130,9 @@ label: quality check" color=lightgreen shape=ellipse style=filled]
 	"10_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	10 -> "10_location"
-	"83467409-8432-4de2-b2dc-2722bc72fb9b" [label="Activity
+	"bfb18a87-353f-4e8c-9d29-b30894220c4d" [label="Activity
 quality check performed" color=lightcoral shape=diamond style=filled]
-	10 -> "83467409-8432-4de2-b2dc-2722bc72fb9b"
+	10 -> "bfb18a87-353f-4e8c-9d29-b30894220c4d"
 	11 [label="Process Event
 11" color=lightblue shape=box style=filled]
 	"11_label" [label="Event Attribute
@@ -141,9 +141,9 @@ label: packaging start" color=lightgreen shape=ellipse style=filled]
 	"11_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	11 -> "11_location"
-	"179dc053-107d-4212-b463-0afb1f11185d" [label="Activity
+	"1811f89b-75aa-4f89-8e38-53ea3be5b8cf" [label="Activity
 packaging started" color=lightcoral shape=diamond style=filled]
-	11 -> "179dc053-107d-4212-b463-0afb1f11185d"
+	11 -> "1811f89b-75aa-4f89-8e38-53ea3be5b8cf"
 	12 [label="Process Event
 12" color=lightblue shape=box style=filled]
 	"12_label" [label="Event Attribute
@@ -152,9 +152,9 @@ label: packaging complete" color=lightgreen shape=ellipse style=filled]
 	"12_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	12 -> "12_location"
-	"aaa1591a-70fe-4236-b6f7-b7b4be308c66" [label="Activity
+	"4c600990-e508-469b-9c9a-888a9a8863de" [label="Activity
 packaging completed" color=lightcoral shape=diamond style=filled]
-	12 -> "aaa1591a-70fe-4236-b6f7-b7b4be308c66"
+	12 -> "4c600990-e508-469b-9c9a-888a9a8863de"
 	13 [label="Process Event
 13" color=lightblue shape=box style=filled]
 	"13_label" [label="Event Attribute
@@ -163,9 +163,9 @@ label: dispatch ready" color=lightgreen shape=ellipse style=filled]
 	"13_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	13 -> "13_location"
-	"4e037bd3-5a1b-4483-bedd-80ccfc01ecf4" [label="Activity
+	"0b61bc30-7ccb-4269-9aa4-26d8c139b93c" [label="Activity
 dispatch ready" color=lightcoral shape=diamond style=filled]
-	13 -> "4e037bd3-5a1b-4483-bedd-80ccfc01ecf4"
+	13 -> "0b61bc30-7ccb-4269-9aa4-26d8c139b93c"
 	14 [label="Process Event
 14" color=lightblue shape=box style=filled]
 	"14_label" [label="Event Attribute
@@ -174,52 +174,52 @@ label: dispatch complete" color=lightgreen shape=ellipse style=filled]
 	"14_location" [label="Event Attribute
 location: Main Manufacturing Plant" color=lightgreen shape=ellipse style=filled]
 	14 -> "14_location"
-	"11ff09cd-5da9-42e1-9243-28575b45aa41" [label="Activity
+	"1bef4c42-bf50-4d78-b73d-544fc64a45c5" [label="Activity
 dispatch completed" color=lightcoral shape=diamond style=filled]
-	14 -> "11ff09cd-5da9-42e1-9243-28575b45aa41"
-	"f4f7b33e-f304-40e3-b0e8-c78be7dc8a45" [label="Data Source
+	14 -> "1bef4c42-bf50-4d78-b73d-544fc64a45c5"
+	"ad105c1d-4936-4bef-845c-5688006e4ad3" [label="Data Source
 iot device
-f4f7b33e-f304-40e3-b0e8-c78be7dc8a45" color=lightpink shape=box style=filled]
-	"0911e367-03b9-421f-abcf-5d6d04c5c5ef" [label="Data Source
+ad105c1d-4936-4bef-845c-5688006e4ad3" color=lightpink shape=box style=filled]
+	"3c26eedd-0500-40c4-9d06-0771e2ec7e63" [label="Data Source
 iot device
-0911e367-03b9-421f-abcf-5d6d04c5c5ef" color=lightpink shape=box style=filled]
-	"efc54bb5-e611-48b8-a204-b23409515567" [label="Data Source
+3c26eedd-0500-40c4-9d06-0771e2ec7e63" color=lightpink shape=box style=filled]
+	"2b68554f-228f-420e-b8cb-74f78ee20cc6" [label="Data Source
 iot device
-efc54bb5-e611-48b8-a204-b23409515567" color=lightpink shape=box style=filled]
-	"e487253a-1f31-4b65-9bcf-40753da1fe0e" [label="Data Source
+2b68554f-228f-420e-b8cb-74f78ee20cc6" color=lightpink shape=box style=filled]
+	"4f8a7908-247e-44b1-a00a-97ecd6df2059" [label="Data Source
 iot device
-e487253a-1f31-4b65-9bcf-40753da1fe0e" color=lightpink shape=box style=filled]
-	"45a237bd-8c74-4068-a9cf-0fa6fe652cd0" [label="Data Source
+4f8a7908-247e-44b1-a00a-97ecd6df2059" color=lightpink shape=box style=filled]
+	"13fca3d6-3f77-42cc-b73b-f31db8c8a207" [label="Data Source
 iot device
-45a237bd-8c74-4068-a9cf-0fa6fe652cd0" color=lightpink shape=box style=filled]
+13fca3d6-3f77-42cc-b73b-f31db8c8a207" color=lightpink shape=box style=filled]
 	1 [label="Data Source
 information system
 1" color=lightpink shape=box style=filled]
-	"f4f7b33e-f304-40e3-b0e8-c78be7dc8a45" [label="IoT Device
+	"ad105c1d-4936-4bef-845c-5688006e4ad3" [label="IoT Device
 iot device" color=lightcyan shape=box style=filled]
 	3 [label="Observation
 3" color=lightblue shape=ellipse style=filled]
-	"f4f7b33e-f304-40e3-b0e8-c78be7dc8a45" -> 3
-	"0911e367-03b9-421f-abcf-5d6d04c5c5ef" [label="IoT Device
+	"ad105c1d-4936-4bef-845c-5688006e4ad3" -> 3
+	"3c26eedd-0500-40c4-9d06-0771e2ec7e63" [label="IoT Device
 iot device" color=lightcyan shape=box style=filled]
 	4 [label="Observation
 4" color=lightblue shape=ellipse style=filled]
-	"0911e367-03b9-421f-abcf-5d6d04c5c5ef" -> 4
-	"efc54bb5-e611-48b8-a204-b23409515567" [label="IoT Device
+	"3c26eedd-0500-40c4-9d06-0771e2ec7e63" -> 4
+	"2b68554f-228f-420e-b8cb-74f78ee20cc6" [label="IoT Device
 iot device" color=lightcyan shape=box style=filled]
 	5 [label="Observation
 5" color=lightblue shape=ellipse style=filled]
-	"efc54bb5-e611-48b8-a204-b23409515567" -> 5
-	"e487253a-1f31-4b65-9bcf-40753da1fe0e" [label="IoT Device
+	"2b68554f-228f-420e-b8cb-74f78ee20cc6" -> 5
+	"4f8a7908-247e-44b1-a00a-97ecd6df2059" [label="IoT Device
 iot device" color=lightcyan shape=box style=filled]
 	6 [label="Observation
 6" color=lightblue shape=ellipse style=filled]
-	"e487253a-1f31-4b65-9bcf-40753da1fe0e" -> 6
-	"45a237bd-8c74-4068-a9cf-0fa6fe652cd0" [label="IoT Device
+	"4f8a7908-247e-44b1-a00a-97ecd6df2059" -> 6
+	"13fca3d6-3f77-42cc-b73b-f31db8c8a207" [label="IoT Device
 iot device" color=lightcyan shape=box style=filled]
 	7 [label="Observation
 7" color=lightblue shape=ellipse style=filled]
-	"45a237bd-8c74-4068-a9cf-0fa6fe652cd0" -> 7
+	"13fca3d6-3f77-42cc-b73b-f31db8c8a207" -> 7
 	1 [label="Information System
 1" color=black fontcolor=white shape=box style=filled]
 	1 -> 3

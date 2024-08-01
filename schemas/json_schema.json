@@ -1,0 +1,156 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "additionalProperties": true,
+  "definitions": {
+    "UUIDType": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "StringType": {
+      "type": "string"
+    },
+    "FloatType": {
+      "type": "number"
+    },
+    "IntType": {
+      "type": "integer"
+    },
+    "DateTimeType": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "AttributeType": {
+      "type": "object",
+      "properties": {
+        "attribute_id": { "$ref": "#/definitions/UUIDType" },
+        "key": { "$ref": "#/definitions/StringType" },
+        "value": {
+          "oneOf": [
+            { "$ref": "#/definitions/StringType" },
+            { "$ref": "#/definitions/FloatType" },
+            { "$ref": "#/definitions/IntType" }
+          ]
+        }
+      },
+      "required": ["attribute_id", "key", "value"]
+    },
+    "ActivityType": {
+      "type": "object",
+      "properties": {
+        "activity_id": { "$ref": "#/definitions/UUIDType" },
+        "activity_type": {
+          "oneOf": [
+            { "$ref": "#/definitions/StringType" },
+            { "$ref": "#/definitions/FloatType" },
+            { "$ref": "#/definitions/IntType" }
+          ]
+        }
+      },
+      "required": ["activity_id"]
+    },
+    "DataSourceType": {
+      "type": "object",
+      "properties": {
+        "data_source_id": { "$ref": "#/definitions/UUIDType" },
+        "data_source_type": { "type": "string", "enum": ["information system", "iot device"] }
+      },
+      "required": ["data_source_id", "data_source_type"]
+    },
+    "EventType": {
+      "type": "object",
+      "properties": {
+        "event_id": { "$ref": "#/definitions/UUIDType" },
+        "event_type": { "type": "string", "enum": ["process event", "iot event"] },
+        "related_objects": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ObjectType" }
+        },
+        "derived_from_events": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/EventType" }
+        },
+        "data_source": { "$ref": "#/definitions/DataSourceType" },
+        "timestamp": { "$ref": "#/definitions/DateTimeType" }
+      },
+      "required": ["event_id", "event_type", "timestamp"]
+    },
+    "ProcessEventType": {
+      "allOf": [
+        { "$ref": "#/definitions/EventType" },
+        {
+          "type": "object",
+          "properties": {
+            "activity": { "$ref": "#/definitions/ActivityType" }
+          },
+          "required": ["activity"]
+        }
+      ]
+    },
+    "IoTEventType": {
+      "allOf": [
+        { "$ref": "#/definitions/EventType" },
+        {
+          "type": "object",
+          "properties": {
+            "observations": {
+              "type": "array",
+              "items": { "$ref": "#/definitions/ObservationType" }
+            }
+          },
+          "required": ["observations"]
+        }
+      ]
+    },
+    "ISType": {
+      "allOf": [
+        { "$ref": "#/definitions/DataSourceType" },
+        {
+          "type": "object",
+          "properties": {
+            "is_id": { "$ref": "#/definitions/UUIDType" },
+            "event": { "$ref": "#/definitions/ProcessEventType" }
+          },
+          "required": ["is_id"]
+        }
+      ]
+    },
+    "ObservationType": {
+      "type": "object",
+      "properties": {
+        "observation_id": { "$ref": "#/definitions/UUIDType" },
+        "iot_device": { "$ref": "#/definitions/IoTDeviceType" }
+      },
+      "required": ["observation_id"]
+    },
+    "IoTDeviceType": {
+      "allOf": [
+        { "$ref": "#/definitions/DataSourceType" },
+        {
+          "type": "object",
+          "properties": {
+            "iot_device_id": { "$ref": "#/definitions/UUIDType" }
+          },
+          "required": ["iot_device_id"]
+        }
+      ]
+    },
+    "ObjectType": {
+      "type": "object",
+      "properties": {
+        "object_id": { "$ref": "#/definitions/UUIDType" },
+        "object_type": { "$ref": "#/definitions/StringType" },
+        "related_objects": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/ObjectType" }
+        },
+        "data_source": { "$ref": "#/definitions/DataSourceType" }
+      },
+      "required": ["object_id", "object_type"]
+    }
+  },
+  "type": "object",
+  "properties": {
+    "ccm": { "$ref": "#/definitions/CCMType" }
+  },
+  "required": ["ccm"]
+}
