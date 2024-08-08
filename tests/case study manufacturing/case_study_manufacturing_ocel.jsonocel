@@ -1,0 +1,158 @@
+{
+  "objectTypes": [
+    {
+      "name": "information system",
+      "attributes": []
+    },
+    {
+      "name": "iot device",
+      "attributes": []
+    },
+    {
+      "name": "sensor",
+      "attributes": []
+    },
+    {
+      "name": "shipment",
+      "attributes": []
+    }
+  ],
+  "eventTypes": [
+    {
+      "name": "assembly completed",
+      "attributes": []
+    },
+    {
+      "name": "assembly started",
+      "attributes": []
+    },
+    {
+      "name": "dispatch completed",
+      "attributes": []
+    },
+    {
+      "name": "dispatch ready",
+      "attributes": []
+    },
+    {
+      "name": "packaging completed",
+      "attributes": []
+    },
+    {
+      "name": "packaging started",
+      "attributes": []
+    },
+    {
+      "name": "quality check performed",
+      "attributes": []
+    },
+    {
+      "name": "unset",
+      "attributes": []
+    }
+  ],
+  "objects": [
+    {
+      "id": "1",
+      "type": "shipment",
+      "relationships": [
+        {
+          "objectId": "3",
+          "qualifier": "related_to"
+        }
+      ]
+    },
+    {
+      "id": "fc6fc3e8-08d9-4afa-9149-ca6c9c93fce7",
+      "type": "iot device"
+    },
+    {
+      "id": "8db87579-845d-4739-a960-f75e7de595bc",
+      "type": "iot device"
+    },
+    {
+      "id": "967d9603-0911-403b-8e0e-c36a5a398527",
+      "type": "iot device"
+    },
+    {
+      "id": "18c7bb21-4720-4678-8d32-4843dd70fe37",
+      "type": "iot device"
+    },
+    {
+      "id": "2",
+      "type": "sensor"
+    }
+  ],
+  "events": [
+    {
+      "id": "1",
+      "type": "unset",
+      "time": "2024-08-08T11:01:39Z"
+    },
+    {
+      "id": "2",
+      "type": "unset",
+      "time": "2024-08-08T10:39:39Z"
+    },
+    {
+      "id": "3",
+      "type": "assembly started",
+      "time": "2024-08-08T11:01:39Z"
+    },
+    {
+      "id": "4",
+      "type": "assembly completed",
+      "time": "2024-08-08T10:51:39Z"
+    },
+    {
+      "id": "5",
+      "type": "unset",
+      "time": "2024-08-08T11:01:39Z"
+    },
+    {
+      "id": "6",
+      "type": "unset",
+      "time": "2024-08-08T10:47:39Z"
+    },
+    {
+      "id": "7",
+      "type": "unset",
+      "time": "2024-08-08T10:40:39Z"
+    },
+    {
+      "id": "8",
+      "type": "unset",
+      "time": "2024-08-08T10:48:39Z"
+    },
+    {
+      "id": "9",
+      "type": "unset",
+      "time": "2024-08-08T10:29:39Z"
+    },
+    {
+      "id": "10",
+      "type": "quality check performed",
+      "time": "2024-08-08T10:47:39Z"
+    },
+    {
+      "id": "11",
+      "type": "packaging started",
+      "time": "2024-08-08T11:12:39Z"
+    },
+    {
+      "id": "12",
+      "type": "packaging completed",
+      "time": "2024-08-08T10:36:39Z"
+    },
+    {
+      "id": "13",
+      "type": "dispatch ready",
+      "time": "2024-08-08T10:22:39Z"
+    },
+    {
+      "id": "14",
+      "type": "dispatch completed",
+      "time": "2024-08-08T10:19:39Z"
+    }
+  ]
+}

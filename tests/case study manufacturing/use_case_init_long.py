@@ -1,13 +1,13 @@
 from random import randint
 
+import pandas as pd
 import pm4py
 
 from src.classes_ import CCM, Object, Attribute, IoTEvent, ProcessEvent, Activity, SOSA, IS
 
 import datetime
-import pandas as pd
 
-from src.mapping.ccm_to_ocel import CCMToOcelMapper
+from src.wrapper.ocel_wrapper import CoreOCELWrapper
 
 
 def create_ccm_env() -> CCM:
@@ -23,6 +23,13 @@ def create_ccm_env() -> CCM:
     object_sensor_rfid.add_attribute(Attribute(key="precision", value="0.1"))
     object_sensor_rfid.add_attribute(Attribute(key="unit", value="cm"))
     object_sensor_rfid.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
+
+    object_gps = Object(object_id="3", object_type="sensor")
+    object_gps.add_attribute(Attribute(key="precision", value="0.1"))
+    object_gps.add_attribute(Attribute(key="unit", value="cm"))
+    object_gps.add_attribute(Attribute(key="location", value="Supplier Warehouse"))
+
+    object_shipment.add_related_object(object_gps)
 
     # Define IoT Events for raw material procurement and supply chain management
     event_shipment_departure = IoTEvent(event_id="1",
@@ -208,18 +215,9 @@ def create_ccm_env() -> CCM:
 if __name__ == "__main__":
     ccm: CCM = create_ccm_env()
 
-    ccm.visualize("use_case_init_long.png")
+    wrapper: CoreOCELWrapper = CoreOCELWrapper(ocel=pm4py.OCEL())
+    wrapper.add_ccm_data(ccm)
+    table: pd.DataFrame = wrapper.get_extended_table()
+    print("OCEL IS 2.0" if wrapper.is_ocel20() else "OCEL IS 1.0")
+    wrapper.write_to_file("case_study_manufacturing_ocel.jsonocel")
 
-    table: pd.DataFrame = ccm.get_extended_table()
-    print(table)
-
-    # Example query 1: Select all IoT events where the label is 'temperature check' or 'humidity check' query1 =
-    # "SELECT event_id, event_type FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
-    query1 = "SELECT * FROM Event WHERE (Event.event_type = 'iot event' AND Object.object_id = '2')"
-    result1: pd.DataFrame = ccm.query(query1, "extended_table")
-    print("Query 1 Result:")
-    print(len(result1))
-
-    ocel_mapping: CCMToOcelMapper = CCMToOcelMapper(ccm)
-
-    print(ocel_mapping.ocel)
