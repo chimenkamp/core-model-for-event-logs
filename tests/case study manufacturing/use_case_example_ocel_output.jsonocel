@@ -1,0 +1,200 @@
+{
+  "ocel:global-event": {
+    "ocel:activity": "__INVALID__"
+  },
+  "ocel:global-object": {
+    "ocel:type": "__INVALID__"
+  },
+  "ocel:global-log": {
+    "ocel:object-types": [
+      "shipment",
+      "sensor",
+      "iot_device",
+      "information_system"
+    ],
+    "ocel:attribute-names": [],
+    "ocel:version": "1.0",
+    "ocel:ordering": "timestamp"
+  },
+  "ocel:events": {
+    "3": {
+      "ocel:activity": "assembly started",
+      "ocel:timestamp": "2024-08-30 12:14:25.464733",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "assembly start",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "4": {
+      "ocel:activity": "assembly completed",
+      "ocel:timestamp": "2024-08-30 12:06:25.464738",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "assembly complete",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "10": {
+      "ocel:activity": "quality check performed",
+      "ocel:timestamp": "2024-08-30 12:29:25.464739",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "quality check",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "11": {
+      "ocel:activity": "packaging started",
+      "ocel:timestamp": "2024-08-30 11:39:25.464740",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "packaging start",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "12": {
+      "ocel:activity": "packaging completed",
+      "ocel:timestamp": "2024-08-30 12:23:25.464742",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "packaging complete",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "13": {
+      "ocel:activity": "dispatch ready",
+      "ocel:timestamp": "2024-08-30 11:57:25.464743",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "dispatch ready",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "14": {
+      "ocel:activity": "dispatch completed",
+      "ocel:timestamp": "2024-08-30 12:01:25.464744",
+      "ocel:event_type": "process_event",
+      "ocel:attr:label": "dispatch complete",
+      "ocel:attr:location": "Main Manufacturing Plant",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "is_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "is_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    }
+  },
+  "ocel:objects": {
+    "1": {
+      "ocel:type": "shipment",
+      "ocel:ovmap": {},
+      "ocel:o2o": [
+        {
+          "ocel:oid": "3",
+          "ocel:qualifier": "related"
+        }
+      ]
+    },
+    "2": {
+      "ocel:type": "sensor",
+      "ocel:ovmap": {}
+    },
+    "3": {
+      "ocel:type": "sensor",
+      "ocel:ovmap": {}
+    },
+    "iot_device_temperature": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "iot_device_humidity": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "iot_device_vibration": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "iot_device_light": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "iot_device_pressure": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "is_system": {
+      "ocel:type": "information_system",
+      "ocel:ovmap": {}
+    }
+  },
+  "ocel:eventTypes": {
+    "assembly completed": {},
+    "assembly started": {},
+    "dispatch completed": {},
+    "dispatch ready": {},
+    "packaging completed": {},
+    "packaging started": {},
+    "quality check performed": {}
+  },
+  "ocel:objectTypes": {
+    "information_system": {},
+    "iot_device": {},
+    "sensor": {},
+    "shipment": {}
+  },
+  "ocel:objectChanges": []
+}

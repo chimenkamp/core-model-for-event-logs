@@ -227,19 +227,24 @@ event_event_relationships: List[Dict[str, str]] = [
 
 iot_devices: List[Dict[str, str]] = [
     {
-        "device_id": "iot_device_temperature"
+        "data_source_id": "iot_device_temperature",
+        "name": "Temperature Sensor",
     },
     {
-        "device_id": "iot_device_humidity"
+        "data_source_id": "iot_device_humidity",
+        "name": "Humidity Sensor",
     },
     {
-        "device_id": "iot_device_vibration"
+        "data_source_id": "iot_device_vibration",
+        "name": "Vibration Sensor",
     },
     {
-        "device_id": "iot_device_light"
+        "data_source_id": "iot_device_light",
+        "name": "Light Sensor",
     },
     {
-        "device_id": "iot_device_pressure"
+        "data_source_id": "iot_device_pressure",
+        "name": "Pressure Sensor",
     }
 ]
 
@@ -319,8 +324,8 @@ event_data_source_relationships: List[Dict[str, str]] = [
 
 information_systems: List[Dict[str, str]] = [
     {
-        "is_id": "1",
-        "system_name": "is_system"
+        "data_source_id": "is_system",
+        "name": "ERP System"
     }
 ]
 
@@ -336,5 +341,6 @@ wrapper = OCELWrapper(objects=objects,
                       event_data_source_relationships=event_data_source_relationships,
                       information_systems=information_systems)
 
+wrapper.save_ocel("use_case_example_ocel_output.jsonocel")
 extended_table: pd.DataFrame = wrapper.get_extended_table()
 print(extended_table)

@@ -2,6 +2,7 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional, Literal
 
 import pandas as pd
+import pm4py
 from pm4py import OCEL
 
 
@@ -36,35 +37,40 @@ class OCELWrapper:
 
         self.ocel = OCEL()
 
-        if objects:
-            self._add_objects(objects)
+        self.objects: List[Dict[str, Any]] = objects if objects is not None else []
+        self.iot_events: List[Dict[str, Any]] = iot_events if iot_events is not None else []
+        self.process_events: List[Dict[str, Any]] = process_events if process_events is not None else []
+        self.iot_devices: List[Dict[str, Any]] = iot_devices if iot_devices is not None else []
+        self.observations: List[Dict[str, Any]] = observations if observations is not None else []
+        self.information_systems: List[Dict[str, Any]] = information_systems if information_systems is not None else []
+        self.object_object_relationships: List[
+            Dict[str, Any]] = object_object_relationships if object_object_relationships is not None else []
+        self.event_object_relationships: List[
+            Dict[str, Any]] = event_object_relationships if event_object_relationships is not None else []
+        self.event_event_relationships: List[
+            Dict[str, Any]] = event_event_relationships if event_event_relationships is not None else []
+        self.event_data_source_relationships: List[
+            Dict[str, Any]] = event_data_source_relationships if event_data_source_relationships is not None else []
 
-        if iot_devices:
-            self._add_objects(self._format_iot_devices(iot_devices))
+        self._add_objects(self.objects)
 
-        if observations:
-            self._add_events(self._format_observations(observations), "")
+        self._add_events(self._format_observations(self.observations), "observation")
 
-        if information_systems:
-            self._add_objects(self._format_information_systems(information_systems))
+        self._add_objects(self._format_iot_devices(self.iot_devices))
 
-        if iot_events:
-            self._add_events(iot_events, "iot_event")
+        self._add_objects(self._format_information_systems(self.information_systems))
 
-        if process_events:
-            self._add_events(process_events, "process_event")
+        self._add_events(self.iot_events, "iot_event")
 
-        if object_object_relationships:
-            self._add_object_relationships(object_object_relationships)
+        self._add_events(self.process_events, "process_event")
 
-        if event_object_relationships:
-            self._add_event_object_relationships(event_object_relationships)
+        self._add_object_relationships(self.object_object_relationships)
 
-        if event_event_relationships:
-            self._add_event_event_relationships(event_event_relationships)
+        self._add_event_object_relationships(self.event_object_relationships)
 
-        if event_data_source_relationships:
-            self._add_event_data_source_relationships(event_data_source_relationships)
+        self._add_event_event_relationships(self.event_event_relationships)
+
+        self._add_event_data_source_relationships(self.event_data_source_relationships)
 
     def _add_objects(self, objects: List[Dict[str, Any]]) -> None:
         """
@@ -87,7 +93,8 @@ class OCELWrapper:
         new_df = pd.DataFrame(new_rows)
         self.ocel.objects = pd.concat([self.ocel.objects, new_df], ignore_index=True)
 
-    def _add_events(self, events: List[Dict[str, Any]], event_type: Literal["iot_event", "process_event", "observation"]) -> None:
+    def _add_events(self, events: List[Dict[str, Any]],
+                    event_type: Literal["iot_event", "process_event", "observation"]) -> None:
         """
         Adds events to the OCEL.
 
@@ -107,7 +114,7 @@ class OCELWrapper:
                 "ocel:event_type": event_type
             }
             for key, value in attributes.items():
-                new_row["ocel:attr:"+key] = value
+                new_row["ocel:attr:" + key] = value
 
             new_rows.append(new_row)
 
@@ -141,13 +148,27 @@ class OCELWrapper:
 
         :param relationships: List of dictionaries representing event-object relationships.
         """
+        # self.event_id_column: [], self.event_activity: [], self.event_timestamp: [], self.object_id_column: [],
+        # self.object_type_column: []
+
         new_rows = []
         for relationship in relationships:
-            event_id = relationship["event_id"]
-            obj_id = relationship["object_id"]
+            obj = list(filter(lambda x: x["object_id"] == relationship["object_id"], self.objects))[0]
+            events = self.iot_events + self.process_events
+            evt = list(filter(lambda x: x["event_id"] == relationship["event_id"], events))[0]
+
+            event_id = evt["event_id"]
+            event_type = evt.get("activity", "")
+            event_timestamp = evt["timestamp"]
+
+            obj_id = obj["object_id"]
+            obj_type = obj.get("object_type", "undefined")
 
             new_row = {
                 self.ocel.event_id_column: event_id,
+                self.ocel.event_activity: event_type,
+                self.ocel.event_timestamp: event_timestamp,
+                self.ocel.object_type_column: obj_type,
                 self.ocel.object_id_column: obj_id
             }
             new_rows.append(new_row)
@@ -184,12 +205,27 @@ class OCELWrapper:
         """
         new_rows = []
         for relationship in relationships:
-            event_id = relationship["event_id"]
-            data_source_id = relationship["data_source_id"]
+
+            data_sources = self.information_systems + self.iot_devices
+            print(data_sources, relationship)
+            ds = list(filter(lambda x: x["data_source_id"] == relationship["data_source_id"], data_sources))[0]
+
+            events = self.iot_events + self.process_events
+            evt = list(filter(lambda x: x["event_id"] == relationship["event_id"], events))[0]
+
+            event_id = evt["event_id"]
+            event_type = evt.get("activity", "")
+            event_timestamp = evt["timestamp"]
+
+            obj_id = ds["data_source_id"]
+            obj_type = ds.get("name", "undefined")
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                "ocel:data_source": data_source_id
+                self.ocel.event_activity: event_type,
+                self.ocel.event_timestamp: event_timestamp,
+                self.ocel.object_type_column: obj_type,
+                self.ocel.object_id_column: obj_id
             }
             new_rows.append(new_row)
 
@@ -206,7 +242,7 @@ class OCELWrapper:
         formatted_devices = []
         for device in iot_devices:
             formatted_devices.append({
-                "object_id": device["device_id"],
+                "object_id": device["data_source_id"],
                 "object_type": "iot_device",
                 "attributes": {}
             })
@@ -223,7 +259,7 @@ class OCELWrapper:
         for observation in observations:
             formatted_events.append({
                 "event_id": observation["observation_id"],
-                "timestamp": observation.get("timestamp", ""),  # Placeholder, assuming real timestamp should be used
+                "timestamp": observation.get("timestamp", ""),
                 "attributes": {
                     "iot_device_id": observation["iot_device_id"]
                 }
@@ -240,13 +276,14 @@ class OCELWrapper:
         formatted_systems = []
         for system in information_systems:
             formatted_systems.append({
-                "object_id": system["is_id"],
+                "object_id": system["data_source_id"],
                 "object_type": "information_system",
                 "attributes": {
-                    "system_name": system["system_name"]
+                    "system_name": system["name"]
                 }
             })
         return formatted_systems
+
     def get_ocel(self) -> OCEL:
         """
         Returns the OCEL object.
@@ -261,3 +298,12 @@ class OCELWrapper:
         attributes and the related objects per object type.
         """
         return self.ocel.get_extended_table()
+
+    def save_ocel(self, path: str) -> None:
+        """
+        Saves the OCEL object to a file.
+
+        :param path: Path to the file.
+        """
+
+        pm4py.write_ocel(self.ocel, path)
