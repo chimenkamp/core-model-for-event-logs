@@ -1,8 +1,13 @@
+import pandas as pd
+
 from src.validation.base import JsonValidator
+from src.wrapper.ocel_wrapper import OCELWrapper
 
-SCHEMA_PATH: str = "../../schemas/json_schema.json"
+ocel_wrapper: OCELWrapper = OCELWrapper().load_from_json("example.json")
 
-if JsonValidator(SCHEMA_PATH).validate("example.json"):
-    print("Validation successful.")
-else:
-    print("Validation failed.")
+ocel_table: pd.DataFrame = ocel_wrapper.get_extended_table()
+
+print(ocel_table)
+
+ocel_wrapper.save_to_json("example_output_[custom_schema].json")
+ocel_wrapper.save_ocel("example_output_[ocel_schema].jsonocel")

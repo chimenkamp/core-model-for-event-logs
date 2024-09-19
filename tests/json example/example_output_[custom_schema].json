@@ -1,0 +1,177 @@
+{
+  "objects": [
+    {
+      "object_id": "machine_1",
+      "object_type": "Machine",
+      "attributes": {
+        "location": "Factory A",
+        "model": "MX1000",
+        "type": NaN,
+        "color": NaN,
+        "customer": NaN,
+        "priority": NaN,
+        "system_name": NaN
+      }
+    },
+    {
+      "object_id": "product_1",
+      "object_type": "Product",
+      "attributes": {
+        "location": NaN,
+        "model": NaN,
+        "type": "Widget",
+        "color": "Red",
+        "customer": NaN,
+        "priority": NaN,
+        "system_name": NaN
+      }
+    },
+    {
+      "object_id": "order_1",
+      "object_type": "Order",
+      "attributes": {
+        "location": NaN,
+        "model": NaN,
+        "type": NaN,
+        "color": NaN,
+        "customer": "Company XYZ",
+        "priority": "High",
+        "system_name": NaN
+      }
+    }
+  ],
+  "iot_events": [
+    {
+      "event_id": "event_3",
+      "timestamp": "2023-10-01T08:00:00+00:00",
+      "attributes": {
+        "iot_device_id": NaN,
+        "sensor_id": "sensor_1",
+        "temperature": 75.0,
+        "order_id": NaN,
+        "created_by": NaN,
+        "product_id": NaN,
+        "machine_id": NaN
+      },
+      "activity": {
+        "activity_type": "Sensor Reading"
+      }
+    },
+    {
+      "event_id": "event_4",
+      "timestamp": "2023-10-01T08:05:00+00:00",
+      "attributes": {
+        "iot_device_id": NaN,
+        "sensor_id": "sensor_1",
+        "temperature": 77.0,
+        "order_id": NaN,
+        "created_by": NaN,
+        "product_id": NaN,
+        "machine_id": NaN
+      },
+      "activity": {
+        "activity_type": "Sensor Reading"
+      }
+    }
+  ],
+  "process_events": [
+    {
+      "event_id": "event_1",
+      "timestamp": "2023-10-01T07:55:00+00:00",
+      "attributes": {
+        "iot_device_id": NaN,
+        "sensor_id": NaN,
+        "temperature": NaN,
+        "order_id": "order_1",
+        "created_by": "User123",
+        "product_id": NaN,
+        "machine_id": NaN
+      },
+      "activity": {
+        "activity_type": "Order Created"
+      }
+    },
+    {
+      "event_id": "event_2",
+      "timestamp": "2023-10-01T08:10:00+00:00",
+      "attributes": {
+        "iot_device_id": NaN,
+        "sensor_id": NaN,
+        "temperature": NaN,
+        "order_id": NaN,
+        "created_by": NaN,
+        "product_id": "product_1",
+        "machine_id": "machine_1"
+      },
+      "activity": {
+        "activity_type": "Product Assembled"
+      }
+    }
+  ],
+  "iot_devices": [
+    {
+      "data_source_id": "sensor_1"
+    },
+    {
+      "data_source_id": "sensor_2"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs_1",
+      "timestamp": "2023-10-01T08:00:00+00:00",
+      "iot_device_id": "sensor_1"
+    },
+    {
+      "observation_id": "obs_2",
+      "timestamp": "2023-10-01T08:05:00+00:00",
+      "iot_device_id": "sensor_1"
+    }
+  ],
+  "information_systems": [
+    {
+      "data_source_id": "erp_system",
+      "name": "ERP System"
+    }
+  ],
+  "object_object_relationships": [
+    {
+      "object_id": "order_1",
+      "related_object_id": "product_1"
+    }
+  ],
+  "event_object_relationships": [
+    {
+      "event_id": "event_1",
+      "object_id": "order_1"
+    },
+    {
+      "event_id": "event_2",
+      "object_id": "product_1"
+    },
+    {
+      "event_id": "event_2",
+      "object_id": "machine_1"
+    }
+  ],
+  "event_event_relationships": [
+    {
+      "event_id": "event_2",
+      "derived_from_event_id": "event_1"
+    }
+  ],
+  "event_data_source_relationships": [
+    {
+      "event_id": "event_1",
+      "data_source_id": "erp_system"
+    },
+    {
+      "event_id": "event_3",
+      "data_source_id": "sensor_1"
+    },
+    {
+      "event_id": "event_4",
+      "data_source_id": "sensor_1"
+    }
+  ]
+}

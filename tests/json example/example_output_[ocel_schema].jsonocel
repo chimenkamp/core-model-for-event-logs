@@ -1,0 +1,165 @@
+{
+  "ocel:global-event": {
+    "ocel:activity": "__INVALID__"
+  },
+  "ocel:global-object": {
+    "ocel:type": "__INVALID__"
+  },
+  "ocel:global-log": {
+    "ocel:object-types": [
+      "Machine",
+      "Product",
+      "Order",
+      "iot_device",
+      "information_system"
+    ],
+    "ocel:attribute-names": [],
+    "ocel:version": "1.0",
+    "ocel:ordering": "timestamp"
+  },
+  "ocel:events": {
+    "obs_1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T08:00:00Z",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "sensor_1",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_2": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T08:05:00Z",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "sensor_1",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "event_3": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T08:00:00Z",
+      "ocel:event_type": "Sensor Reading",
+      "ocel:event_subtype": "iot_event",
+      "ocel:attr:sensor_id": "sensor_1",
+      "ocel:attr:temperature": 75.0,
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "sensor_1"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "sensor_1",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "event_4": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T08:05:00Z",
+      "ocel:event_type": "Sensor Reading",
+      "ocel:event_subtype": "iot_event",
+      "ocel:attr:sensor_id": "sensor_1",
+      "ocel:attr:temperature": 77.0,
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "sensor_1"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "sensor_1",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "event_1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T07:55:00Z",
+      "ocel:event_type": "Order Created",
+      "ocel:event_subtype": "process_event",
+      "ocel:attr:order_id": "order_1",
+      "ocel:attr:created_by": "User123",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "order_1",
+        "erp_system"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "order_1",
+          "ocel:qualifier": NaN
+        },
+        {
+          "ocel:oid": "erp_system",
+          "ocel:qualifier": NaN
+        }
+      ]
+    },
+    "event_2": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-10-01T08:10:00Z",
+      "ocel:event_type": "Product Assembled",
+      "ocel:event_subtype": "process_event",
+      "ocel:attr:product_id": "product_1",
+      "ocel:attr:machine_id": "machine_1",
+      "ocel:vmap": {},
+      "ocel:omap": [
+        "product_1",
+        "machine_1"
+      ],
+      "ocel:typedOmap": [
+        {
+          "ocel:oid": "product_1",
+          "ocel:qualifier": NaN
+        },
+        {
+          "ocel:oid": "machine_1",
+          "ocel:qualifier": NaN
+        }
+      ]
+    }
+  },
+  "ocel:objects": {
+    "machine_1": {
+      "ocel:type": "Machine",
+      "ocel:ovmap": {}
+    },
+    "product_1": {
+      "ocel:type": "Product",
+      "ocel:ovmap": {}
+    },
+    "order_1": {
+      "ocel:type": "Order",
+      "ocel:ovmap": {},
+      "ocel:o2o": [
+        {
+          "ocel:oid": "product_1",
+          "ocel:qualifier": "related"
+        }
+      ]
+    },
+    "sensor_1": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "sensor_2": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    },
+    "erp_system": {
+      "ocel:type": "information_system",
+      "ocel:ovmap": {}
+    }
+  },
+  "ocel:eventTypes": {
+    "NO ACTIVITY": {}
+  },
+  "ocel:objectTypes": {
+    "Machine": {},
+    "Order": {},
+    "Product": {},
+    "information_system": {},
+    "iot_device": {}
+  },
+  "ocel:objectChanges": []
+}

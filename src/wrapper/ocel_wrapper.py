@@ -1,9 +1,12 @@
+import json
 from datetime import datetime
-from typing import List, Dict, Any, Optional, Literal
+from typing import List, Dict, Any, Optional, Literal, Self
 
 import pandas as pd
 import pm4py
 from pm4py import OCEL
+
+from src.validation.base import JsonValidator
 
 
 class OCELWrapper:
@@ -20,22 +23,11 @@ class OCELWrapper:
                  event_data_source_relationships: Optional[List[Dict[str, Any]]] = None
                  ) -> None:
         """
-         Initialize the OCELWrapper with lists of dicts representing different aspects of the OCEL model.
-
-         :param objects: List of dictionaries representing objects.
-         :param iot_events: List of dictionaries representing IoT events.
-         :param process_events: List of dictionaries representing process events.
-         :param iot_devices: List of dictionaries representing IoT devices.
-         :param observations: List of dictionaries representing observations.
-         :param information_systems: List of dictionaries representing information systems.
-
-         :param object_object_relationships: List of dictionaries representing object relationships.
-         :param event_object_relationships: List of dictionaries representing event-object relationships.
-         :param event_event_relationships: List of dictionaries representing event-event relationships.
-         :param event_data_source_relationships: List of dictionaries representing event-data source relationships.
-         """
-
+        Initialize the OCELWrapper with lists of dicts representing different aspects of the OCEL model.
+        """
         self.ocel = OCEL()
+
+        self.JSON_SCHEMA_PATH = "../../schemas/json_schema.json"
 
         self.objects: List[Dict[str, Any]] = objects if objects is not None else []
         self.iot_events: List[Dict[str, Any]] = iot_events if iot_events is not None else []
@@ -52,25 +44,55 @@ class OCELWrapper:
         self.event_data_source_relationships: List[
             Dict[str, Any]] = event_data_source_relationships if event_data_source_relationships is not None else []
 
+        # Process the data
+        self._process_data()
+
+    def _process_data(self) -> None:
+        """
+        Processes the data by adding objects, events, and relationships to the OCEL.
+        """
         self._add_objects(self.objects)
-
         self._add_events(self._format_observations(self.observations), "observation")
-
         self._add_objects(self._format_iot_devices(self.iot_devices))
-
         self._add_objects(self._format_information_systems(self.information_systems))
-
         self._add_events(self.iot_events, "iot_event")
-
         self._add_events(self.process_events, "process_event")
-
         self._add_object_relationships(self.object_object_relationships)
-
         self._add_event_object_relationships(self.event_object_relationships)
-
         self._add_event_event_relationships(self.event_event_relationships)
-
         self._add_event_data_source_relationships(self.event_data_source_relationships)
+
+    def load_from_json(self, json_file_path: str) -> Self:
+        """
+        Loads data from a JSON file, validates it against the schema, and assigns it to the wrapper's attributes.
+
+        :param json_file_path: Path to the JSON file containing the data.
+        :param schema_path: Path to the JSON schema file for validation.
+        """
+        validator = JsonValidator(self.JSON_SCHEMA_PATH)
+        is_valid = validator.validate(json_file_path)
+
+        if is_valid:
+            with open(json_file_path, 'r') as f:
+                data = json.load(f)
+
+            self.objects = data.get('objects', [])
+            self.iot_events = data.get('iot_events', [])
+            self.process_events = data.get('process_events', [])
+            self.iot_devices = data.get('iot_devices', [])
+            self.observations = data.get('observations', [])
+            self.information_systems = data.get('information_systems', [])
+            self.object_object_relationships = data.get('object_object_relationships', [])
+            self.event_object_relationships = data.get('event_object_relationships', [])
+            self.event_event_relationships = data.get('event_event_relationships', [])
+            self.event_data_source_relationships = data.get('event_data_source_relationships', [])
+
+            self.ocel = OCEL()
+            self._process_data()
+        else:
+            raise ValueError("JSON file does not conform to schema")
+
+        return self
 
     def _add_objects(self, objects: List[Dict[str, Any]]) -> None:
         """
@@ -86,12 +108,13 @@ class OCELWrapper:
 
             new_row = {self.ocel.object_id_column: obj_id, self.ocel.object_type_column: obj_type}
             for key, value in attributes.items():
-                new_row["ocel:attr" + key] = value
+                new_row["ocel:attr:" + key] = value
 
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.objects = pd.concat([self.ocel.objects, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            self.ocel.objects = pd.concat([self.ocel.objects, new_df], ignore_index=True)
 
     def _add_events(self, events: List[Dict[str, Any]],
                     event_type: Literal["iot_event", "process_event", "observation"]) -> None:
@@ -99,27 +122,30 @@ class OCELWrapper:
         Adds events to the OCEL.
 
         :param events: List of dictionaries representing events.
+        :param event_type: Type of the event.
         """
         new_rows = []
         for event in events:
             event_id = event["event_id"]
-            timestamp = event["timestamp"]
+            timestamp = pd.to_datetime(event["timestamp"])
             attributes = event.get("attributes", {})
             activity = event.get("activity", {}).get("activity_type", "")
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                self.ocel.event_activity: "observation" if event_type == "observation" else activity,
+                self.ocel.event_activity: "NO ACTIVITY",
                 self.ocel.event_timestamp: timestamp,
-                "ocel:event_type": attributes
+                "ocel:event_type": "observation" if event_type == "observation" else activity,
+                "ocel:event_subtype": event_type
             }
             for key, value in attributes.items():
                 new_row["ocel:attr:" + key] = value
 
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.events = pd.concat([self.ocel.events, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            self.ocel.events = pd.concat([self.ocel.events, new_df], ignore_index=True)
 
     def _add_object_relationships(self, relationships: List[Dict[str, Any]]) -> None:
         """
@@ -139,8 +165,9 @@ class OCELWrapper:
             }
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.o2o = pd.concat([self.ocel.o2o, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            self.ocel.o2o = pd.concat([self.ocel.o2o, new_df], ignore_index=True)
 
     def _add_event_object_relationships(self, relationships: List[Dict[str, Any]]) -> None:
         """
@@ -148,33 +175,39 @@ class OCELWrapper:
 
         :param relationships: List of dictionaries representing event-object relationships.
         """
-        # self.event_id_column: [], self.event_activity: [], self.event_timestamp: [], self.object_id_column: [],
-        # self.object_type_column: []
-
         new_rows = []
         for relationship in relationships:
-            obj = list(filter(lambda x: x["object_id"] == relationship["object_id"], self.objects))[0]
-            events = self.iot_events + self.process_events
-            evt = list(filter(lambda x: x["event_id"] == relationship["event_id"], events))[0]
+            obj_id = relationship["object_id"]
+            event_id = relationship["event_id"]
 
-            event_id = evt["event_id"]
-            event_type = evt.get("activity", "")
-            event_timestamp = evt["timestamp"]
+            # Find the object
+            obj = next((x for x in self.objects if x["object_id"] == obj_id), None)
+            if obj is None:
+                continue
 
-            obj_id = obj["object_id"]
             obj_type = obj.get("object_type", "undefined")
+
+            # Find the event
+            all_events = self.iot_events + self.process_events
+            evt = next((x for x in all_events if x["event_id"] == event_id), None)
+            if evt is None:
+                continue
+
+            event_activity = evt.get("activity", {}).get("activity_type", "")
+            event_timestamp = pd.to_datetime(evt["timestamp"])
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                self.ocel.event_activity: event_type,
+                self.ocel.event_activity: event_activity,
                 self.ocel.event_timestamp: event_timestamp,
                 self.ocel.object_type_column: obj_type,
                 self.ocel.object_id_column: obj_id
             }
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.relations = pd.concat([self.ocel.relations, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            self.ocel.relations = pd.concat([self.ocel.relations, new_df], ignore_index=True)
 
     def _add_event_event_relationships(self, relationships: List[Dict[str, Any]]) -> None:
         """
@@ -194,8 +227,9 @@ class OCELWrapper:
             }
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.e2e = pd.concat([self.ocel.e2e, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            self.ocel.e2e = pd.concat([self.ocel.e2e, new_df], ignore_index=True)
 
     def _add_event_data_source_relationships(self, relationships: List[Dict[str, Any]]) -> None:
         """
@@ -205,32 +239,42 @@ class OCELWrapper:
         """
         new_rows = []
         for relationship in relationships:
+            data_source_id = relationship["data_source_id"]
+            event_id = relationship["event_id"]
 
+            # Find the data source
             data_sources = self.information_systems + self.iot_devices
-            print(data_sources, relationship)
-            ds = list(filter(lambda x: x["data_source_id"] == relationship["data_source_id"], data_sources))[0]
-
-            events = self.iot_events + self.process_events
-            evt = list(filter(lambda x: x["event_id"] == relationship["event_id"], events))[0]
-
-            event_id = evt["event_id"]
-            event_type = evt.get("activity", "")
-            event_timestamp = evt["timestamp"]
+            ds = next((x for x in data_sources if x.get("data_source_id") == data_source_id), None)
+            if ds is None:
+                continue
 
             obj_id = ds["data_source_id"]
-            obj_type = ds.get("name", "undefined")
+            obj_type = "information_system" if "name" in ds else "iot_device"
+
+            # Find the event
+            all_events = self.iot_events + self.process_events
+            evt = next((x for x in all_events if x["event_id"] == event_id), None)
+            if evt is None:
+                continue
+
+            event_activity = evt.get("activity", {}).get("activity_type", "")
+            event_timestamp = pd.to_datetime(evt["timestamp"])
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                self.ocel.event_activity: event_type,
+                self.ocel.event_activity: event_activity,
                 self.ocel.event_timestamp: event_timestamp,
                 self.ocel.object_type_column: obj_type,
                 self.ocel.object_id_column: obj_id
             }
             new_rows.append(new_row)
 
-        new_df = pd.DataFrame(new_rows)
-        self.ocel.relations = pd.concat([self.ocel.relations, new_df], ignore_index=True)
+        if new_rows:
+            new_df = pd.DataFrame(new_rows)
+            if self.ocel.relations is None:
+                self.ocel.relations = new_df
+            else:
+                self.ocel.relations = pd.concat([self.ocel.relations, new_df], ignore_index=True)
 
     def _format_iot_devices(self, iot_devices: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
@@ -255,9 +299,7 @@ class OCELWrapper:
         :param observations: List of dictionaries representing observations.
         :return: List of formatted dictionaries representing observations as events.
         """
-
         formatted_events = []
-
         for observation in observations:
             formatted_events.append({
                 "event_id": observation["observation_id"],
@@ -307,6 +349,125 @@ class OCELWrapper:
 
         :param path: Path to the file.
         """
-
         pm4py.write_ocel(self.ocel, path)
 
+    def save_to_json(self, json_file_path: str, schema_path: Optional[str] = None) -> None:
+        """
+        Saves the data stored inside the OCEL instance to a JSON file following the defined schema.
+
+        :param json_file_path: Path to the JSON file where data will be saved.
+        :param schema_path: Optional path to the JSON schema file for validation.
+        """
+        data = self._reconstruct_data()
+
+        if schema_path:
+            validator = JsonValidator(schema_path)
+            is_valid = validator.validate(data)
+            if not is_valid:
+                raise ValueError("Reconstructed data does not conform to schema")
+
+        # Save data to JSON file
+        with open(json_file_path, 'w') as f:
+            json.dump(data, f, indent=2, default=str)  # default=str to handle datetime serialization
+
+    def _reconstruct_data(self) -> Dict[str, Any]:
+        """
+        Reconstructs the data from the OCEL instance into the JSON structure defined by the schema.
+
+        :return: A dictionary containing the reconstructed data.
+        """
+        data = {
+            "objects": [],
+            "iot_events": [],
+            "process_events": [],
+            "iot_devices": [],
+            "observations": [],
+            "information_systems": [],
+            "object_object_relationships": [],
+            "event_object_relationships": [],
+            "event_event_relationships": [],
+            "event_data_source_relationships": []
+        }
+
+        # Extract objects
+        for _, obj_row in self.ocel.objects.iterrows():
+            obj = {
+                "object_id": obj_row[self.ocel.object_id_column],
+                "object_type": obj_row[self.ocel.object_type_column],
+                "attributes": {k.replace("ocel:attr:", ""): v for k, v in obj_row.items() if k.startswith("ocel:attr:")}
+            }
+            obj_type = obj["object_type"]
+            if obj_type == "iot_device":
+                data["iot_devices"].append({
+                    "data_source_id": obj["object_id"]
+                })
+            elif obj_type == "information_system":
+                data["information_systems"].append({
+                    "data_source_id": obj["object_id"],
+                    "name": obj["attributes"].get("system_name", "")
+                })
+            else:
+                data["objects"].append(obj)
+
+        # Extract events
+        for _, event_row in self.ocel.events.iterrows():
+            event = {
+                "event_id": event_row[self.ocel.event_id_column],
+                "timestamp": event_row[self.ocel.event_timestamp].isoformat(),
+                "attributes": {k.replace("ocel:attr:", ""): v for k, v in event_row.items() if
+                               k.startswith("ocel:attr:")},
+                "activity": {
+                    "activity_type": event_row.get("ocel:event_type", "")
+                }
+            }
+            event_subtype = event_row.get("ocel:event_subtype", "")
+            if event_subtype == "iot_event":
+                data["iot_events"].append(event)
+            elif event_subtype == "process_event":
+                data["process_events"].append(event)
+            elif event_subtype == "observation":
+                observation = {
+                    "observation_id": event["event_id"],
+                    "timestamp": event["timestamp"],
+                    "iot_device_id": event["attributes"].get("iot_device_id", "")
+                }
+                data["observations"].append(observation)
+            else:
+                print(f"Unknown event subtype: {event_subtype}")
+                pass
+
+        # Extract object-object relationships
+        if self.ocel.o2o is not None and not self.ocel.o2o.empty:
+            for _, rel_row in self.ocel.o2o.iterrows():
+                rel = {
+                    "object_id": rel_row[self.ocel.object_id_column],
+                    "related_object_id": rel_row[self.ocel.object_id_column + "_2"]
+                }
+                data["object_object_relationships"].append(rel)
+
+        # Extract event-object relationships
+        if self.ocel.relations is not None and not self.ocel.relations.empty:
+            for _, rel_row in self.ocel.relations.iterrows():
+                rel = {
+                    "event_id": rel_row[self.ocel.event_id_column],
+                    "object_id": rel_row[self.ocel.object_id_column]
+                }
+                obj_type = rel_row[self.ocel.object_type_column]
+                if obj_type in ["iot_device", "information_system"]:
+                    data["event_data_source_relationships"].append({
+                        "event_id": rel["event_id"],
+                        "data_source_id": rel["object_id"]
+                    })
+                else:
+                    data["event_object_relationships"].append(rel)
+
+        # Extract event-event relationships
+        if self.ocel.e2e is not None and not self.ocel.e2e.empty:
+            for _, rel_row in self.ocel.e2e.iterrows():
+                rel = {
+                    "event_id": rel_row[self.ocel.event_id_column],
+                    "derived_from_event_id": rel_row[self.ocel.event_id_column + "_2"]
+                }
+                data["event_event_relationships"].append(rel)
+
+        return data
