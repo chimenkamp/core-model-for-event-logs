@@ -1,156 +1,144 @@
 {
-  "$schema": "http://json-schema.org/schema#",
-  "additionalProperties": true,
-  "definitions": {
-    "UUIDType": {
-      "type": "string",
-      "format": "uuid"
-    },
-    "StringType": {
-      "type": "string"
-    },
-    "FloatType": {
-      "type": "number"
-    },
-    "IntType": {
-      "type": "integer"
-    },
-    "DateTimeType": {
-      "type": "string",
-      "format": "date-time"
-    },
-    "AttributeType": {
-      "type": "object",
-      "properties": {
-        "attribute_id": { "$ref": "#/definitions/UUIDType" },
-        "key": { "$ref": "#/definitions/StringType" },
-        "value": {
-          "oneOf": [
-            { "$ref": "#/definitions/StringType" },
-            { "$ref": "#/definitions/FloatType" },
-            { "$ref": "#/definitions/IntType" }
-          ]
-        }
-      },
-      "required": ["attribute_id", "key", "value"]
-    },
-    "ActivityType": {
-      "type": "object",
-      "properties": {
-        "activity_id": { "$ref": "#/definitions/UUIDType" },
-        "activity_type": {
-          "oneOf": [
-            { "$ref": "#/definitions/StringType" },
-            { "$ref": "#/definitions/FloatType" },
-            { "$ref": "#/definitions/IntType" }
-          ]
-        }
-      },
-      "required": ["activity_id"]
-    },
-    "DataSourceType": {
-      "type": "object",
-      "properties": {
-        "data_source_id": { "$ref": "#/definitions/UUIDType" },
-        "data_source_type": { "type": "string", "enum": ["information system", "iot device"] }
-      },
-      "required": ["data_source_id", "data_source_type"]
-    },
-    "EventType": {
-      "type": "object",
-      "properties": {
-        "event_id": { "$ref": "#/definitions/UUIDType" },
-        "event_type": { "type": "string", "enum": ["process event", "iot event"] },
-        "related_objects": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/ObjectType" }
-        },
-        "derived_from_events": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/EventType" }
-        },
-        "data_source": { "$ref": "#/definitions/DataSourceType" },
-        "timestamp": { "$ref": "#/definitions/DateTimeType" }
-      },
-      "required": ["event_id", "event_type", "timestamp"]
-    },
-    "ProcessEventType": {
-      "allOf": [
-        { "$ref": "#/definitions/EventType" },
-        {
-          "type": "object",
-          "properties": {
-            "activity": { "$ref": "#/definitions/ActivityType" }
-          },
-          "required": ["activity"]
-        }
-      ]
-    },
-    "IoTEventType": {
-      "allOf": [
-        { "$ref": "#/definitions/EventType" },
-        {
-          "type": "object",
-          "properties": {
-            "observations": {
-              "type": "array",
-              "items": { "$ref": "#/definitions/ObservationType" }
-            }
-          },
-          "required": ["observations"]
-        }
-      ]
-    },
-    "ISType": {
-      "allOf": [
-        { "$ref": "#/definitions/DataSourceType" },
-        {
-          "type": "object",
-          "properties": {
-            "is_id": { "$ref": "#/definitions/UUIDType" },
-            "event": { "$ref": "#/definitions/ProcessEventType" }
-          },
-          "required": ["is_id"]
-        }
-      ]
-    },
-    "ObservationType": {
-      "type": "object",
-      "properties": {
-        "observation_id": { "$ref": "#/definitions/UUIDType" },
-        "iot_device": { "$ref": "#/definitions/IoTDeviceType" }
-      },
-      "required": ["observation_id"]
-    },
-    "IoTDeviceType": {
-      "allOf": [
-        { "$ref": "#/definitions/DataSourceType" },
-        {
-          "type": "object",
-          "properties": {
-            "iot_device_id": { "$ref": "#/definitions/UUIDType" }
-          },
-          "required": ["iot_device_id"]
-        }
-      ]
-    },
-    "ObjectType": {
-      "type": "object",
-      "properties": {
-        "object_id": { "$ref": "#/definitions/UUIDType" },
-        "object_type": { "$ref": "#/definitions/StringType" },
-        "related_objects": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/ObjectType" }
-        },
-        "data_source": { "$ref": "#/definitions/DataSourceType" }
-      },
-      "required": ["object_id", "object_type"]
-    }
-  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Data Schema",
   "type": "object",
   "properties": {
-    "ccm": { "$ref": "#/definitions/CCMType" }
+    "objects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "object_id": { "type": "string" },
+          "object_type": { "type": "string" },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": ["object_id", "object_type"]
+      }
+    },
+    "iot_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "activity": {
+            "type": "object",
+            "properties": {
+              "activity_type": { "type": "string" }
+            },
+            "required": ["activity_type"]
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": ["event_id", "timestamp", "activity"]
+      }
+    },
+    "process_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "activity": {
+            "type": "object",
+            "properties": {
+              "activity_type": { "type": "string" }
+            },
+            "required": ["activity_type"]
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "required": ["event_id", "timestamp", "activity"]
+      }
+    },
+    "iot_devices": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data_source_id": { "type": "string" }
+        },
+        "required": ["data_source_id"]
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "observation_id": { "type": "string" },
+          "timestamp": { "type": "string", "format": "date-time" },
+          "iot_device_id": { "type": "string" }
+        },
+        "required": ["observation_id", "iot_device_id"]
+      }
+    },
+    "information_systems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "data_source_id": { "type": "string" },
+          "name": { "type": "string" }
+        },
+        "required": ["data_source_id", "name"]
+      }
+    },
+    "object_object_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "object_id": { "type": "string" },
+          "related_object_id": { "type": "string" }
+        },
+        "required": ["object_id", "related_object_id"]
+      }
+    },
+    "event_object_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "object_id": { "type": "string" }
+        },
+        "required": ["event_id", "object_id"]
+      }
+    },
+    "event_event_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "derived_from_event_id": { "type": "string" }
+        },
+        "required": ["event_id", "derived_from_event_id"]
+      }
+    },
+    "event_data_source_relationships": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event_id": { "type": "string" },
+          "data_source_id": { "type": "string" }
+        },
+        "required": ["event_id", "data_source_id"]
+      }
+    }
   },
-  "required": ["ccm"]
+  "additionalProperties": false
 }

@@ -1,0 +1,142 @@
+{
+  "objects": [
+    {
+      "object_id": "machine_1",
+      "object_type": "Machine",
+      "attributes": {
+        "location": "Factory A",
+        "model": "MX1000"
+      }
+    },
+    {
+      "object_id": "product_1",
+      "object_type": "Product",
+      "attributes": {
+        "type": "Widget",
+        "color": "Red"
+      }
+    },
+    {
+      "object_id": "order_1",
+      "object_type": "Order",
+      "attributes": {
+        "customer": "Company XYZ",
+        "priority": "High"
+      }
+    }
+  ],
+  "iot_devices": [
+    {
+      "data_source_id": "sensor_1"
+    },
+    {
+      "data_source_id": "sensor_2"
+    }
+  ],
+  "observations": [
+    {
+      "observation_id": "obs_1",
+      "timestamp": "2023-10-01T08:00:00Z",
+      "iot_device_id": "sensor_1"
+    },
+    {
+      "observation_id": "obs_2",
+      "timestamp": "2023-10-01T08:05:00Z",
+      "iot_device_id": "sensor_1"
+    }
+  ],
+  "information_systems": [
+    {
+      "data_source_id": "erp_system",
+      "name": "ERP System"
+    }
+  ],
+  "process_events": [
+    {
+      "event_id": "event_1",
+      "timestamp": "2023-10-01T07:55:00Z",
+      "activity": {
+        "activity_type": "Order Created"
+      },
+      "attributes": {
+        "order_id": "order_1",
+        "created_by": "User123"
+      }
+    },
+    {
+      "event_id": "event_2",
+      "timestamp": "2023-10-01T08:10:00Z",
+      "activity": {
+        "activity_type": "Product Assembled"
+      },
+      "attributes": {
+        "product_id": "product_1",
+        "machine_id": "machine_1"
+      }
+    }
+  ],
+  "iot_events": [
+    {
+      "event_id": "event_3",
+      "timestamp": "2023-10-01T08:00:00Z",
+      "activity": {
+        "activity_type": "Sensor Reading"
+      },
+      "attributes": {
+        "sensor_id": "sensor_1",
+        "temperature": 75.0
+      }
+    },
+    {
+      "event_id": "event_4",
+      "timestamp": "2023-10-01T08:05:00Z",
+      "activity": {
+        "activity_type": "Sensor Reading"
+      },
+      "attributes": {
+        "sensor_id": "sensor_1",
+        "temperature": 77.0
+      }
+    }
+  ],
+  "object_object_relationships": [
+    {
+      "object_id": "order_1",
+      "related_object_id": "product_1"
+    }
+  ],
+  "event_object_relationships": [
+    {
+      "event_id": "event_1",
+      "object_id": "order_1"
+    },
+    {
+      "event_id": "event_2",
+      "object_id": "product_1"
+    },
+    {
+      "event_id": "event_2",
+      "object_id": "machine_1"
+    }
+  ],
+  "event_event_relationships": [
+    {
+      "event_id": "event_2",
+      "derived_from_event_id": "event_1"
+    }
+  ],
+  "event_data_source_relationships": [
+    {
+      "event_id": "event_1",
+      "data_source_id": "erp_system"
+    },
+    {
+      "event_id": "event_3",
+      "data_source_id": "sensor_1"
+    },
+    {
+      "event_id": "event_4",
+      "data_source_id": "sensor_1"
+    }
+  ]
+}

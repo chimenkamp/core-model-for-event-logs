@@ -109,9 +109,9 @@ class OCELWrapper:
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                self.ocel.event_activity: activity,
+                self.ocel.event_activity: "observation" if event_type == "observation" else activity,
                 self.ocel.event_timestamp: timestamp,
-                "ocel:event_type": event_type
+                "ocel:event_type": attributes
             }
             for key, value in attributes.items():
                 new_row["ocel:attr:" + key] = value
@@ -255,7 +255,9 @@ class OCELWrapper:
         :param observations: List of dictionaries representing observations.
         :return: List of formatted dictionaries representing observations as events.
         """
+
         formatted_events = []
+
         for observation in observations:
             formatted_events.append({
                 "event_id": observation["observation_id"],
@@ -307,3 +309,4 @@ class OCELWrapper:
         """
 
         pm4py.write_ocel(self.ocel, path)
+
