@@ -3,7 +3,7 @@ import pandas as pd
 from src.validation.base import JsonValidator
 from src.wrapper.ocel_wrapper import OCELWrapper
 
-ocel_wrapper: OCELWrapper = OCELWrapper().load_from_json("example.json")
+ocel_wrapper: OCELWrapper = OCELWrapper().load_from_json_schema("example.json")
 
 ocel_table: pd.DataFrame = ocel_wrapper.get_extended_table()
 

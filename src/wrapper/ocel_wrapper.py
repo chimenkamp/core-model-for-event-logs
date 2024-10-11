@@ -62,7 +62,7 @@ class OCELWrapper:
         self._add_event_event_relationships(self.event_event_relationships)
         self._add_event_data_source_relationships(self.event_data_source_relationships)
 
-    def load_from_json(self, json_file_path: str) -> Self:
+    def load_from_json_schema(self, json_file_path: str) -> Self:
         """
         Loads data from a JSON file, validates it against the schema, and assigns it to the wrapper's attributes.
 
@@ -70,29 +70,31 @@ class OCELWrapper:
         :param schema_path: Path to the JSON schema file for validation.
         """
         validator = JsonValidator(self.JSON_SCHEMA_PATH)
-        is_valid = validator.validate(json_file_path)
 
-        if is_valid:
-            with open(json_file_path, 'r') as f:
-                data = json.load(f)
-
-            self.objects = data.get('objects', [])
-            self.iot_events = data.get('iot_events', [])
-            self.process_events = data.get('process_events', [])
-            self.iot_devices = data.get('iot_devices', [])
-            self.observations = data.get('observations', [])
-            self.information_systems = data.get('information_systems', [])
-            self.object_object_relationships = data.get('object_object_relationships', [])
-            self.event_object_relationships = data.get('event_object_relationships', [])
-            self.event_event_relationships = data.get('event_event_relationships', [])
-            self.event_data_source_relationships = data.get('event_data_source_relationships', [])
-
-            self.ocel = OCEL()
-            self._process_data()
-        else:
+        if not validator.validate(json_file_path):
             raise ValueError("JSON file does not conform to schema")
 
+        with open(json_file_path, 'r') as f:
+            data = json.load(f)
+
+        self.objects = data.get('objects', [])
+        self.iot_events = data.get('iot_events', [])
+        self.process_events = data.get('process_events', [])
+        self.iot_devices = data.get('iot_devices', [])
+        self.observations = data.get('observations', [])
+        self.information_systems = data.get('information_systems', [])
+        self.object_object_relationships = data.get('object_object_relationships', [])
+        self.event_object_relationships = data.get('event_object_relationships', [])
+        self.event_event_relationships = data.get('event_event_relationships', [])
+        self.event_data_source_relationships = data.get('event_data_source_relationships', [])
+
+        self.ocel = OCEL()
+        self._process_data()
+
         return self
+
+    def load_from_ocel_schema(self, ocel_file_path: str) -> Self:
+        return Self
 
     def _add_objects(self, objects: List[Dict[str, Any]]) -> None:
         """
@@ -133,9 +135,9 @@ class OCELWrapper:
 
             new_row = {
                 self.ocel.event_id_column: event_id,
-                self.ocel.event_activity: "NO ACTIVITY",
+                #self.ocel.event_activity: "NO ACTIVITY",
                 self.ocel.event_timestamp: timestamp,
-                "ocel:event_type": "observation" if event_type == "observation" else activity,
+                "ocel:event_type": "observation" if event_type == "observed" else activity,
                 "ocel:event_subtype": event_type
             }
             for key, value in attributes.items():

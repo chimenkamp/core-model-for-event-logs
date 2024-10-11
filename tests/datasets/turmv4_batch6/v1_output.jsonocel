@@ -1,0 +1,418 @@
+{
+  "ocel:global-event": {
+    "ocel:activity": "__INVALID__"
+  },
+  "ocel:global-object": {
+    "ocel:type": "__INVALID__"
+  },
+  "ocel:global-log": {
+    "ocel:object-types": [
+      "iot_device"
+    ],
+    "ocel:attribute-names": [],
+    "ocel:version": "1.0",
+    "ocel:ordering": "timestamp"
+  },
+  "ocel:events": {
+    "obs_State/progStatus": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:22:42+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Axes/Power/Active/A": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.208526",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Coolant/Power/Active/A": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.208527",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Power/Active/Sum": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.205677",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Coolant/Power/Active/B": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.213492",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Axes/Power/Active/B": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.212363",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Power/Active/A": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.209648",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Coolant/Power/Active/C": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.217273",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Axes/Power/Active/C": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.216435",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Power/Active/B": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.213439",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Power/Active/C": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.217546",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Axes/Power/Active/Sum": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.204013",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_MaxxTurn45/Coolant/Power/Active/Sum": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 15:06:43.204330",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Active": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:31.846806900+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/X/aaLeadP": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:51+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Y/aaLeadP": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:43+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Z/aaLeadP": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:53+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/X/aaTorque": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:54+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Y/aaTorque": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:53+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Z/aaTorque": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:53+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/X/aaVactB": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:51+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Y/aaVactB": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:43+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Axes/Z/aaVactB": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:53+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Program/actBlock": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:54+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Current": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:31.846806900+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_NC": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:05:22.101379+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Channel": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:05:21.352577700+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Program/msg": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:52+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Status": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:31.831206800+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_State/actToolIdent": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:50+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_State/actTNumber": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:50+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_State/actToolLength1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:51+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_State/actToolRadius": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:51+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Spindle/actSpeed": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:41+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Spindle/turnState": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:41+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Program/progName1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:20+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Program/actLineNumber": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:54+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_CounterSpindle/aaLeadP": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:24:41+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Opened": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:07.931964900+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_ClampingSystem2": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:04.484358800+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_Closed": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:09.445167500+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "obs_ClampingSystem1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2023-04-28 17:07:09.507567600+02:00",
+      "ocel:event_type": "observation",
+      "ocel:event_subtype": "observation",
+      "ocel:attr:iot_device_id": "MaxxTurn45",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "a2": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2024-10-10 13:11:53.981075",
+      "ocel:event_type": "Correct  Queue",
+      "ocel:event_subtype": "process_event",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    },
+    "a1": {
+      "ocel:activity": "NO ACTIVITY",
+      "ocel:timestamp": "2024-10-10 13:11:53.981156",
+      "ocel:event_type": "Fetch",
+      "ocel:event_subtype": "process_event",
+      "ocel:vmap": {},
+      "ocel:omap": []
+    }
+  },
+  "ocel:objects": {
+    "MaxxTurn45": {
+      "ocel:type": "iot_device",
+      "ocel:ovmap": {}
+    }
+  }
+}
