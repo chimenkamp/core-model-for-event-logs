@@ -10,6 +10,7 @@ from src.wrapper.ocel_wrapper import OCELWrapper
 import json
 from typing import List, Dict, Any
 
+
 def group_by_observation_id(dicts: List[Dict[str, any]]) -> List[List[Dict[str, any]]]:
     """
     Groups a list of dictionaries by their 'observation_id' field.
@@ -27,6 +28,7 @@ def group_by_observation_id(dicts: List[Dict[str, any]]) -> List[List[Dict[str, 
 
     return list(groups.values())
 
+
 class SensorStreamParser:
     def __init__(self) -> None:
         """
@@ -43,7 +45,7 @@ class SensorStreamParser:
         self.event_event_relationships = []
         self.event_data_source_relationships = []
 
-    def parse_sensorstream_log(self, sensorstream_log: List[Dict[str, Any]]) -> OCELWrapper:
+    def parse_sensor_stream_log(self, sensorstream_log: List[Dict[str, Any]]) -> OCELWrapper:
         """
         Parses a SensorStream log and returns an OCELWrapper object.
 
@@ -58,11 +60,14 @@ class SensorStreamParser:
                     process_event_id = self._parse_process_event(event)
                 if "stream:datastream" in event:
                     data_stream: List[Dict] = event["stream:datastream"]
-                    self._parse_sensorstream_data(data_stream, process_event_id)
+                    self._parse_sensor_stream_data(data_stream, process_event_id)
 
         # link observations with the same id to one iot event
         self.link_observation_to_iot_event()
-        # After processing all data, pass it to the OCELWrapper constructor
+
+        # link iot event to objects
+        self.link_iot_events_to_objects()
+
         return OCELWrapper(
             objects=self.objects,
             iot_events=self.iot_events,
@@ -87,6 +92,7 @@ class SensorStreamParser:
             self.iot_events.append({
                 "event_id": iot_event_id,
                 "timestamp": observations[0]["timestamp"],
+                "event_type": observations[0]['observation_id'],
             })
 
             for i, observation in enumerate(observations):
@@ -103,6 +109,7 @@ class SensorStreamParser:
                     "event_id": process_event_id,
                     "derived_from_event_id": iot_event_id
                 })
+
     def _parse_process_event(self, process_event: Dict[str, Any]) -> str:
         # Create Process events
         # only add the event if it is not already in the list
@@ -116,7 +123,8 @@ class SensorStreamParser:
             })
         return process_event["id:id"]
 
-    def _parse_sensorstream_data(self, sensorstream_events: List[Dict[str, Any]], process_event_id: str | None) -> None:
+    def _parse_sensor_stream_data(self, sensorstream_events: List[Dict[str, Any]],
+                                  process_event_id: str | None) -> None:
         """
         Parses a SensorStream event and adds the corresponding IoT data and relationships to the parser's internal state.
 
@@ -128,15 +136,19 @@ class SensorStreamParser:
         iot_device_id = [x["stream:name"] for x in sensorstream_events if "stream:name" in x][0]
         iot_source = [x["stream:source"] for x in sensorstream_events if "stream:source" in x][0]
 
-        # Add IoT device to the local list
-        if iot_device_id not in self.iot_devices:
-            self.iot_devices.append({
-                "data_source_id": iot_device_id,
-                "attributes": iot_source
-            })
+        # Add IoT device to the local list or find the existing object
+        iot_device_id_with_prefix: str = "iot_device_" + iot_device_id
+        iot_device = next((dev for dev in self.iot_devices if dev["data_source_id"] == iot_device_id_with_prefix), None)
 
+        if iot_device is None:
+            # If not already stored, add a new IoT device
+            iot_device = {
+                "data_source_id": iot_device_id_with_prefix,
+                "attributes": iot_source  # Add all relevant attributes here
+            }
+            self.iot_devices.append(iot_device)
 
-        # Process the sensor points and create IoT events (observations)
+        # Process the sensor points and create observations
         for point in points:
             if type(point) is not dict:
                 print(type(point))
@@ -144,19 +156,32 @@ class SensorStreamParser:
             id_ = point.get("stream:id", "unknown_id")
             observation = {
                 "observation_id": "obs_" + id_,
-                "iot_device_id": iot_device_id,
+                "iot_device_link": iot_device_id_with_prefix,  # Link to the sensor object
                 "timestamp": point.get("stream:timestamp", ""),
-                "attributes": {
-                    "value": point.get("stream:value", ""),
-                    "source_details": point.get("stream:source", {})
-                }
+                "attributes": {}
             }
+            # Add all attributes to the observation
+            for key in point.keys():
+                if key not in observation and key not in observation["attributes"]:
+                    observation["attributes"][key] = point[key]
+
             self.observations.append(observation)
 
             # Create event-object relationships (link IoT events to their data source)
             self.event_data_source_relationships.append({
                 "event_id": observation["observation_id"],
-                "data_source_id": iot_device_id
+                "data_source_id": iot_device_id_with_prefix  # Link to the sensor object
+            })
+
+    def link_iot_events_to_objects(self):
+        """
+        Link iot events to objects
+        """
+        for iot_event in self.iot_events:
+            iot_event_id = iot_event["event_id"]
+            self.event_object_relationships.append({
+                "event_id": iot_event_id,
+                "object_id": self.iot_devices[0]["data_source_id"]
             })
 
 
@@ -171,57 +196,19 @@ def load_yaml(yaml_file: str) -> List[Any]:
         return list(yaml.safe_load_all(file))
 
 
-def infer_schema(data: Any) -> Union[Dict[str, Any], List[Any], str]:
-    """
-    Infers the schema (types) of the data structure.
-
-    :param data: The loaded YAML data.
-    :return: A structure reflecting the types of the data.
-    """
-    if isinstance(data, dict):
-        return {key: infer_schema(value) for key, value in data.items()}
-    elif isinstance(data, list):
-        if len(data) > 0:
-            return [infer_schema(item) for item in data]
-        else:
-            return "EmptyList"
-    else:
-        return type(data).__name__
-
-
-def extract_schema(yaml_file: str) -> List[Dict[str, Any]]:
-    """
-    Extracts the schema of a YAML file by identifying keys and their corresponding types,
-    handling multiple documents.
-
-    :param yaml_file: The path to the YAML file.
-    :return: A list of dictionaries, each containing the keys and types of one document.
-    """
-    yaml_docs = load_yaml(yaml_file)
-    return [infer_schema(doc) for doc in yaml_docs]
-
-
 if __name__ == "__main__":
-    # Example usage: extracting the schema from the YAML file
-    # schema = extract_schema("file.yaml")
-    # for i, doc_schema in enumerate(schema, 1):
-    #     print(f"Document {i} Schema:")
-    #     print(doc_schema)
-    #     print("\n")
-
-    # Example usage: loading and printing the YAML documents
-
-    scheme = load_yaml("file.yaml")
+    scheme_1 = load_yaml("file.yaml")
+    scheme_2 = load_yaml("file_2.yaml")
     parser = SensorStreamParser()
-    res: OCELWrapper = parser.parse_sensorstream_log(scheme)
+    res: OCELWrapper = parser.parse_sensor_stream_log(scheme_1[:20] + scheme_2[:20])
     tabel = res.get_extended_table()
     print(tabel)
     ocel_pointer: pm4py.OCEL = res.get_ocel()
-    res.save_ocel("v2_output.jsonocel")
-    # print("Schema Len:", len(scheme))
-    # all_keys = [list(e.keys())[0] for e in scheme]
-    # pprint(scheme[0:5])
-    # print("All Keys:", all_keys)
-    # # get all events with a data attribute
-    # data_events = [e for e in scheme if "data" in e.get("event", {})]
-    # print("Data Events:", len(data_events))
+    res.save_ocel("v3_output.jsonocel")
+    print(ocel_pointer.get_summary())
+    discovered_df = pm4py.discover_oc_petri_net(ocel_pointer)
+    pm4py.view_ocpn(discovered_df)
+
+    # with open("/Users/christianimenkamp/Downloads/payment.json") as f:
+    #     json_ref = json.load(f)
+    #     print(json_ref)
