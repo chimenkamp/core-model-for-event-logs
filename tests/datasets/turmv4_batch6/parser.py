@@ -177,11 +177,11 @@ class SensorStreamParser:
         """
         Link iot events to objects
         """
-        for iot_event in self.iot_events:
+        for i, iot_event in enumerate(self.iot_events):
             iot_event_id = iot_event["event_id"]
             self.event_object_relationships.append({
                 "event_id": iot_event_id,
-                "object_id": self.iot_devices[0]["data_source_id"]
+                "object_id":  self.iot_devices[0]["data_source_id"] if i%2==0 else self.iot_devices[1]["data_source_id"]
             })
 
 
@@ -199,15 +199,23 @@ def load_yaml(yaml_file: str) -> List[Any]:
 if __name__ == "__main__":
     scheme_1 = load_yaml("file.yaml")
     scheme_2 = load_yaml("file_2.yaml")
+    full_scheme = scheme_1 + scheme_2
     parser = SensorStreamParser()
-    res: OCELWrapper = parser.parse_sensor_stream_log(scheme_1[:20] + scheme_2[:20])
-    tabel = res.get_extended_table()
-    print(tabel)
+    res: OCELWrapper = parser.parse_sensor_stream_log(full_scheme)
     ocel_pointer: pm4py.OCEL = res.get_ocel()
     res.save_ocel("v3_output.jsonocel")
     print(ocel_pointer.get_summary())
     discovered_df = pm4py.discover_oc_petri_net(ocel_pointer)
     pm4py.view_ocpn(discovered_df)
+
+    # Discover an Object-Centric Petri Net (OC-PN) from the sampled OCEL
+    # ocpn = pm4py.discover_oc_petri_net(ocel_pointer)
+
+    # Get a visualization of the OC-PN (Returns a Graphviz digraph)
+    # gph = pm4py.visualization.ocel.ocpn.visualizer.apply(ocpn)
+
+    # View the diagram using matplotlib
+    # pm4py.visualization.ocel.ocpn.visualizer.matplotlib_view(gph)
 
     # with open("/Users/christianimenkamp/Downloads/payment.json") as f:
     #     json_ref = json.load(f)

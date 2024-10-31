@@ -43,7 +43,6 @@ class OCELWrapper:
         self.ocel = OCEL()
 
         self.JSON_SCHEMA_PATH = "../../schemas/json_schema.json"
-
         self.objects: List[Dict[str, Any]] = objects if objects is not None else []
         self.iot_events: List[Dict[str, Any]] = iot_events if iot_events is not None else []
         self.process_events: List[Dict[str, Any]] = process_events if process_events is not None else []
@@ -78,52 +77,17 @@ class OCELWrapper:
         self._add_event_event_relationships(self.event_event_relationships)
         self._add_event_data_source_relationships(self.event_data_source_relationships)
 
+        t = [list(self.ocel.objects.loc[self.ocel.objects["ocel:oid"] == x["object_id"]].to_dict()["ocel:type"].values())[0] for x in self.event_object_relationships]
+        l = [list(self.ocel.events.loc[self.ocel.events["ocel:eid"] == x["event_id"]].to_dict()["ocel:activity"].values())[0] for x in self.event_object_relationships]
+
         relationships = {
             self.ocel.event_id_column: [x["event_id"] for x in self.event_object_relationships],
             self.ocel.object_id_column: [x["object_id"] for x in self.event_object_relationships],
-            self.ocel.object_type_column: ["iot_device" for _ in self.event_object_relationships],
-            self.ocel.event_activity: [
-                get_event_by_id(self.ocel.events, e.get("event_id", ""), self.ocel.event_activity)
-                [self.ocel.event_activity]
-                for e in self.event_object_relationships
-            ],
+            self.ocel.object_type_column: t,
+            self.ocel.event_activity: l
         }
 
         self.ocel.relations = pd.DataFrame(relationships)
-
-    def load_from_json_schema(self, json_file_path: str) -> Self:
-        """
-        Loads data from a JSON file, validates it against the schema, and assigns it to the wrapper's attributes.
-
-        :param json_file_path: Path to the JSON file containing the data.
-        :param schema_path: Path to the JSON schema file for validation.
-        """
-        validator = JsonValidator(self.JSON_SCHEMA_PATH)
-
-        if not validator.validate(json_file_path):
-            raise ValueError("JSON file does not conform to schema")
-
-        with open(json_file_path, 'r') as f:
-            data = json.load(f)
-
-        self.objects = data.get('objects', [])
-        self.iot_events = data.get('iot_events', [])
-        self.process_events = data.get('process_events', [])
-        self.iot_devices = data.get('iot_devices', [])
-        self.observations = data.get('observations', [])
-        self.information_systems = data.get('information_systems', [])
-        self.object_object_relationships = data.get('object_object_relationships', [])
-        self.event_object_relationships = data.get('event_object_relationships', [])
-        self.event_event_relationships = data.get('event_event_relationships', [])
-        self.event_data_source_relationships = data.get('event_data_source_relationships', [])
-
-        self.ocel = OCEL()
-        self._process_data()
-
-        return self
-
-    def load_from_ocel_schema(self, ocel_file_path: str) -> Self:
-        return Self
 
     def _add_objects(self, objects: List[Dict[str, Any]],
                      object_class: Literal["iot_device", "information_system"]) -> None:
@@ -297,7 +261,11 @@ class OCELWrapper:
                 continue
 
             obj_id = ds["data_source_id"]
-            obj_type = "information_system" if "name" in ds else "iot_device"
+            type_test = self.ocel.objects.loc[self.ocel.objects["ocel:oid"] == obj_id].to_dict()["ocel:type"]
+
+            type_ = list(type_test.values())[0]
+
+            obj_type = "information_system" if "name" in ds else type_
 
             # Find the event
             all_events = self.iot_events + self.process_events
@@ -333,11 +301,15 @@ class OCELWrapper:
         """
         formatted_devices = []
         for device in iot_devices:
+            # generate a random string
+            device_type: str = "iot_device_" + str(p.randint(0, 1000000))
+
             formatted_devices.append({
                 "object_id": device["data_source_id"],
-                "object_type": "iot_device",
+                "object_type": device_type,
                 "attributes": {}
             })
+
         return formatted_devices
 
     def _format_observations(self, observations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -410,125 +382,3 @@ class OCELWrapper:
         :param path: Path to the file.
         """
         pm4py.write_ocel(self.ocel, path)
-
-    def save_to_json(self, json_file_path: str, schema_path: Optional[str] = None) -> None:
-        """
-        Saves the data stored inside the OCEL instance to a JSON file following the defined schema.
-
-        :param json_file_path: Path to the JSON file where data will be saved.
-        :param schema_path: Optional path to the JSON schema file for validation.
-        """
-        data = self._reconstruct_data()
-
-        if schema_path:
-            validator = JsonValidator(schema_path)
-            is_valid = validator.validate(data)
-            if not is_valid:
-                raise ValueError("Reconstructed data does not conform to schema")
-
-        # Save data to JSON file
-        with open(json_file_path, 'w') as f:
-            json.dump(data, f, indent=2, default=str)  # default=str to handle datetime serialization
-
-    def _reconstruct_data(self) -> Dict[str, Any]:
-        """
-        Reconstructs the data from the OCEL instance into the JSON structure defined by the schema.
-
-        :return: A dictionary containing the reconstructed data.
-        """
-        data = {
-            "objects": [],
-            "iot_events": [],
-            "process_events": [],
-            "iot_devices": [],
-            "observations": [],
-            "information_systems": [],
-            "object_object_relationships": [],
-            "event_object_relationships": [],
-            "event_event_relationships": [],
-            "event_data_source_relationships": []
-        }
-
-        # Extract objects
-        for _, obj_row in self.ocel.objects.iterrows():
-            obj = {
-                "object_id": obj_row[self.ocel.object_id_column],
-                "object_type": obj_row[self.ocel.object_type_column],
-                "attributes": {k.replace(ATTRIBUTE_KEY_PREFIX, ""): v for k, v in obj_row.items() if
-                               k.startswith(ATTRIBUTE_KEY_PREFIX)}
-            }
-            obj_type = obj["object_type"]
-            if obj_type == "iot_device":
-                data["iot_devices"].append({
-                    "data_source_id": obj["object_id"]
-                })
-            elif obj_type == "information_system":
-                data["information_systems"].append({
-                    "data_source_id": obj["object_id"],
-                    "name": obj["attributes"].get("system_name", "")
-                })
-            else:
-                data["objects"].append(obj)
-
-        # Extract events
-        for _, event_row in self.ocel.events.iterrows():
-            event = {
-                "event_id": event_row[self.ocel.event_id_column],
-                "timestamp": event_row[self.ocel.event_timestamp].isoformat(),
-                "attributes": {k.replace(ATTRIBUTE_KEY_PREFIX, ""): v for k, v in event_row.items() if
-                               k.startswith(ATTRIBUTE_KEY_PREFIX)},
-                "activity": {
-                    "activity_type": event_row.get("ocel:event_type", "")
-                }
-            }
-            event_class = event_row.get("ocel:event_class", "")
-            if event_class == "iot_event":
-                data["iot_events"].append(event)
-            elif event_class == "process_event":
-                data["process_events"].append(event)
-            elif event_class == "observation":
-                observation = {
-                    "observation_id": event["event_id"],
-                    "timestamp": event["timestamp"],
-                    "iot_device_id": event["attributes"].get("iot_device_id", "")
-                }
-                data["observations"].append(observation)
-            else:
-                print(f"Unknown event class: {event_class}")
-                pass
-
-        # Extract object-object relationships
-        if self.ocel.o2o is not None and not self.ocel.o2o.empty:
-            for _, rel_row in self.ocel.o2o.iterrows():
-                rel = {
-                    "object_id": rel_row[self.ocel.object_id_column],
-                    "related_object_id": rel_row[self.ocel.object_id_column + "_2"]
-                }
-                data["object_object_relationships"].append(rel)
-
-        # Extract event-object relationships
-        if self.ocel.relations is not None and not self.ocel.relations.empty:
-            for _, rel_row in self.ocel.relations.iterrows():
-                rel = {
-                    "event_id": rel_row[self.ocel.event_id_column],
-                    "object_id": rel_row[self.ocel.object_id_column]
-                }
-                obj_type = rel_row[self.ocel.object_type_column]
-                if obj_type in ["iot_device", "information_system"]:
-                    data["event_data_source_relationships"].append({
-                        "event_id": rel["event_id"],
-                        "data_source_id": rel["object_id"]
-                    })
-                else:
-                    data["event_object_relationships"].append(rel)
-
-        # Extract event-event relationships
-        if self.ocel.e2e is not None and not self.ocel.e2e.empty:
-            for _, rel_row in self.ocel.e2e.iterrows():
-                rel = {
-                    "event_id": rel_row[self.ocel.event_id_column],
-                    "derived_from_event_id": rel_row[self.ocel.event_id_column + "_2"]
-                }
-                data["event_event_relationships"].append(rel)
-
-        return data
