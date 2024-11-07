@@ -66,7 +66,7 @@ class OCELWrapper:
         Processes the data by adding objects, events, and relationships to the OCEL.
         """
 
-        # self._add_objects(self.objects)
+        self._add_objects(self.objects, "generic")
         self._add_objects(self._format_iot_devices(self.iot_devices), "iot_device")
         self._add_objects(self._format_information_systems(self.information_systems), "information_system")
         self._add_events(self._format_observations(self.observations), "observation")
@@ -77,20 +77,33 @@ class OCELWrapper:
         self._add_event_event_relationships(self.event_event_relationships)
         self._add_event_data_source_relationships(self.event_data_source_relationships)
 
-        t = [list(self.ocel.objects.loc[self.ocel.objects["ocel:oid"] == x["object_id"]].to_dict()["ocel:type"].values())[0] for x in self.event_object_relationships]
-        l = [list(self.ocel.events.loc[self.ocel.events["ocel:eid"] == x["event_id"]].to_dict()["ocel:activity"].values())[0] for x in self.event_object_relationships]
+        t = [list(
+            self.ocel.objects.loc[self.ocel.objects["ocel:oid"] == x["object_id"]].to_dict()["ocel:type"].values())[0]
+             for x in self.event_object_relationships]
+
+        e_to_o = lambda x: list(
+            self.ocel.events.loc[self.ocel.events["ocel:eid"] == x["event_id"]]
+            .to_dict()["ocel:activity"]
+            .values()
+        )
+
+        l = [
+            e_to_o(x)[0] if len(e_to_o(x)) > 0 else "undefined"
+            for x in self.event_object_relationships
+        ]
 
         relationships = {
             self.ocel.event_id_column: [x["event_id"] for x in self.event_object_relationships],
             self.ocel.object_id_column: [x["object_id"] for x in self.event_object_relationships],
             self.ocel.object_type_column: t,
-            self.ocel.event_activity: l
+            self.ocel.event_activity: l,
+            "ocel:qualifier": ["related"] * len(self.event_object_relationships)
         }
 
         self.ocel.relations = pd.DataFrame(relationships)
 
     def _add_objects(self, objects: List[Dict[str, Any]],
-                     object_class: Literal["iot_device", "information_system"]) -> None:
+                     object_class: Literal["iot_device", "information_system", "generic"]) -> None:
         """
         Adds objects to the OCEL.
 
@@ -310,6 +323,11 @@ class OCELWrapper:
                 "attributes": {}
             })
 
+            # Add device attributes excluding data_source_id
+            for key, value in device.items():
+                if key != "data_source_id":
+                    formatted_devices[-1]["attributes"][key] = value
+
         return formatted_devices
 
     def _format_observations(self, observations: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
@@ -325,7 +343,7 @@ class OCELWrapper:
                 "event_id": observation["observation_id"],
                 "event_type": "observation",
                 "timestamp": observation.get("timestamp", ""),
-                "attributes": {}  # Moved IoT device linking to relationships
+                "attributes": {}
             }
 
             # Add observation attributes excluding iot_device_id

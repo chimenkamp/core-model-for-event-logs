@@ -181,7 +181,7 @@ class SensorStreamParser:
             iot_event_id = iot_event["event_id"]
             self.event_object_relationships.append({
                 "event_id": iot_event_id,
-                "object_id":  self.iot_devices[0]["data_source_id"] if i%2==0 else self.iot_devices[1]["data_source_id"]
+                "object_id":  self.iot_devices[0]["data_source_id"] if i%2==0 else self.iot_devices[1]["data_source_id"] # Todo: This is for testing only and should be replaced with a proper mapping
             })
 
 
