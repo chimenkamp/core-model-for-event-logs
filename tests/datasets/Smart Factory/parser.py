@@ -1,3 +1,4 @@
+import xml
 from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
@@ -94,13 +95,13 @@ class SensorStreamParser:
             data_stream: List[dict] = process_event["list"]["list"]
 
             for stream_point in data_stream:
-                attr_system: str = stream_point["@stream:system"]
-                attr_system_type: str = stream_point["@stream:system_type"]
-                attr_observation: str = stream_point["@stream:observation"]
-                attr_procedure_type: str = stream_point["@stream:procedure_type"]
-                attr_interaction_type: str = stream_point["@stream:interaction_type"]
-                point_time_stamp: str = stream_point["date"]["@stream:timestamp"]
-                point_value: str = stream_point["string"]["@stream:value"]
+                attr_system: str = stream_point.get("@stream:system", "NO VALUE")
+                attr_system_type: str = stream_point.get("@stream:system_type", "NO VALUE")
+                attr_observation: str = stream_point.get("@stream:observation", "NO VALUE")
+                attr_procedure_type: str = stream_point.get("@stream:procedure_type", "NO VALUE")
+                attr_interaction_type: str = stream_point.get("@stream:interaction_type", "NO VALUE")
+                point_time_stamp: str = stream_point.get("date", {}).get("@stream:timestamp", "NO VALUE")
+                point_value: str = stream_point.get("string", {}).get("@stream:value", "NO VALUE")
 
                 observation_id: str = f"observation_{str(uuid4())[:8]}"
 
@@ -162,7 +163,13 @@ if __name__ == "__main__":
         with open(FILE_NAME, 'r') as file:
             xml_string = file.read()
         # Parse xml string to dict
-        xml_dict = xmltodict.parse(xml_string)
+        try:
+            xml_dict = xmltodict.parse(xml_string)
+        except xml.parsers.expat.ExpatError as e:
+            print("ERROR in line", FILE_NAME)
+            print(e)
+            continue
+
         events: List[dict] = xml_dict["log"]["trace"]["event"]
         if isinstance(events, dict):
             events = [events]
@@ -173,7 +180,7 @@ if __name__ == "__main__":
     ocel_wrapper = parser.parse_sensor_stream_log(all_process_events)
 
     ocel_pointer: pm4py.OCEL = ocel_wrapper.get_ocel()
-    ocel_wrapper.save_ocel("v3_output.jsonocel")
+    # ocel_wrapper.save_ocel("v4_output.jsonocel")
     print(ocel_pointer.get_summary())
     discovered_df = pm4py.discover_oc_petri_net(ocel_pointer)
     pm4py.view_ocpn(discovered_df)
