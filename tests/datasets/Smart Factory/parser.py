@@ -7,6 +7,24 @@ import xmltodict
 
 from src.wrapper.ocel_wrapper import OCELWrapper
 
+from pathlib import Path
+from typing import List, Optional
+
+
+def get_file_paths(folder_path: str, pattern: str = "*.xes", recursive: bool = False) -> List[str]:
+    folder = Path(folder_path)
+    if not folder.exists():
+        raise FileNotFoundError(f"Folder not found: {folder_path}")
+
+    if not folder.is_dir():
+        raise NotADirectoryError(f"Path is not a directory: {folder_path}")
+
+    # Use rglob for recursive search, glob for non-recursive
+    glob_func = folder.rglob if recursive else folder.glob
+
+    # Get all files matching the pattern and convert to strings
+    return [str(file_path) for file_path in glob_func(pattern) if file_path.is_file()]
+
 
 def find_value_by_key(data_list: List[Dict[str, str]], search_key: str) -> str:
     for item in data_list:
@@ -35,7 +53,7 @@ class SensorStreamParser:
         self.event_event_relationships = []
         self.event_data_source_relationships = []
 
-    def parse_sensor_stream_log(self, sensorstream_log: Dict[str, Any]) -> OCELWrapper:
+    def parse_sensor_stream_log(self, process_events: List[Dict[str, Any]]) -> OCELWrapper:
         """
         Parses a SensorStream log and returns an OCELWrapper object.
 
@@ -48,8 +66,6 @@ class SensorStreamParser:
         # xml_dict["log"]["trace"](dict_2)["event"](list_5)[0](dict_3)["list"] <- stream:datastream
 
         # stream:datastream(list_178)[0](dict_8) <- stream:point
-
-        process_events: List[dict] = sensorstream_log["event"]
 
         for process_event in process_events:
             concept_name: str = find_value_by_key(process_event["string"], "concept:name")
@@ -138,22 +154,26 @@ class SensorStreamParser:
             })
 
 
-FILE_NAME: str = "771e7f75-e1e6-4d0c-856c-d65a003159b4.xes"
-
 if __name__ == "__main__":
-    # Load xml as string
-    with open(FILE_NAME, 'r') as file:
-        xml_string = file.read()
+    event_log_paths: List[str] = get_file_paths("./event_logs")
 
-    # Parse xml string to dict
-    xml_dict = xmltodict.parse(xml_string)
+    all_process_events: List[Dict[str, Any]] = []
+    for FILE_NAME in event_log_paths:
+        with open(FILE_NAME, 'r') as file:
+            xml_string = file.read()
+        # Parse xml string to dict
+        xml_dict = xmltodict.parse(xml_string)
+        events: List[dict] = xml_dict["log"]["trace"]["event"]
+        if isinstance(events, dict):
+            events = [events]
+        all_process_events.extend(events)
+
     # Parse the log
     parser = SensorStreamParser()
-    ocel_wrapper = parser.parse_sensor_stream_log(xml_dict["log"]["trace"])
+    ocel_wrapper = parser.parse_sensor_stream_log(all_process_events)
 
     ocel_pointer: pm4py.OCEL = ocel_wrapper.get_ocel()
-    ocel_wrapper.save_ocel("v1_output.jsonocel")
+    ocel_wrapper.save_ocel("v3_output.jsonocel")
     print(ocel_pointer.get_summary())
     discovered_df = pm4py.discover_oc_petri_net(ocel_pointer)
     pm4py.view_ocpn(discovered_df)
-
