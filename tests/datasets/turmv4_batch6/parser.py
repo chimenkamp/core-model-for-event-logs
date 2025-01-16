@@ -5,7 +5,7 @@ import pm4py
 import yaml
 from typing import Any, Dict, List, Union
 
-from src.wrapper.ocel_wrapper import OCELWrapper
+from src.wrapper.ocel_wrapper import COREMetamodel
 
 import json
 from typing import List, Dict, Any
@@ -45,7 +45,7 @@ class SensorStreamParser:
         self.event_event_relationships = []
         self.event_data_source_relationships = []
 
-    def parse_sensor_stream_log(self, sensorstream_log: List[Dict[str, Any]]) -> OCELWrapper:
+    def parse_sensor_stream_log(self, sensorstream_log: List[Dict[str, Any]]) -> COREMetamodel:
         """
         Parses a SensorStream log and returns an OCELWrapper object.
 
@@ -68,7 +68,7 @@ class SensorStreamParser:
         # link iot event to objects
         self.link_iot_events_to_objects()
 
-        return OCELWrapper(
+        return COREMetamodel(
             objects=self.objects,
             iot_events=self.iot_events,
             process_events=self.process_events,
@@ -201,7 +201,7 @@ if __name__ == "__main__":
     scheme_2 = load_yaml("file_2.yaml")
     full_scheme = scheme_1 + scheme_2
     parser = SensorStreamParser()
-    res: OCELWrapper = parser.parse_sensor_stream_log(full_scheme)
+    res: COREMetamodel = parser.parse_sensor_stream_log(full_scheme)
     ocel_pointer: pm4py.OCEL = res.get_ocel()
     res.save_ocel("v3_output.jsonocel")
     print(ocel_pointer.get_summary())

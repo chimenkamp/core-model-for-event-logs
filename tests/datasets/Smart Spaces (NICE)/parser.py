@@ -3,29 +3,37 @@ from uuid import uuid4
 
 import pm4py
 import yaml
-from typing import Union, Dict, List, Any
+from typing import Union, Dict, List, Any, Literal
 import xmltodict
 
-from src.wrapper.ocel_wrapper import OCELWrapper
+from src.types_defintion.event_definition import Event, ProcessEvent, Observation, IotEvent
+from src.types_defintion.object_definition import Object, ObjectClassEnum
+from src.types_defintion.relationship_definitions import ObjectObjectRelationship, EventObjectRelationship, \
+    EventEventRelationship
+from src.wrapper.ocel_wrapper import COREMetamodel
 
+def get_object_class_for_object_type(o_type: Literal["location",  "date", "user"]) -> ObjectClassEnum:
+    if o_type == "location":
+        return ObjectClassEnum.BUSINESS_OBJECT
+    elif o_type == "date":
+        return ObjectClassEnum.BUSINESS_OBJECT
+    elif o_type == "user":
+        return ObjectClassEnum.RESOURCE
 
 class SensorStreamParser:
     def __init__(self) -> None:
         """
         Initializes the SensorStreamParser class.
         """
-        self.objects = []
-        self.iot_events = []
-        self.process_events = []
-        self.iot_devices = []
-        self.observations = []
-        self.information_systems = []
-        self.object_object_relationships = []
-        self.event_object_relationships = []
-        self.event_event_relationships = []
-        self.event_data_source_relationships = []
+        self.objects: List[Object] = []
+        self.iot_events: List[Event] = []
+        self.process_events: List[Event] = []
+        self.observations: List[Event] = []
+        self.object_object_relationships: List[ObjectObjectRelationship] = []
+        self.event_object_relationships: List[EventObjectRelationship] = []
+        self.event_event_relationships: List[EventEventRelationship] = []
 
-    def parse_sensor_stream_log(self, sensorstream_log: dict) -> OCELWrapper:
+    def parse_sensor_stream_log(self, sensorstream_log: dict) -> COREMetamodel:
         """
         Parses a SensorStream log and returns an OCELWrapper object.
 
@@ -42,12 +50,17 @@ class SensorStreamParser:
         context_events = event_log["EventsList"]["ContextEvent"]
 
         for obj in object_list:
+            dp: dict | list = obj.get("DigitalProperty", {})
+            dp_dict = dp if isinstance(dp, dict) else {str(i): n for i, n in enumerate(dp)}
 
-            self.objects.append({
-                "object_id": obj["@ID"],
-                "object_type": obj["@objectType"],
-                # "attributes": obj.get("DigitalProperty", {}),
-            })
+            object_ref: Object = Object(
+                object_id=obj["@ID"],
+                object_type=obj["@objectType"],
+                object_class=get_object_class_for_object_type(obj["@objectType"]),
+                attributes= dp_dict
+            )
+
+            self.objects.append(object_ref)
             ob_prop: dict | None = obj.get("ObservableProperty", None)
 
             if ob_prop:
@@ -56,114 +69,153 @@ class SensorStreamParser:
                 ...
 
         for sensor in sensors:
-            self.iot_devices.append({
-                "data_source_id": sensor["@ID"],
-                "device_type": "Sensor",
-            })
+            object_ref: Object = Object(
+                object_id=sensor["@ID"],
+                object_type="Sensor",
+                object_class=ObjectClassEnum.SENSOR,
+                attributes={
+                    "location": sensor.get("@location", None),
+                    "metadata": sensor.get("metadata", {}),
+                },
+            )
+            self.objects.append(object_ref)
 
-            # Link iot device to object
             sensor_id: str = sensor["@ID"]
 
             if "@location" in sensor:
                 object_id: str = sensor["@location"]
-
-                self.object_object_relationships.append({
-                    "object_id": sensor_id,
-                    "related_object_id": object_id,
-                })
+                o2o_ref: ObjectObjectRelationship = ObjectObjectRelationship(
+                    object_id=sensor_id,
+                    related_object_id=object_id,
+                    qualifier="located_at",
+                )
+                self.object_object_relationships.append(o2o_ref)
 
         for event in iot_events:
-            self.iot_events.append({
-                "event_id": event["@ID"],
-                "event_type": f"IoTEvent+{str(uuid4())[:8]}",
-                "timestamp": event["@timestamp"],
-            })
+
+            iot_event_ref: Event = IotEvent(
+                event_id=event["@ID"],
+                event_type=f"IoTEvent+{str(uuid4())[:8]}",
+                timestamp=event["@timestamp"],
+                attributes={
+                    "feature_of_interest": event.get("FeatureOfInterest", None),
+                }
+            )
+
+            self.iot_events.append(iot_event_ref)
+
             # Link iot event to object
             e_o_relationship: List[Dict[str, str]] = event.get("EventObjectRelationship", [])
             for rel in e_o_relationship:
-                self.event_object_relationships.append({
-                    "event_id": event["@ID"],
-                    "object_id": rel["@objectID"],
-                })
+                e2o_ref: EventObjectRelationship = EventObjectRelationship(
+                    event_id=event["@ID"],
+                    object_id=rel["@objectID"],
+                )
+                self.event_object_relationships.append(e2o_ref)
 
-            # Link iot event to object
-            if "FeatureOfInterest" in event:
-                linking_object_id: str = str(uuid4())
 
-                self.objects.append({
-                    "object_id": linking_object_id,
-                    "object_type": "FeatureOfInterest",
-                })
+            # Create Observation
+            if "Observation" in event:
 
-                self.event_object_relationships.append({
-                    "event_id": event["@ID"],
-                    "object_id": linking_object_id,
-                })
+                observation: dict = event["Observation"]
 
-                self.object_object_relationships.append({
-                    "object_id": linking_object_id,
-                    "related_object_id": event["FeatureOfInterest"],
-                })
+                observation_ref: Event = Observation(
+                    event_id=str(uuid4()),
+                    event_type=f"Observation+{str(uuid4())[:8]}",
+                    timestamp=event["@timestamp"],
+                    attributes={
+                        "value": observation.get("@value", None),
+                        "sensor": observation.get("@sensor", None),
+                    }
+                )
+
+                self.observations.append(observation_ref)
+
+                e2e_ref: EventEventRelationship = EventEventRelationship(
+                    event_id=iot_event_ref.event_id,
+                    derived_from_event_id=observation_ref.event_id,
+                    qualifier="observe_by",
+                )
+                self.event_event_relationships.append(e2e_ref)
+
+                if observation.get("@sensor", None):
+                    e2o_ref: EventObjectRelationship = EventObjectRelationship(
+                        event_id= iot_event_ref.event_id,
+                        object_id= observation["@sensor"],
+                        qualifier="observe_by",
+                    )
+                    self.event_object_relationships.append(e2o_ref)
+
 
         for event in process_events:
-            self.process_events.append({
-                "event_id": event["@ID"],
-                "event_type": event["@label"],
-                "timestamp": event["@timestamp"],
-                "attributes": event.get("Method", {}),
-                "activity": {
-                    "activity_type": event["@label"],
-                }
-            })
+
+            process_event_ref: Event = ProcessEvent(
+                event_id=event["@ID"],
+                event_type=f"ProcessEvent+{str(uuid4())[:8]}",
+                timestamp=event["@timestamp"],
+                activity= event["@label"],
+                attributes={
+                    "method": event.get("Method", {}),
+                    "analytics": event.get("Analytics",  {}),
+                    "value": event.get("@value", None),
+                },
+            )
+
+            self.process_events.append(process_event_ref)
+
             # Link process event to object
             e_o_relationship: List[Dict[str, str]] = event.get("EventObjectRelationship", [])
             for rel in e_o_relationship:
-                self.event_object_relationships.append({
-                    "event_id": event["@ID"],
-                    "object_id": rel["@objectID"],
-                })
+                e2o_ref: EventObjectRelationship = EventObjectRelationship(
+                    event_id=event["@ID"],
+                    object_id=rel["@objectID"],
+                )
+                self.event_object_relationships.append(e2o_ref)
 
             # Create Analysis Object
-            analysis_object_id: str = str(uuid4())
-            self.objects.append({
-                "object_id": analysis_object_id,
-                "object_type": "Analysis",
-            })
-
-            self.event_object_relationships.append({
-                "event_id": event["@ID"],
-                "object_id": analysis_object_id,
-            })
-
-            analysis_event_ids: List[str] = event.get("Analytics", [])
-            for analysis_event_id in analysis_event_ids:
-                self.event_object_relationships.append({
-                    "event_id": analysis_event_id,
-                    "object_id": analysis_object_id,
-                })
+            if "Analytics" in event:
+                analytics: List[str] = event["Analytics"]["AnalysesEvent"]
+                for id_ref in analytics:
+                    self.event_event_relationships.append(
+                        EventEventRelationship(
+                            event_id=process_event_ref.event_id,
+                            derived_from_event_id=id_ref,
+                            qualifier="analyzed_by",
+                        )
+                    )
 
         for event in context_events:
             event_id: str = event["@ID"]
-            event_type: str = "ContextEvent"
+            event_type: str =f"ContextEvent+{str(uuid4())[:8]}"
             event_timestamp: str = event["@timestamp"]
 
-            self.iot_events.append({
-                "event_id": event_id,
-                "event_type": event_type,
-                "timestamp": event_timestamp,
-            })
+            context_event_ref: Event = Observation(
+                event_id=event_id,
+                event_type=event_type,
+                timestamp=event_timestamp,
+                attributes={
+                    "value": event.get("@value", None),
+                }
+            )
+            self.observations.append(context_event_ref)
 
-        return OCELWrapper(
+            e_o_relationship: List[Dict[str, str]] = event.get("EventObjectRelationship", [])
+
+            for rel in e_o_relationship:
+                e2o_ref: EventObjectRelationship = EventObjectRelationship(
+                    event_id=event_id,
+                    object_id=rel["@objectID"],
+                )
+                self.event_object_relationships.append(e2o_ref)
+
+        return COREMetamodel(
             objects=self.objects,
             iot_events=self.iot_events,
             process_events=self.process_events,
-            iot_devices=self.iot_devices,
             observations=self.observations,
-            information_systems=self.information_systems,
             object_object_relationships=self.object_object_relationships,
             event_object_relationships=self.event_object_relationships,
             event_event_relationships=self.event_event_relationships,
-            event_data_source_relationships=self.event_data_source_relationships
         )
 
 
@@ -173,13 +225,14 @@ if __name__ == "__main__":
     # Load xml as string
     with open(sample_xml_path, 'r') as file:
         xml_string = file.read()
-
+    print("After reading the file")
     # Parse xml string to dict
     xml_dict = xmltodict.parse(xml_string)
 
     # Parse xml dict to OCELWrapper
     parser = SensorStreamParser()
     ocel_wrapper = parser.parse_sensor_stream_log(xml_dict)
+    print("After parsing the xml")
 
     ocel_pointer: pm4py.OCEL = ocel_wrapper.get_ocel()
     ocel_wrapper.save_ocel("v1_output.jsonocel")

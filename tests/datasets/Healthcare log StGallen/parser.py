@@ -6,7 +6,9 @@ import yaml
 from typing import Union, Dict, List, Any
 import xmltodict
 
-from src.wrapper.ocel_wrapper import OCELWrapper
+from src.wrapper.ocel_wrapper import COREMetamodel
+
+
 
 
 class SensorStreamParser:
@@ -25,7 +27,7 @@ class SensorStreamParser:
         self.event_event_relationships = []
         self.event_data_source_relationships = []
 
-    def parse_sensor_stream_log(self, sensorstream_log: dict) -> OCELWrapper:
+    def parse_sensor_stream_log(self, sensorstream_log: dict) -> COREMetamodel:
         """
         Parses a SensorStream log and returns an OCELWrapper object.
 
@@ -76,7 +78,7 @@ class SensorStreamParser:
                     "object_id": concept_name
                 })
 
-        return OCELWrapper(
+        return COREMetamodel(
             objects=self.objects,
             iot_events=self.iot_events,
             process_events=self.process_events,

@@ -4,7 +4,7 @@ from typing import List, Dict, Any
 
 import pandas as pd
 
-from src.wrapper.ocel_wrapper import OCELWrapper
+from src.wrapper.ocel_wrapper import COREMetamodel
 
 objects: List[Dict[str, Any]] = [
     {
@@ -330,16 +330,16 @@ information_systems: List[Dict[str, str]] = [
 ]
 
 
-wrapper = OCELWrapper(objects=objects,
-                      object_object_relationships=object_relationships,
-                      iot_events=iot_events,
-                      process_events=process_events,
-                      event_object_relationships=event_object_relationships,
-                      event_event_relationships=event_event_relationships,
-                      iot_devices=iot_devices,
-                      observations=observations,
-                      event_data_source_relationships=event_data_source_relationships,
-                      information_systems=information_systems)
+wrapper = COREMetamodel(objects=objects,
+                        object_object_relationships=object_relationships,
+                        iot_events=iot_events,
+                        process_events=process_events,
+                        event_object_relationships=event_object_relationships,
+                        event_event_relationships=event_event_relationships,
+                        iot_devices=iot_devices,
+                        observations=observations,
+                        event_data_source_relationships=event_data_source_relationships,
+                        information_systems=information_systems)
 
 wrapper.save_ocel("use_case_example_ocel_output.jsonocel")
 extended_table: pd.DataFrame = wrapper.get_extended_table()
